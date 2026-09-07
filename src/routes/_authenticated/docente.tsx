@@ -37,12 +37,14 @@ function PanelDocente() {
       <main className="mx-auto max-w-5xl px-4 py-8">
         <p className="font-display text-xs uppercase tracking-[0.3em] text-accent">Panel docente</p>
         <h1 className="mt-2 font-display text-3xl">
-          {data?.curso ? data.curso.nombre : "Sin curso asignado"}
+          {isLoading ? "Consultando el archivo…" : (data?.curso?.nombre ?? "Sin curso asignado")}
         </h1>
         <p className="mt-2 text-muted-foreground">
-          {data?.curso
-            ? "Progreso de lectura de tus estudiantes en las aventuras activas."
-            : "Tu cuenta aún no está vinculada como responsable de un curso."}
+          {isLoading
+            ? "Recuperando el progreso de tu curso."
+            : data?.curso
+              ? "Progreso de lectura de tus estudiantes en las aventuras activas."
+              : "Tu cuenta aún no está vinculada como responsable de un curso."}
         </p>
 
         <div className="mt-6 grid gap-3 sm:grid-cols-4">
