@@ -160,9 +160,15 @@ export const cursoDocenteQuery = () =>
         .eq("rol", "estudiante");
       if (errorPerfiles) throw errorPerfiles;
 
-      const heroIds = (perfiles ?? []).flatMap((p) =>
-        (p.heroes as { id: string }[] | null)?.map((h) => h.id) ?? [],
-      );
+      const heroeDe = (p: { heroes?: unknown }): Heroe | null => {
+        const h = p.heroes;
+        if (!h) return null;
+        return (Array.isArray(h) ? ((h[0] as Heroe) ?? null) : (h as Heroe)) ?? null;
+      };
+
+      const heroIds = (perfiles ?? [])
+        .map((p) => heroeDe(p)?.id)
+        .filter((id): id is string => !!id);
 
       let progresos: {
         hero_id: string;
