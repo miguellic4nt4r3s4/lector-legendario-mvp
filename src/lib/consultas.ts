@@ -187,7 +187,7 @@ export const cursoDocenteQuery = () =>
       }
 
       const estudiantes: EstudianteResumen[] = (perfiles ?? []).map((p) => {
-        const heroe = ((p.heroes as Heroe[] | null) ?? [])[0] ?? null;
+        const heroe = heroeDe(p);
         const suyos = progresos.filter((x) => heroe && x.hero_id === heroe.id);
         const aciertos = suyos.reduce((a, x) => a + x.aciertos, 0);
         const total = suyos.reduce((a, x) => a + x.total, 0);
