@@ -14,16 +14,393 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      aventuras: {
+        Row: {
+          ambientacion: string | null
+          created_at: string
+          descripcion: string
+          id: string
+          orden: number
+          titulo: string
+        }
+        Insert: {
+          ambientacion?: string | null
+          created_at?: string
+          descripcion: string
+          id?: string
+          orden?: number
+          titulo: string
+        }
+        Update: {
+          ambientacion?: string | null
+          created_at?: string
+          descripcion?: string
+          id?: string
+          orden?: number
+          titulo?: string
+        }
+        Relationships: []
+      }
+      cursos: {
+        Row: {
+          codigo: string
+          created_at: string
+          docente_id: string | null
+          id: string
+          nombre: string
+        }
+        Insert: {
+          codigo: string
+          created_at?: string
+          docente_id?: string | null
+          id?: string
+          nombre: string
+        }
+        Update: {
+          codigo?: string
+          created_at?: string
+          docente_id?: string | null
+          id?: string
+          nombre?: string
+        }
+        Relationships: []
+      }
+      hero_insignias: {
+        Row: {
+          hero_id: string
+          id: string
+          insignia_id: string
+          obtenida_at: string
+        }
+        Insert: {
+          hero_id: string
+          id?: string
+          insignia_id: string
+          obtenida_at?: string
+        }
+        Update: {
+          hero_id?: string
+          id?: string
+          insignia_id?: string
+          obtenida_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "hero_insignias_hero_id_fkey"
+            columns: ["hero_id"]
+            isOneToOne: false
+            referencedRelation: "heroes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "hero_insignias_insignia_id_fkey"
+            columns: ["insignia_id"]
+            isOneToOne: false
+            referencedRelation: "insignias"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      heroes: {
+        Row: {
+          avatar: string
+          clase: string
+          created_at: string
+          id: string
+          nivel: number
+          nombre: string
+          profile_id: string
+          xp: number
+        }
+        Insert: {
+          avatar?: string
+          clase: string
+          created_at?: string
+          id?: string
+          nivel?: number
+          nombre: string
+          profile_id: string
+          xp?: number
+        }
+        Update: {
+          avatar?: string
+          clase?: string
+          created_at?: string
+          id?: string
+          nivel?: number
+          nombre?: string
+          profile_id?: string
+          xp?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "heroes_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      insignias: {
+        Row: {
+          codigo: string
+          descripcion: string
+          icono: string
+          id: string
+          nombre: string
+        }
+        Insert: {
+          codigo: string
+          descripcion: string
+          icono?: string
+          id?: string
+          nombre: string
+        }
+        Update: {
+          codigo?: string
+          descripcion?: string
+          icono?: string
+          id?: string
+          nombre?: string
+        }
+        Relationships: []
+      }
+      intentos: {
+        Row: {
+          correcto: boolean
+          created_at: string
+          hero_id: string
+          id: string
+          opcion_elegida: number
+          reto_id: string
+        }
+        Insert: {
+          correcto: boolean
+          created_at?: string
+          hero_id: string
+          id?: string
+          opcion_elegida: number
+          reto_id: string
+        }
+        Update: {
+          correcto?: boolean
+          created_at?: string
+          hero_id?: string
+          id?: string
+          opcion_elegida?: number
+          reto_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "intentos_hero_id_fkey"
+            columns: ["hero_id"]
+            isOneToOne: false
+            referencedRelation: "heroes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "intentos_reto_id_fkey"
+            columns: ["reto_id"]
+            isOneToOne: false
+            referencedRelation: "retos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      misiones: {
+        Row: {
+          aventura_id: string
+          created_at: string
+          disponible: boolean
+          id: string
+          orden: number
+          sinopsis: string
+          texto_lectura: string
+          titulo: string
+          xp_base: number
+        }
+        Insert: {
+          aventura_id: string
+          created_at?: string
+          disponible?: boolean
+          id?: string
+          orden?: number
+          sinopsis: string
+          texto_lectura: string
+          titulo: string
+          xp_base?: number
+        }
+        Update: {
+          aventura_id?: string
+          created_at?: string
+          disponible?: boolean
+          id?: string
+          orden?: number
+          sinopsis?: string
+          texto_lectura?: string
+          titulo?: string
+          xp_base?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "misiones_aventura_id_fkey"
+            columns: ["aventura_id"]
+            isOneToOne: false
+            referencedRelation: "aventuras"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          curso_id: string | null
+          id: string
+          nombre: string
+          rol: Database["public"]["Enums"]["rol_usuario"]
+        }
+        Insert: {
+          created_at?: string
+          curso_id?: string | null
+          id: string
+          nombre: string
+          rol?: Database["public"]["Enums"]["rol_usuario"]
+        }
+        Update: {
+          created_at?: string
+          curso_id?: string | null
+          id?: string
+          nombre?: string
+          rol?: Database["public"]["Enums"]["rol_usuario"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_curso_fk"
+            columns: ["curso_id"]
+            isOneToOne: false
+            referencedRelation: "cursos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      progreso_misiones: {
+        Row: {
+          aciertos: number
+          actualizado_at: string
+          completada: boolean
+          hero_id: string
+          id: string
+          mision_id: string
+          total: number
+          xp_ganado: number
+        }
+        Insert: {
+          aciertos?: number
+          actualizado_at?: string
+          completada?: boolean
+          hero_id: string
+          id?: string
+          mision_id: string
+          total?: number
+          xp_ganado?: number
+        }
+        Update: {
+          aciertos?: number
+          actualizado_at?: string
+          completada?: boolean
+          hero_id?: string
+          id?: string
+          mision_id?: string
+          total?: number
+          xp_ganado?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "progreso_misiones_hero_id_fkey"
+            columns: ["hero_id"]
+            isOneToOne: false
+            referencedRelation: "heroes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "progreso_misiones_mision_id_fkey"
+            columns: ["mision_id"]
+            isOneToOne: false
+            referencedRelation: "misiones"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      retos: {
+        Row: {
+          competencia: Database["public"]["Enums"]["competencia_lit"]
+          enunciado: string
+          id: string
+          mision_id: string
+          opciones: Json
+          orden: number
+          pista: string | null
+          respuesta_correcta: number
+          retroalimentacion_correcta: string
+          retroalimentacion_incorrecta: string
+          xp: number
+        }
+        Insert: {
+          competencia: Database["public"]["Enums"]["competencia_lit"]
+          enunciado: string
+          id?: string
+          mision_id: string
+          opciones: Json
+          orden?: number
+          pista?: string | null
+          respuesta_correcta: number
+          retroalimentacion_correcta: string
+          retroalimentacion_incorrecta: string
+          xp?: number
+        }
+        Update: {
+          competencia?: Database["public"]["Enums"]["competencia_lit"]
+          enunciado?: string
+          id?: string
+          mision_id?: string
+          opciones?: Json
+          orden?: number
+          pista?: string | null
+          respuesta_correcta?: number
+          retroalimentacion_correcta?: string
+          retroalimentacion_incorrecta?: string
+          xp?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "retos_mision_id_fkey"
+            columns: ["mision_id"]
+            isOneToOne: false
+            referencedRelation: "misiones"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      docente_de_estudiante: {
+        Args: { _docente: string; _estudiante: string }
+        Returns: boolean
+      }
+      es_docente: { Args: { _user: string }; Returns: boolean }
     }
     Enums: {
-      [_ in never]: never
+      competencia_lit:
+        | "literal"
+        | "inferencial"
+        | "critica"
+        | "vocabulario"
+        | "estructura"
+      rol_usuario: "estudiante" | "docente"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +527,15 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      competencia_lit: [
+        "literal",
+        "inferencial",
+        "critica",
+        "vocabulario",
+        "estructura",
+      ],
+      rol_usuario: ["estudiante", "docente"],
+    },
   },
 } as const
