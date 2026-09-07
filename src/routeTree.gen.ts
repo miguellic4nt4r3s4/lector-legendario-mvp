@@ -13,7 +13,9 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedAventuraRouteImport } from './routes/_authenticated/aventura'
+import { Route as AuthenticatedDocenteRouteImport } from './routes/_authenticated/docente'
 import { Route as AuthenticatedHeroeRouteImport } from './routes/_authenticated/heroe'
+import { Route as AuthenticatedMisionMisionIdRouteImport } from './routes/_authenticated/mision.$misionId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,23 +36,38 @@ const AuthenticatedAventuraRoute = AuthenticatedAventuraRouteImport.update({
   path: '/aventura',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedDocenteRoute = AuthenticatedDocenteRouteImport.update({
+  id: '/docente',
+  path: '/docente',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedHeroeRoute = AuthenticatedHeroeRouteImport.update({
   id: '/heroe',
   path: '/heroe',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedMisionMisionIdRoute =
+  AuthenticatedMisionMisionIdRouteImport.update({
+    id: '/mision/$misionId',
+    path: '/mision/$misionId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/aventura': typeof AuthenticatedAventuraRoute
+  '/docente': typeof AuthenticatedDocenteRoute
   '/heroe': typeof AuthenticatedHeroeRoute
+  '/mision/$misionId': typeof AuthenticatedMisionMisionIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/aventura': typeof AuthenticatedAventuraRoute
+  '/docente': typeof AuthenticatedDocenteRoute
   '/heroe': typeof AuthenticatedHeroeRoute
+  '/mision/$misionId': typeof AuthenticatedMisionMisionIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -58,20 +75,25 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/_authenticated/aventura': typeof AuthenticatedAventuraRoute
+  '/_authenticated/docente': typeof AuthenticatedDocenteRoute
   '/_authenticated/heroe': typeof AuthenticatedHeroeRoute
+  '/_authenticated/mision/$misionId': typeof AuthenticatedMisionMisionIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/aventura' | '/heroe'
+  fullPaths:
+    '/' | '/auth' | '/aventura' | '/docente' | '/heroe' | '/mision/$misionId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/aventura' | '/heroe'
+  to: '/' | '/auth' | '/aventura' | '/docente' | '/heroe' | '/mision/$misionId'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
     | '/_authenticated/aventura'
+    | '/_authenticated/docente'
     | '/_authenticated/heroe'
+    | '/_authenticated/mision/$misionId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -110,6 +132,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAventuraRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/docente': {
+      id: '/_authenticated/docente'
+      path: '/docente'
+      fullPath: '/docente'
+      preLoaderRoute: typeof AuthenticatedDocenteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/heroe': {
       id: '/_authenticated/heroe'
       path: '/heroe'
@@ -117,17 +146,28 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedHeroeRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/mision/$misionId': {
+      id: '/_authenticated/mision/$misionId'
+      path: '/mision/$misionId'
+      fullPath: '/mision/$misionId'
+      preLoaderRoute: typeof AuthenticatedMisionMisionIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAventuraRoute: typeof AuthenticatedAventuraRoute
+  AuthenticatedDocenteRoute: typeof AuthenticatedDocenteRoute
   AuthenticatedHeroeRoute: typeof AuthenticatedHeroeRoute
+  AuthenticatedMisionMisionIdRoute: typeof AuthenticatedMisionMisionIdRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAventuraRoute: AuthenticatedAventuraRoute,
+  AuthenticatedDocenteRoute: AuthenticatedDocenteRoute,
   AuthenticatedHeroeRoute: AuthenticatedHeroeRoute,
+  AuthenticatedMisionMisionIdRoute: AuthenticatedMisionMisionIdRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
