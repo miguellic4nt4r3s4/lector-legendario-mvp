@@ -3,7 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { BookLock, LogOut } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
-export function Encabezado({ rol }: { rol?: string }) {
+export function Encabezado({ rol }: { rol?: string | undefined }) {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
