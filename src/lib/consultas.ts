@@ -95,6 +95,27 @@ export const progresoQuery = (heroId: string | undefined) =>
     },
   });
 
+export type InsigniaCatalogo = {
+  id: string;
+  codigo: string;
+  nombre: string;
+  descripcion: string;
+  icono: string;
+};
+
+export const insigniasCatalogoQuery = () =>
+  queryOptions({
+    queryKey: ["insignias-catalogo"],
+    queryFn: async (): Promise<InsigniaCatalogo[]> => {
+      const { data, error } = await supabase
+        .from("insignias")
+        .select("id, codigo, nombre, descripcion, icono")
+        .order("codigo");
+      if (error) throw error;
+      return (data ?? []) as InsigniaCatalogo[];
+    },
+  });
+
 export const insigniasHeroeQuery = (heroId: string | undefined) =>
   queryOptions({
     queryKey: ["insignias-heroe", heroId],
@@ -115,7 +136,7 @@ export const misionQuery = (misionId: string) =>
     queryFn: async () => {
       const { data, error } = await supabase
         .from("misiones")
-        .select("id, titulo, sinopsis, texto_lectura, xp_base, aventuras(titulo, ambientacion)")
+        .select("id, titulo, sinopsis, texto_lectura, xp_base, aventuras(titulo, ambientacion, orden)")
         .eq("id", misionId)
         .maybeSingle();
       if (error) throw error;

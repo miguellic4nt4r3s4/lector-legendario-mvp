@@ -5,13 +5,16 @@ import { Lock, MapPin } from "lucide-react";
 import { Encabezado } from "@/components/juego/Encabezado";
 import { TarjetaHeroe } from "@/components/juego/TarjetaHeroe";
 import { Insignia } from "@/components/juego/Insignia";
+import { MapaReino } from "@/components/juego/MapaReino";
 import {
   aventurasQuery,
   heroeQuery,
+  insigniasCatalogoQuery,
   insigniasHeroeQuery,
   perfilQuery,
   progresoQuery,
 } from "@/lib/consultas";
+import { CONDICION_POR_CODIGO, MUNDO_POR_CODIGO, rarezaDe } from "@/lib/juego";
 
 export const Route = createFileRoute("/_authenticated/aventura")({
   head: () => ({
@@ -35,6 +38,7 @@ function Aventura() {
   const { data: aventuras } = useQuery(aventurasQuery());
   const { data: progreso } = useQuery(progresoQuery(heroe?.id));
   const { data: insignias } = useQuery(insigniasHeroeQuery(heroe?.id));
+  const { data: catalogo } = useQuery(insigniasCatalogoQuery());
 
   useEffect(() => {
     if (!cargandoHeroe && heroe === null && perfil?.rol === "estudiante") {
@@ -57,12 +61,24 @@ function Aventura() {
   }
 
   const progresoPorMision = new Map((progreso ?? []).map((p) => [p.mision_id, p]));
+  const obtenidaPorId = new Map(
+    (insignias ?? []).map((i) => {
+      const ins = i.insignias as unknown as { id: string };
+      return [ins.id, i.obtenida_at as string];
+    }),
+  );
+  const aventurasCompletadas = (aventuras ?? [])
+    .filter((a) => {
+      const ms = (a.misiones as unknown as { id: string }[]) ?? [];
+      return ms.some((m) => progresoPorMision.get(m.id)?.completada);
+    })
+    .map((a) => a.orden);
 
   return (
     <div className="min-h-screen">
       <Encabezado rol={perfil?.rol} />
       <main className="mx-auto max-w-5xl px-4 py-8">
-        <div className="grid gap-6 lg:grid-cols-[320px_1fr]">
+        <div className="grid gap-6 lg:grid-cols-[340px_1fr]">
           <aside className="space-y-6">
             <TarjetaHeroe
               nombre={heroe.nombre}
@@ -71,38 +87,40 @@ function Aventura() {
               xp={heroe.xp}
               insignias={insignias?.length ?? 0}
             />
-            <section className="panel p-5">
-              <h2 className="text-base">Insignias</h2>
-              {insignias && insignias.length > 0 ? (
-                <div className="mt-3 space-y-3">
-                  {insignias.map((i) => {
-                    const ins = i.insignias as unknown as {
-                      id: string;
-                      nombre: string;
-                      descripcion: string;
-                      icono: string;
-                    };
-                    return (
-                      <Insignia
-                        key={ins.id}
-                        nombre={ins.nombre}
-                        descripcion={ins.descripcion}
-                        icono={ins.icono}
-                        destacada
-                      />
-                    );
-                  })}
-                </div>
-              ) : (
-                <p className="mt-2 text-sm text-muted-foreground">
-                  Aún no obtienes insignias. Completa una misión con al menos 3 aciertos para ganar
-                  la primera.
-                </p>
-              )}
+            <section className="panel p-5" aria-labelledby="titulo-insignias">
+              <p className="font-display text-xs uppercase tracking-[0.35em] text-accent">
+                Recompensas
+              </p>
+              <h2 id="titulo-insignias" className="mt-1 text-lg">
+                Insignias
+              </h2>
+              <p className="mt-1 text-xs text-muted-foreground">
+                {insignias?.length ?? 0} de {catalogo?.length ?? 0} desbloqueadas
+              </p>
+              <div className="mt-4 space-y-3">
+                {(catalogo ?? []).map((ins) => {
+                  const fecha = obtenidaPorId.get(ins.id) ?? null;
+                  return (
+                    <Insignia
+                      key={ins.id}
+                      nombre={ins.nombre}
+                      descripcion={ins.descripcion}
+                      icono={ins.icono}
+                      rareza={rarezaDe(ins.codigo)}
+                      desbloqueada={!!fecha}
+                      fecha={fecha}
+                      mundo={MUNDO_POR_CODIGO[ins.codigo]}
+                      condicion={CONDICION_POR_CODIGO[ins.codigo]}
+                      destacada={!!fecha}
+                    />
+                  );
+                })}
+              </div>
             </section>
           </aside>
 
           <section className="space-y-6">
+            <MapaReino xp={heroe.xp} aventurasCompletadas={aventurasCompletadas} />
             {(aventuras ?? []).map((aventura) => {
               const misiones = ((aventura.misiones as unknown as {
                 id: string;
@@ -115,10 +133,15 @@ function Aventura() {
 
               return (
                 <article key={aventura.id} className="panel p-6">
-                  <p className="font-display text-xs uppercase tracking-[0.3em] text-accent">
+                  <p className="font-display text-xs uppercase tracking-[0.35em] text-accent">
+                    Mundo 1 · Bosque de las Palabras
+                  </p>
+                  <p className="mt-3 font-display text-sm uppercase tracking-[0.3em] text-muted-foreground">
                     Aventura {aventura.orden}
                   </p>
-                  <h1 className="mt-2 font-display text-2xl text-primary">{aventura.titulo}</h1>
+                  <h1 className="mt-1 font-display text-2xl uppercase tracking-wide text-primary sm:text-3xl">
+                    {aventura.titulo}
+                  </h1>
                   <p className="mt-2 text-muted-foreground">{aventura.descripcion}</p>
                   {aventura.ambientacion && (
                     <p className="mt-1 flex items-center gap-1.5 text-xs text-muted-foreground">

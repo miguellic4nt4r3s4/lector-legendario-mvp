@@ -7,7 +7,7 @@ import { Encabezado } from "@/components/juego/Encabezado";
 import { Insignia } from "@/components/juego/Insignia";
 import { BarraXp } from "@/components/juego/BarraXp";
 import { heroeQuery, misionQuery, perfilQuery, retosQuery, type Reto } from "@/lib/consultas";
-import { ETIQUETA_COMPETENCIA, nivelDesdeXp, rangoDeNivel } from "@/lib/juego";
+import { ETIQUETA_COMPETENCIA, MUNDO_POR_CODIGO, nivelDesdeXp, rarezaDe } from "@/lib/juego";
 
 export const Route = createFileRoute("/_authenticated/mision/$misionId")({
   head: () => ({
@@ -43,7 +43,7 @@ function PaginaMision() {
   const [resultado, setResultado] = useState<{
     aciertos: number;
     xpGanado: number;
-    insigniasNuevas: { nombre: string; descripcion: string; icono: string }[];
+    insigniasNuevas: { codigo: string; nombre: string; descripcion: string; icono: string }[];
     xpTotal: number;
   } | null>(null);
   const [guardando, setGuardando] = useState(false);
@@ -150,7 +150,7 @@ function PaginaMision() {
       if (aciertos >= 3) codigos.push("ojo_del_archivo");
       if (aciertos === total) codigos.push("lector_legendario");
 
-      const insigniasNuevas: { nombre: string; descripcion: string; icono: string }[] = [];
+      const insigniasNuevas: { codigo: string; nombre: string; descripcion: string; icono: string }[] = [];
       if (codigos.length > 0) {
         const { data: catalogo } = await supabase
           .from("insignias")
@@ -168,6 +168,7 @@ function PaginaMision() {
             .insert({ hero_id: heroe.id, insignia_id: ins.id });
           if (!error) {
             insigniasNuevas.push({
+              codigo: ins.codigo,
               nombre: ins.nombre,
               descripcion: ins.descripcion,
               icono: ins.icono,
@@ -184,16 +185,28 @@ function PaginaMision() {
     }
   }
 
-  const aventura = mision.aventuras as unknown as { titulo: string; ambientacion: string | null };
+  const aventura = mision.aventuras as unknown as {
+    titulo: string;
+    ambientacion: string | null;
+    orden?: number;
+  };
 
   return (
     <div className="min-h-screen">
       <Encabezado rol={perfil?.rol} />
       <main className="mx-auto max-w-3xl px-4 py-8">
-        <p className="font-display text-xs uppercase tracking-[0.3em] text-accent">
-          {aventura?.titulo}
-        </p>
-        <h1 className="mt-2 font-display text-3xl">{mision.titulo}</h1>
+        <header className="border-l-2 border-primary/60 pl-4">
+          <p className="font-display text-xs uppercase tracking-[0.35em] text-accent">
+            Aventura {aventura?.orden ?? 1}
+          </p>
+          <p className="mt-1 font-display text-lg uppercase tracking-[0.15em] text-primary sm:text-xl">
+            {aventura?.titulo}
+          </p>
+          <h1 className="mt-3 font-display text-2xl text-foreground sm:text-3xl">{mision.titulo}</h1>
+          {aventura?.ambientacion && (
+            <p className="mt-1 text-xs italic text-muted-foreground">{aventura.ambientacion}</p>
+          )}
+        </header>
 
         {fase === "lectura" && (
           <section className="mt-6 space-y-6">
@@ -338,25 +351,28 @@ function PaginaMision() {
               <p className="mt-4 text-lg">
                 <span className="text-primary">+{resultado.xpGanado} XP</span> en este intento
               </p>
-              <div className="mx-auto mt-4 max-w-sm">
-                <BarraXp xp={resultado.xpTotal} />
-                <p className="mt-2 text-sm text-muted-foreground">
-                  Nivel {nivelDesdeXp(resultado.xpTotal)} ·{" "}
-                  {rangoDeNivel(nivelDesdeXp(resultado.xpTotal))}
-                </p>
+              <div className="mx-auto mt-4 max-w-sm text-left">
+                <BarraXp xp={resultado.xpTotal} conNivel />
               </div>
             </div>
 
             {resultado.insigniasNuevas.length > 0 && (
               <div className="panel p-6">
-                <h2 className="text-base">Nueva recompensa</h2>
+                <p className="font-display text-xs uppercase tracking-[0.35em] text-accent">
+                  Recompensa desbloqueada
+                </p>
+                <h2 className="mt-1 text-lg">Nueva insignia</h2>
                 <div className="mt-3 space-y-3">
                   {resultado.insigniasNuevas.map((i) => (
                     <Insignia
-                      key={i.nombre}
+                      key={i.codigo}
                       nombre={i.nombre}
                       descripcion={i.descripcion}
                       icono={i.icono}
+                      rareza={rarezaDe(i.codigo)}
+                      mundo={MUNDO_POR_CODIGO[i.codigo]}
+                      fecha={new Date().toISOString()}
+                      desbloqueada
                       destacada
                     />
                   ))}
