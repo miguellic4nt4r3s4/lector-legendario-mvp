@@ -8,6 +8,7 @@ import { Insignia } from "@/components/juego/Insignia";
 import { MapaReino } from "@/components/juego/MapaReino";
 import {
   aventurasQuery,
+  inventarioAvatarQuery,
   heroeQuery,
   insigniasCatalogoQuery,
   insigniasHeroeQuery,
@@ -15,6 +16,7 @@ import {
   progresoQuery,
 } from "@/lib/consultas";
 import { CONDICION_POR_CODIGO, MUNDO_POR_CODIGO, rarezaDe } from "@/lib/juego";
+import type { ConfiguracionAvatar } from "@/components/juego/AvatarModular";
 
 export const Route = createFileRoute("/_authenticated/aventura")({
   head: () => ({
@@ -39,6 +41,7 @@ function Aventura() {
   const { data: progreso } = useQuery(progresoQuery(heroe?.id));
   const { data: insignias } = useQuery(insigniasHeroeQuery(heroe?.id));
   const { data: catalogo } = useQuery(insigniasCatalogoQuery());
+  const { data: inventarioAvatar } = useQuery(inventarioAvatarQuery(heroe?.id));
 
   useEffect(() => {
     if (!cargandoHeroe && heroe === null && perfil?.rol === "estudiante") {
@@ -73,6 +76,9 @@ function Aventura() {
       return ms.some((m) => progresoPorMision.get(m.id)?.completada);
     })
     .map((a) => a.orden);
+  const configuracionAvatar = Object.fromEntries(
+    (inventarioAvatar ?? []).filter((fila) => fila.equipped).map((fila) => [fila.category, fila.avatar_items.asset]),
+  ) as ConfiguracionAvatar;
 
   return (
     <div className="min-h-screen">
@@ -83,7 +89,7 @@ function Aventura() {
             <TarjetaHeroe
               nombre={heroe.nombre}
               clase={heroe.clase}
-              avatar={heroe.avatar}
+              configuracion={configuracionAvatar}
               xp={heroe.xp}
               insignias={insignias?.length ?? 0}
             />

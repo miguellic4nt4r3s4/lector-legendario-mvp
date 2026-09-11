@@ -15,7 +15,7 @@ export type CategoriaAvatar = (typeof CATEGORIAS_AVATAR)[number];
 export type ConfiguracionAvatar = Partial<Record<CategoriaAvatar, string>>;
 
 type Props = {
-  configuracion?: ConfiguracionAvatar;
+  configuracion?: ConfiguracionAvatar | undefined;
   className?: string;
   nombre?: string;
 };
