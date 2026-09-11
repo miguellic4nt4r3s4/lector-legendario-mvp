@@ -18,6 +18,28 @@ export type Heroe = {
   nivel: number;
 };
 
+export type AvatarItem = {
+  id: string;
+  code: string;
+  name: string;
+  category: "face" | "hair" | "eyes" | "top" | "bottom" | "shoes" | "accessory" | "effect";
+  description: string;
+  asset: string;
+  rarity: "comun" | "rara" | "epica" | "legendaria" | "mitica";
+  unlock_condition: string;
+  sort_order: number;
+};
+
+export type InventarioAvatar = {
+  id: string;
+  hero_id: string;
+  item_id: string;
+  category: AvatarItem["category"];
+  equipped: boolean;
+  unlocked_at: string;
+  avatar_items: AvatarItem;
+};
+
 export type Reto = {
   id: string;
   enunciado: string;
@@ -68,6 +90,34 @@ export const heroeQuery = () =>
     },
   });
 
+export const catalogoAvatarQuery = () =>
+  queryOptions({
+    queryKey: ["catalogo-avatar"],
+    queryFn: async (): Promise<AvatarItem[]> => {
+      const { data, error } = await supabase
+        .from("avatar_items")
+        .select("id, code, name, category, description, asset, rarity, unlock_condition, sort_order")
+        .order("sort_order");
+      if (error) throw error;
+      return (data ?? []) as AvatarItem[];
+    },
+  });
+
+export const inventarioAvatarQuery = (heroId: string | undefined) =>
+  queryOptions({
+    queryKey: ["inventario-avatar", heroId],
+    enabled: !!heroId,
+    queryFn: async (): Promise<InventarioAvatar[]> => {
+      if (!heroId) return [];
+      const { data, error } = await supabase
+        .from("hero_inventory")
+        .select("id, hero_id, item_id, category, equipped, unlocked_at, avatar_items(id, code, name, category, description, asset, rarity, unlock_condition, sort_order)")
+        .eq("hero_id", heroId);
+      if (error) throw error;
+      return (data ?? []) as unknown as InventarioAvatar[];
+    },
+  });
+
 export const aventurasQuery = () =>
   queryOptions({
     queryKey: ["aventuras"],
@@ -89,7 +139,7 @@ export const progresoQuery = (heroId: string | undefined) =>
       const { data, error } = await supabase
         .from("progreso_misiones")
         .select("mision_id, aciertos, total, xp_ganado, completada")
-        .eq("hero_id", heroId!);
+        .eq("hero_id", heroId ?? "");
       if (error) throw error;
       return data ?? [];
     },
@@ -124,7 +174,7 @@ export const insigniasHeroeQuery = (heroId: string | undefined) =>
       const { data, error } = await supabase
         .from("hero_insignias")
         .select("obtenida_at, insignias(id, codigo, nombre, descripcion, icono)")
-        .eq("hero_id", heroId!);
+        .eq("hero_id", heroId ?? "");
       if (error) throw error;
       return data ?? [];
     },

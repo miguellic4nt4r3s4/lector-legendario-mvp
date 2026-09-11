@@ -1,10 +1,15 @@
-import { AVATAR_EMOJI, nivelDesdeXp, rangoDeNivel } from "@/lib/juego";
+import { Link } from "@tanstack/react-router";
+import { Shirt, SlidersHorizontal } from "lucide-react";
+import { nivelDesdeXp, rangoDeNivel } from "@/lib/juego";
+import type { ConfiguracionAvatar } from "./AvatarModular";
+import { AvatarModular } from "./AvatarModular";
 import { BarraXp } from "./BarraXp";
+import { Button } from "@/components/ui/button";
 
 type Props = {
   nombre: string;
   clase: string;
-  avatar: string;
+  configuracion?: ConfiguracionAvatar;
   xp: number;
   insignias?: number;
 };
@@ -14,7 +19,7 @@ type Props = {
  * pensado para alojar en el futuro un avatar 2D modular por capas
  * (cuerpo, rostro, atuendo, accesorio); hoy renderiza el emblema elegido.
  */
-export function TarjetaHeroe({ nombre, clase, avatar, xp, insignias = 0 }: Props) {
+export function TarjetaHeroe({ nombre, clase, configuracion, xp, insignias = 0 }: Props) {
   const nivel = nivelDesdeXp(xp);
   return (
     <section className="panel overflow-hidden" aria-labelledby="titulo-mi-heroe">
@@ -28,14 +33,10 @@ export function TarjetaHeroe({ nombre, clase, avatar, xp, insignias = 0 }: Props
       </header>
 
       <div className="p-5">
-        {/* Marco del avatar — preparado para avatar 2D modular */}
-        <div className="relative mx-auto aspect-square w-full max-w-[220px]">
+        <div className="relative mx-auto w-full max-w-[240px]">
           <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--color-primary)_28%,transparent),transparent_70%)] blur-xl" />
-          <div className="relative flex h-full w-full items-center justify-center rounded-full border-2 border-primary/60 bg-gradient-to-b from-secondary to-background shadow-[inset_0_0_40px_oklch(0_0_0/0.45)]">
-            <div className="absolute inset-2 rounded-full border border-accent/30" />
-            <span className="text-[5.5rem] leading-none drop-shadow-[0_6px_12px_oklch(0_0_0/0.6)]" aria-hidden>
-              {AVATAR_EMOJI[avatar] ?? "🔍"}
-            </span>
+          <div className="relative">
+            <AvatarModular configuracion={configuracion} nombre={`Avatar modular de ${nombre}`} />
             <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 rounded-full border border-primary bg-background px-3 py-0.5 font-display text-xs uppercase tracking-widest text-primary">
               Nv. {nivel}
             </span>
@@ -64,6 +65,15 @@ export function TarjetaHeroe({ nombre, clase, avatar, xp, insignias = 0 }: Props
             <dd className="font-display text-xl text-primary">{insignias}</dd>
           </div>
         </dl>
+
+        <div className="mt-4 grid grid-cols-2 gap-3">
+          <Button asChild>
+            <Link to="/personalizar" search={{ categoria: "face" }}><SlidersHorizontal aria-hidden /> Personalizar</Link>
+          </Button>
+          <Button asChild variant="outline">
+            <Link to="/personalizar" search={{ categoria: "top" }}><Shirt aria-hidden /> Vestuario</Link>
+          </Button>
+        </div>
       </div>
     </section>
   );

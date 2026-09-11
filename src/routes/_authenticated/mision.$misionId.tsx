@@ -6,7 +6,9 @@ import { supabase } from "@/integrations/supabase/client";
 import { Encabezado } from "@/components/juego/Encabezado";
 import { Insignia } from "@/components/juego/Insignia";
 import { BarraXp } from "@/components/juego/BarraXp";
-import { heroeQuery, misionQuery, perfilQuery, retosQuery, type Reto } from "@/lib/consultas";
+import { RecompensaAvatar } from "@/components/juego/RecompensaAvatar";
+import { Button } from "@/components/ui/button";
+import { heroeQuery, misionQuery, perfilQuery, retosQuery, type AvatarItem, type Reto } from "@/lib/consultas";
 import { ETIQUETA_COMPETENCIA, MUNDO_POR_CODIGO, nivelDesdeXp, rarezaDe } from "@/lib/juego";
 
 export const Route = createFileRoute("/_authenticated/mision/$misionId")({
@@ -47,6 +49,9 @@ function PaginaMision() {
     xpTotal: number;
   } | null>(null);
   const [guardando, setGuardando] = useState(false);
+  const [recompensaAvatar, setRecompensaAvatar] = useState<AvatarItem | null>(null);
+  const [mostrarRecompensa, setMostrarRecompensa] = useState(false);
+  const [equipandoRecompensa, setEquipandoRecompensa] = useState(false);
 
   const listaRetos: Reto[] = useMemo(() => retos ?? [], [retos]);
   const retoActual = listaRetos[indice];
@@ -97,6 +102,14 @@ function PaginaMision() {
     if (!heroe) return;
     setGuardando(true);
     try {
+      const { data: mochilaCatalogo } = await supabase
+        .from("avatar_items")
+        .select("id, code, name, category, description, asset, rarity, unlock_condition, sort_order")
+        .eq("code", "accessory_backpack_01")
+        .maybeSingle();
+      const { data: mochilaAntes } = mochilaCatalogo
+        ? await supabase.from("hero_inventory").select("id").eq("hero_id", heroe.id).eq("item_id", mochilaCatalogo.id).maybeSingle()
+        : { data: null };
       const aciertos = respuestas.filter((r) => r.correcto).length;
       const total = listaRetos.length;
       const xpRetos = respuestas.reduce((acc, r) => {
@@ -180,8 +193,37 @@ function PaginaMision() {
       setResultado({ aciertos, xpGanado: xpNuevo, insigniasNuevas, xpTotal });
       setFase("resultado");
       await queryClient.invalidateQueries();
+      if (!mochilaAntes && mochilaCatalogo && codigos.includes("ojo_del_archivo")) {
+        const { data: mochilaDespues } = await supabase
+          .from("hero_inventory")
+          .select("id")
+          .eq("hero_id", heroe.id)
+          .eq("item_id", mochilaCatalogo.id)
+          .maybeSingle();
+        if (mochilaDespues) {
+          setRecompensaAvatar(mochilaCatalogo as AvatarItem);
+          setMostrarRecompensa(true);
+        }
+      }
     } finally {
       setGuardando(false);
+    }
+  }
+
+  async function equiparRecompensa() {
+    if (!recompensaAvatar || !heroe) return;
+    setEquipandoRecompensa(true);
+    try {
+      const { error } = await supabase
+        .from("hero_inventory")
+        .update({ equipped: true })
+        .eq("hero_id", heroe.id)
+        .eq("item_id", recompensaAvatar.id);
+      if (error) throw error;
+      await queryClient.invalidateQueries({ queryKey: ["inventario-avatar", heroe.id] });
+      setMostrarRecompensa(false);
+    } finally {
+      setEquipandoRecompensa(false);
     }
   }
 
@@ -193,6 +235,13 @@ function PaginaMision() {
 
   return (
     <div className="min-h-screen">
+      <RecompensaAvatar
+        item={recompensaAvatar}
+        abierta={mostrarRecompensa}
+        equipando={equipandoRecompensa}
+        onEquipar={equiparRecompensa}
+        onContinuar={() => setMostrarRecompensa(false)}
+      />
       <Encabezado rol={perfil?.rol} />
       <main className="mx-auto max-w-3xl px-4 py-8">
         <header className="border-l-2 border-primary/60 pl-4">
@@ -406,7 +455,7 @@ function PaginaMision() {
               >
                 Volver al mapa de aventura
               </Link>
-              <button
+              <Button
                 onClick={() => {
                   setFase("lectura");
                   setIndice(0);
@@ -415,10 +464,10 @@ function PaginaMision() {
                   setRespuestas([]);
                   setResultado(null);
                 }}
-                className="rounded-md border border-border px-5 py-2.5 font-semibold transition-colors hover:bg-secondary"
+                variant="outline"
               >
                 Repetir la misión
-              </button>
+              </Button>
             </div>
           </section>
         )}

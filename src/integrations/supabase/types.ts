@@ -14,6 +14,51 @@ export type Database = {
   }
   public: {
     Tables: {
+      avatar_items: {
+        Row: {
+          asset: string
+          category: string
+          code: string
+          created_at: string
+          description: string
+          id: string
+          is_starter: boolean
+          name: string
+          rarity: string
+          required_badge_code: string | null
+          sort_order: number
+          unlock_condition: string
+        }
+        Insert: {
+          asset: string
+          category: string
+          code: string
+          created_at?: string
+          description: string
+          id?: string
+          is_starter?: boolean
+          name: string
+          rarity: string
+          required_badge_code?: string | null
+          sort_order?: number
+          unlock_condition: string
+        }
+        Update: {
+          asset?: string
+          category?: string
+          code?: string
+          created_at?: string
+          description?: string
+          id?: string
+          is_starter?: boolean
+          name?: string
+          rarity?: string
+          required_badge_code?: string | null
+          sort_order?: number
+          unlock_condition?: string
+        }
+        Relationships: []
+      }
       aventuras: {
         Row: {
           ambientacion: string | null
@@ -98,6 +143,51 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "insignias"
             referencedColumns: ["id"]
+          },
+        ]
+      }
+      hero_inventory: {
+        Row: {
+          category: string
+          equipped: boolean
+          hero_id: string
+          id: string
+          item_id: string
+          unlocked_at: string
+          updated_at: string
+        }
+        Insert: {
+          category: string
+          equipped?: boolean
+          hero_id: string
+          id?: string
+          item_id: string
+          unlocked_at?: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          equipped?: boolean
+          hero_id?: string
+          id?: string
+          item_id?: string
+          unlocked_at?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "hero_inventory_hero_id_fkey"
+            columns: ["hero_id"]
+            isOneToOne: false
+            referencedRelation: "heroes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "hero_inventory_item_category_fkey"
+            columns: ["item_id", "category"]
+            isOneToOne: false
+            referencedRelation: "avatar_items"
+            referencedColumns: ["id", "category"]
           },
         ]
       }
