@@ -19,7 +19,6 @@ type Props = {
  * (cuerpo, rostro, atuendo, accesorio); hoy renderiza el emblema elegido.
  */
 export function TarjetaHeroe({ nombre, clase, configuracion, xp, insignias = 0 }: Props) {
-  const nivel = nivelDesdeXp(xp);
   return (
     <section className="space-y-4" aria-labelledby="titulo-mi-heroe">
       <header className="flex items-center justify-between border-b border-border/70 pb-3">

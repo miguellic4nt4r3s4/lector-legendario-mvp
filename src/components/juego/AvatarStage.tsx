@@ -11,7 +11,7 @@ const mundos: Record<MundoEscenario, string> = {
   ciudad: "Ciudad de las Perspectivas", archivo: "Archivo Secreto del Autor", reino: "Reino del Pensamiento Crítico",
 };
 
-type Props = { configuracion?: ConfiguracionAvatar; nombre: string; mundo?: MundoEscenario; className?: string; compacto?: boolean };
+type Props = { configuracion?: ConfiguracionAvatar | undefined; nombre: string; mundo?: MundoEscenario | undefined; className?: string | undefined; compacto?: boolean | undefined };
 
 export function AvatarStage({ configuracion, nombre, mundo = "bosque", className, compacto = false }: Props) {
   return (
