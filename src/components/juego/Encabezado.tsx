@@ -16,7 +16,7 @@ export function Encabezado({ rol }: { rol?: string | undefined }) {
   }
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border/70 bg-background/88 backdrop-blur-xl">
+    <header className="sticky top-0 z-40 overflow-x-hidden border-b border-border/70 bg-background/88 backdrop-blur-xl">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-3 px-4 py-3">
         <Link to="/aventura" className="flex items-center gap-2">
           <span className="flex h-8 w-8 items-center justify-center rounded-full border border-primary/50 bg-primary/10"><BookLock className="h-4 w-4 text-primary" aria-hidden /></span>
@@ -24,7 +24,7 @@ export function Encabezado({ rol }: { rol?: string | undefined }) {
             Lector Legendario
           </span>
         </Link>
-        <nav className="order-3 flex w-full items-center gap-1 overflow-x-auto border-t border-border/50 pt-2 text-xs md:order-none md:ml-auto md:w-auto md:border-0 md:pt-0" aria-label="Navegación principal">
+        <nav className="order-3 flex w-full min-w-0 max-w-full items-center gap-1 overflow-x-auto border-t border-border/50 pt-2 text-xs md:order-none md:ml-auto md:w-auto md:border-0 md:pt-0" aria-label="Navegación principal">
           {rol === "docente" ? (
             <Link
               to="/docente"
