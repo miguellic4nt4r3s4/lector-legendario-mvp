@@ -16,6 +16,8 @@ export const Route = createFileRoute("/_authenticated/docente")({
       },
       { property: "og:title", content: "Panel docente — Lector Legendario" },
       { property: "og:description", content: "Progreso de lectura por estudiante y por curso." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: PanelDocente,
@@ -35,8 +37,8 @@ function PanelDocente() {
     <div className="min-h-screen">
       <Encabezado rol={perfil?.rol} />
       <main className="mx-auto max-w-5xl px-4 py-8">
-        <p className="font-display text-xs uppercase tracking-[0.3em] text-accent">Panel docente</p>
-        <h1 className="mt-2 font-display text-3xl">
+        <p className="text-xs font-bold uppercase tracking-[0.3em] text-accent">Crónica del curso</p>
+        <h1 className="mt-2 font-display text-4xl font-bold text-primary">
           {isLoading ? "Consultando el archivo…" : (data?.curso?.nombre ?? "Sin curso asignado")}
         </h1>
         <p className="mt-2 text-muted-foreground">
