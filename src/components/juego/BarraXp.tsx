@@ -19,7 +19,7 @@ export function BarraXp({ xp, compacta = false, conNivel = false }: Props) {
         </p>
       )}
       <div
-        className="h-3 w-full overflow-hidden rounded-full border border-border/60 bg-secondary"
+        className="h-3 w-full overflow-hidden rounded-full border border-primary/25 bg-background/70 shadow-inner"
         role="progressbar"
         aria-valuemin={0}
         aria-valuemax={XP_POR_NIVEL}
@@ -27,7 +27,7 @@ export function BarraXp({ xp, compacta = false, conNivel = false }: Props) {
         aria-label="Progreso hacia el siguiente nivel"
       >
         <div
-          className="h-full rounded-full bg-gradient-to-r from-accent to-primary transition-all duration-700"
+          className="h-full rounded-full bg-gradient-to-r from-accent via-success to-primary transition-all duration-700 reward-glow"
           style={{ width: `${pct}%` }}
         />
       </div>
