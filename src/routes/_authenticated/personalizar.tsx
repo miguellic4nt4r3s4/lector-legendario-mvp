@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { z } from "zod";
-import { AvatarModular, CATEGORIAS_AVATAR, type CategoriaAvatar, type ConfiguracionAvatar } from "@/components/juego/AvatarModular";
+import { CATEGORIAS_AVATAR, type CategoriaAvatar, type ConfiguracionAvatar } from "@/components/juego/AvatarModular";
 import { AvatarStage } from "@/components/juego/AvatarStage";
 import { CharacterCard } from "@/components/juego/CharacterCard";
 import { CategoryTabs } from "@/components/juego/CategoryTabs";

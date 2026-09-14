@@ -22,6 +22,8 @@ export const Route = createFileRoute("/_authenticated/mision/$misionId")({
       },
       { property: "og:title", content: "Misión en curso — Lector Legendario" },
       { property: "og:description", content: "Lectura, retos y retroalimentación inmediata." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: PaginaMision,
@@ -243,9 +245,9 @@ function PaginaMision() {
         onContinuar={() => setMostrarRecompensa(false)}
       />
       <Encabezado rol={perfil?.rol} />
-      <main className="mx-auto max-w-3xl px-4 py-8">
-        <header className="border-l-2 border-primary/60 pl-4">
-          <p className="font-display text-xs uppercase tracking-[0.35em] text-accent">
+      <main className="mx-auto max-w-4xl px-4 py-6 sm:py-8">
+        <header className="game-surface ornate-frame rounded-lg border-l-2 border-l-primary px-5 py-6 sm:px-7">
+          <p className="text-xs font-bold uppercase tracking-[0.35em] text-accent">
             Aventura {aventura?.orden ?? 1}
           </p>
           <p className="mt-1 font-display text-lg uppercase tracking-[0.15em] text-primary sm:text-xl">
@@ -266,12 +268,9 @@ function PaginaMision() {
               ))}
             </article>
             <div className="flex flex-wrap items-center gap-4">
-              <button
-                onClick={() => setFase("retos")}
-                className="rounded-md bg-primary px-6 py-3 font-semibold text-primary-foreground transition-opacity hover:opacity-90"
-              >
+              <Button onClick={() => setFase("retos")} size="lg">
                 Estoy listo: ir a los retos
-              </button>
+              </Button>
               <p className="text-sm text-muted-foreground">
                 {listaRetos.length} retos · hasta {mision.xp_base} XP
               </p>
@@ -308,12 +307,13 @@ function PaginaMision() {
                   else if (revelado && elegida) clases = "border-destructive bg-destructive/15";
                   else if (elegida) clases = "border-primary bg-primary/10";
                   return (
-                    <button
+                    <Button
                       key={i}
                       type="button"
+                      variant="outline"
                       disabled={revelado}
                       onClick={() => setSeleccion(i)}
-                      className={`flex w-full items-start gap-3 rounded-lg border p-4 text-left transition-colors ${clases}`}
+                      className={`h-auto min-h-14 w-full justify-start whitespace-normal p-4 text-left ${clases}`}
                     >
                       <span className="font-display text-sm text-primary">
                         {String.fromCharCode(65 + i)}
@@ -325,7 +325,7 @@ function PaginaMision() {
                       {revelado && elegida && !esCorrecta && (
                         <XCircle className="h-5 w-5 text-destructive" aria-hidden />
                       )}
-                    </button>
+                    </Button>
                   );
                 })}
               </div>
@@ -360,21 +360,19 @@ function PaginaMision() {
 
               <div className="mt-6 flex justify-end">
                 {!revelado ? (
-                  <button
+                  <Button
                     onClick={responder}
                     disabled={seleccion === null}
-                    className="rounded-md bg-primary px-5 py-2.5 font-semibold text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-50"
                   >
                     Responder
-                  </button>
+                  </Button>
                 ) : (
-                  <button
+                  <Button
                     onClick={siguiente}
                     disabled={guardando}
-                    className="rounded-md bg-primary px-5 py-2.5 font-semibold text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-60"
                   >
                     {indice < listaRetos.length - 1 ? "Siguiente reto" : "Ver resultado"}
-                  </button>
+                  </Button>
                 )}
               </div>
             </div>
@@ -383,8 +381,8 @@ function PaginaMision() {
 
         {fase === "resultado" && resultado && (
           <section className="mt-6 space-y-6">
-            <div className="panel p-6 text-center">
-              <p className="font-display text-xs uppercase tracking-[0.3em] text-accent">
+            <div className="game-surface ornate-frame reveal-up rounded-lg p-6 text-center">
+              <p className="text-xs font-bold uppercase tracking-[0.3em] text-accent">
                 Misión completada
               </p>
               <p className="mt-3 font-display text-5xl text-primary">
@@ -398,7 +396,7 @@ function PaginaMision() {
                     : "El archivo guarda sus secretos. Relee el texto y vuelve a intentarlo."}
               </p>
               <p className="mt-4 text-lg">
-                <span className="text-primary">+{resultado.xpGanado} XP</span> en este intento
+                <span className="inline-flex rounded-md border border-primary/50 bg-primary/10 px-3 py-1 font-bold text-primary reward-glow">+{resultado.xpGanado} XP</span> en este intento
               </p>
               <div className="mx-auto mt-4 max-w-sm text-left">
                 <BarraXp xp={resultado.xpTotal} conNivel />
@@ -410,7 +408,7 @@ function PaginaMision() {
                 <p className="font-display text-xs uppercase tracking-[0.35em] text-accent">
                   Recompensa desbloqueada
                 </p>
-                <h2 className="mt-1 text-lg">Nueva insignia</h2>
+                <h2 className="mt-1 font-display text-2xl font-bold text-primary">¡Nueva insignia!</h2>
                 <div className="mt-3 space-y-3">
                   {resultado.insigniasNuevas.map((i) => (
                     <Insignia
@@ -449,12 +447,7 @@ function PaginaMision() {
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <Link
-                to="/aventura"
-                className="rounded-md bg-primary px-5 py-2.5 font-semibold text-primary-foreground"
-              >
-                Volver al mapa de aventura
-              </Link>
+              <Button asChild><Link to="/aventura">Volver al mapa de aventura</Link></Button>
               <Button
                 onClick={() => {
                   setFase("lectura");
