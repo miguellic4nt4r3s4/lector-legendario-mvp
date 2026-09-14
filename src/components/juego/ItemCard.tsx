@@ -5,7 +5,7 @@ import { RarityBadge, estiloMarcoRareza } from "./RarityBadge";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-type Props = { item: AvatarItem; desbloqueada: boolean; equipada: boolean; cargando?: boolean; onEquipar: () => void };
+type Props = { item: AvatarItem; desbloqueada: boolean; equipada: boolean; cargando?: boolean | undefined; onEquipar: () => void };
 
 export function ItemCard({ item, desbloqueada, equipada, cargando, onEquipar }: Props) {
   return <article className={cn("group relative overflow-hidden rounded-lg border bg-card/80 p-4 transition-transform duration-200 hover:-translate-y-0.5", estiloMarcoRareza(item.rarity), !desbloqueada && "opacity-65 grayscale-[35%]")}>
