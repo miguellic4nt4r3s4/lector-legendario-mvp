@@ -8,7 +8,7 @@ type Props = {
   conNivel?: boolean;
 };
 
-export function BarraXp({ xp, compacta = false, conNivel = false }: Props) {
+export function XPBar({ xp, compacta = false, conNivel = false }: Props) {
   const pct = progresoNivel(xp);
   const nivel = nivelDesdeXp(xp);
   return (
@@ -45,3 +45,6 @@ export function BarraXp({ xp, compacta = false, conNivel = false }: Props) {
     </div>
   );
 }
+
+/** Nombre conservado para no romper las pantallas existentes. */
+export const BarraXp = XPBar;
