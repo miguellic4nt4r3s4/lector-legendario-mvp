@@ -3,10 +3,10 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { heroeQuery, perfilQuery } from "@/lib/consultas";
-import { AVATARES, AVATAR_EMOJI, CLASES_HEROE } from "@/lib/juego";
+import { AVATARES, CLASES_HEROE } from "@/lib/juego";
 import { Encabezado } from "@/components/juego/Encabezado";
 import { Button } from "@/components/ui/button";
-import { Compass, Feather, KeyRound, Lamp, Search, Timer, Bird } from "lucide-react";
+import { Feather, KeyRound, Lamp, Search, Timer, Bird } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/heroe")({
   head: () => ({
