@@ -100,8 +100,9 @@ export function AvatarModular({ configuracion, className, nombre = "Avatar del h
   return (
     <div className={cn("relative aspect-[4/5] overflow-hidden rounded-md border border-primary/50 bg-secondary/35", className)} role="img" aria-label={nombre}>
       <div className="absolute inset-x-[14%] bottom-[4%] h-[12%] rounded-full bg-background/60 blur-md" />
+      <div className="absolute left-1/2 top-[24%] h-[46%] w-[42%] -translate-x-1/2 rounded-full bg-primary/10 blur-2xl" />
       <svg viewBox="0 0 200 210" className="relative h-full w-full" aria-hidden="true">
-        <path d="M25 177Q100 203 175 177" fill="none" className="stroke-accent/25" strokeWidth="2" />
+        <path d="M25 177Q100 203 175 177" fill="none" className="stroke-primary/35" strokeWidth="2" />
         {orden.map((categoria) => <Capa key={categoria} codigo={piezas[categoria] ?? ""} />)}
       </svg>
     </div>

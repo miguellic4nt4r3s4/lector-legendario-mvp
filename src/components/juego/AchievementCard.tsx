@@ -4,7 +4,7 @@ import { RarityBadge, estiloMarcoRareza } from "./RarityBadge";
 import { cn } from "@/lib/utils";
 
 const iconos = { crown: Crown, eye: Eye, shield: Shield } as const;
-type Props = { nombre: string; descripcion: string; icono: string; rareza?: Rareza; desbloqueada?: boolean; fecha?: string | null; mundo?: number; condicion?: string; destacada?: boolean };
+type Props = { nombre: string; descripcion: string; icono: string; rareza?: Rareza | undefined; desbloqueada?: boolean | undefined; fecha?: string | null | undefined; mundo?: number | undefined; condicion?: string | undefined; destacada?: boolean | undefined };
 
 export function AchievementCard({ nombre, descripcion, icono, rareza = "Común", desbloqueada = true, fecha, mundo, condicion, destacada = false }: Props) {
   const Icono = iconos[icono as keyof typeof iconos] ?? Shield;
