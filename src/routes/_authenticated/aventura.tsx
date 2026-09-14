@@ -17,6 +17,7 @@ import {
 } from "@/lib/consultas";
 import { CONDICION_POR_CODIGO, MUNDO_POR_CODIGO, rarezaDe } from "@/lib/juego";
 import type { ConfiguracionAvatar } from "@/components/juego/AvatarModular";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/_authenticated/aventura")({
   head: () => ({
@@ -28,6 +29,8 @@ export const Route = createFileRoute("/_authenticated/aventura")({
       },
       { property: "og:title", content: "Mi aventura — Lector Legendario" },
       { property: "og:description", content: "Continúa tus misiones de comprensión lectora." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: Aventura,
@@ -83,9 +86,9 @@ function Aventura() {
   return (
     <div className="min-h-screen">
       <Encabezado rol={perfil?.rol} />
-      <main className="mx-auto max-w-5xl px-4 py-8">
-        <div className="grid gap-6 lg:grid-cols-[340px_1fr]">
-          <aside className="space-y-6">
+      <main className="mx-auto max-w-6xl px-4 py-6 sm:py-8">
+        <div className="grid gap-7 lg:grid-cols-[minmax(380px,0.92fr)_minmax(0,1.08fr)]">
+          <aside id="mi-heroe" className="space-y-6 lg:sticky lg:top-24 lg:self-start">
             <TarjetaHeroe
               nombre={heroe.nombre}
               clase={heroe.clase}
@@ -93,8 +96,8 @@ function Aventura() {
               xp={heroe.xp}
               insignias={insignias?.length ?? 0}
             />
-            <section className="panel p-5" aria-labelledby="titulo-insignias">
-              <p className="font-display text-xs uppercase tracking-[0.35em] text-accent">
+            <section id="insignias" className="space-y-4 border-t border-border pt-6" aria-labelledby="titulo-insignias">
+              <p className="text-xs font-bold uppercase tracking-[0.35em] text-accent">
                 Recompensas
               </p>
               <h2 id="titulo-insignias" className="mt-1 text-lg">
@@ -126,7 +129,7 @@ function Aventura() {
           </aside>
 
           <section className="space-y-6">
-            <MapaReino xp={heroe.xp} aventurasCompletadas={aventurasCompletadas} />
+            <div id="mapa"><MapaReino xp={heroe.xp} aventurasCompletadas={aventurasCompletadas} /></div>
             {(aventuras ?? []).map((aventura) => {
               const misiones = ((aventura.misiones as unknown as {
                 id: string;
@@ -138,8 +141,8 @@ function Aventura() {
               }[]) ?? []).sort((a, b) => a.orden - b.orden);
 
               return (
-                <article key={aventura.id} className="panel p-6">
-                  <p className="font-display text-xs uppercase tracking-[0.35em] text-accent">
+                <article key={aventura.id} className="game-surface ornate-frame rounded-lg p-5 sm:p-7">
+                  <p className="text-xs font-bold uppercase tracking-[0.35em] text-accent">
                     Mundo 1 · Bosque de las Palabras
                   </p>
                   <p className="mt-3 font-display text-sm uppercase tracking-[0.3em] text-muted-foreground">
@@ -176,13 +179,7 @@ function Aventura() {
                             </p>
                           </div>
                           {m.disponible ? (
-                            <Link
-                              to="/mision/$misionId"
-                              params={{ misionId: m.id }}
-                              className="rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
-                            >
-                              {p?.completada ? "Repetir misión" : p ? "Continuar" : "Iniciar misión"}
-                            </Link>
+                            <Button asChild><Link to="/mision/$misionId" params={{ misionId: m.id }}>{p?.completada ? "Repetir misión" : p ? "Continuar" : "Iniciar misión"}</Link></Button>
                           ) : (
                             <span className="inline-flex items-center gap-1.5 rounded-md border border-border px-4 py-2 text-sm text-muted-foreground">
                               <Lock className="h-4 w-4" aria-hidden /> Bloqueada

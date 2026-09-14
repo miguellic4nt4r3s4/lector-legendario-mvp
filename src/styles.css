@@ -6,8 +6,8 @@
 
 /*
  * Lector Legendario — sistema de diseño.
- * Ambientación: archivo secreto, fantasía detectivesca. Tinta profunda,
- * latón envejecido, verde esmeralda de lámpara y pergamino tenue.
+ * Lenguaje oficial Legendary Mythic: archivo nocturno, aventura literaria,
+ * iluminación de bosque, latón antiguo y superficies de expedición.
  */
 
 @theme inline {
@@ -17,8 +17,8 @@
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
-  --font-display: "Cinzel", ui-serif, Georgia, serif;
-  --font-sans: "Spectral", ui-serif, Georgia, serif;
+  --font-display: "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-sans: "Karla", ui-sans-serif, system-ui, sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -58,40 +58,47 @@
 
 :root {
   --radius: 0.5rem;
-  --background: oklch(0.19 0.03 265);
-  --foreground: oklch(0.94 0.015 85);
-  --card: oklch(0.24 0.033 266);
-  --card-foreground: oklch(0.94 0.015 85);
-  --popover: oklch(0.22 0.032 266);
-  --popover-foreground: oklch(0.94 0.015 85);
-  --primary: oklch(0.78 0.13 84);
-  --primary-foreground: oklch(0.2 0.03 265);
-  --secondary: oklch(0.31 0.04 266);
-  --secondary-foreground: oklch(0.94 0.015 85);
-  --muted: oklch(0.28 0.035 266);
-  --muted-foreground: oklch(0.73 0.025 85);
-  --accent: oklch(0.62 0.11 175);
-  --accent-foreground: oklch(0.17 0.03 265);
+  --background: oklch(0.18 0.03 256);
+  --foreground: oklch(0.94 0.01 240);
+  --card: oklch(0.27 0.035 243);
+  --card-foreground: oklch(0.94 0.01 240);
+  --popover: oklch(0.23 0.034 250);
+  --popover-foreground: oklch(0.94 0.01 240);
+  --primary: oklch(0.7 0.115 79);
+  --primary-foreground: oklch(0.18 0.03 256);
+  --secondary: oklch(0.32 0.035 243);
+  --secondary-foreground: oklch(0.94 0.01 240);
+  --muted: oklch(0.3 0.028 244);
+  --muted-foreground: oklch(0.77 0.025 237);
+  --accent: oklch(0.52 0.084 180);
+  --accent-foreground: oklch(0.96 0.01 180);
   --destructive: oklch(0.6 0.19 22);
   --destructive-foreground: oklch(0.97 0.01 85);
-  --success: oklch(0.66 0.13 155);
-  --success-foreground: oklch(0.17 0.03 265);
-  --border: oklch(0.36 0.04 266);
-  --input: oklch(0.33 0.04 266);
-  --ring: oklch(0.78 0.13 84);
+  --success: oklch(0.67 0.12 157);
+  --success-foreground: oklch(0.18 0.03 256);
+  --border: oklch(0.4 0.04 243);
+  --input: oklch(0.35 0.04 243);
+  --ring: oklch(0.7 0.115 79);
   --chart-1: oklch(0.78 0.13 84);
-  --chart-2: oklch(0.62 0.11 175);
+  --chart-2: oklch(0.52 0.084 180);
   --chart-3: oklch(0.66 0.13 155);
   --chart-4: oklch(0.6 0.19 22);
-  --chart-5: oklch(0.7 0.09 300);
-  --sidebar: oklch(0.22 0.032 266);
+  --chart-5: oklch(0.66 0.14 302);
+  --sidebar: oklch(0.21 0.032 250);
   --sidebar-foreground: oklch(0.94 0.015 85);
   --sidebar-primary: oklch(0.78 0.13 84);
   --sidebar-primary-foreground: oklch(0.2 0.03 265);
-  --sidebar-accent: oklch(0.28 0.035 266);
+  --sidebar-accent: oklch(0.3 0.04 243);
   --sidebar-accent-foreground: oklch(0.94 0.015 85);
   --sidebar-border: oklch(0.36 0.04 266);
   --sidebar-ring: oklch(0.78 0.13 84);
+  --rarity-common: oklch(0.72 0.025 240);
+  --rarity-rare: oklch(0.67 0.13 230);
+  --rarity-epic: oklch(0.68 0.15 305);
+  --rarity-legendary: oklch(0.76 0.14 78);
+  --rarity-mythic: oklch(0.66 0.2 25);
+  --shadow-panel: 0 24px 70px -38px oklch(0.03 0.02 250 / 0.95);
+  --shadow-reward: 0 0 42px -16px color-mix(in oklab, var(--primary) 68%, transparent);
 }
 
 .dark {
@@ -107,8 +114,8 @@
   body {
     background-color: var(--color-background);
     background-image:
-      radial-gradient(circle at 15% 10%, oklch(0.3 0.05 175 / 0.25), transparent 45%),
-      radial-gradient(circle at 85% 0%, oklch(0.35 0.07 84 / 0.18), transparent 40%);
+      linear-gradient(180deg, color-mix(in oklab, var(--accent) 10%, transparent), transparent 32%),
+      radial-gradient(circle at 82% 4%, color-mix(in oklab, var(--primary) 11%, transparent), transparent 32%);
     background-attachment: fixed;
     color: var(--color-foreground);
     font-family: var(--font-sans);
@@ -121,11 +128,52 @@
     font-family: var(--font-display);
     letter-spacing: 0.01em;
   }
+
+  button,
+  a,
+  input {
+    -webkit-tap-highlight-color: transparent;
+  }
 }
 
 @utility panel {
   border: 1px solid var(--color-border);
   background-color: color-mix(in oklab, var(--color-card) 88%, transparent);
   border-radius: var(--radius-lg);
-  box-shadow: 0 18px 40px -28px oklch(0 0 0 / 0.9);
+  box-shadow: var(--shadow-panel);
+}
+
+@utility ornate-frame {
+  border: 1px solid color-mix(in oklab, var(--primary) 48%, var(--border));
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--primary) 10%, transparent), var(--shadow-panel);
+}
+
+@utility game-surface {
+  background-image: linear-gradient(145deg, color-mix(in oklab, var(--card) 96%, var(--accent)), var(--card));
+}
+
+@utility reward-glow {
+  box-shadow: var(--shadow-reward);
+}
+
+@utility shimmer-line {
+  background-image: linear-gradient(90deg, transparent, var(--primary), transparent);
+}
+
+@utility reveal-up {
+  animation: reveal-up 420ms ease-out both;
+}
+
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(10px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

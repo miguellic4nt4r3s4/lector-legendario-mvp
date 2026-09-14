@@ -2,6 +2,7 @@ import { useState } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { BookLock } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/auth")({
   ssr: false,
@@ -18,6 +19,8 @@ export const Route = createFileRoute("/auth")({
         property: "og:description",
         content: "Ingresa o crea tu cuenta de estudiante o docente en Lector Legendario.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: PaginaAuth,
@@ -75,8 +78,9 @@ function PaginaAuth() {
           </span>
         </Link>
 
-        <div className="panel p-6">
-          <h1 className="font-display text-2xl text-foreground">
+        <div className="game-surface ornate-frame rounded-lg p-6 sm:p-8">
+          <p className="text-center text-xs font-bold uppercase tracking-[0.3em] text-accent">Portal de expedición</p>
+          <h1 className="mt-2 text-center font-display text-3xl font-bold text-foreground">
             {modo === "entrar" ? "Abrir el archivo" : "Registrar investigador"}
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
@@ -104,18 +108,15 @@ function PaginaAuth() {
                   <legend className="mb-1.5 text-sm text-muted-foreground">Soy</legend>
                   <div className="grid grid-cols-2 gap-2">
                     {(["estudiante", "docente"] as const).map((r) => (
-                      <button
+                      <Button
                         key={r}
                         type="button"
                         onClick={() => setRol(r)}
-                        className={`rounded-md border px-3 py-2 text-sm capitalize transition-colors ${
-                          rol === r
-                            ? "border-primary bg-primary/15 text-primary"
-                            : "border-border text-muted-foreground hover:bg-secondary"
-                        }`}
+                        variant={rol === r ? "default" : "outline"}
+                        className="w-full capitalize"
                       >
                         {r}
-                      </button>
+                      </Button>
                     ))}
                   </div>
                 </fieldset>
@@ -156,26 +157,27 @@ function PaginaAuth() {
               </p>
             )}
 
-            <button
+            <Button
               type="submit"
               disabled={cargando}
-              className="w-full rounded-md bg-primary px-4 py-2.5 font-semibold text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-60"
+              className="w-full"
             >
               {cargando ? "Un momento…" : modo === "entrar" ? "Entrar" : "Crear cuenta"}
-            </button>
+            </Button>
           </form>
 
-          <button
+          <Button
             onClick={() => {
               setModo(modo === "entrar" ? "registrar" : "entrar");
               setError(null);
             }}
-            className="mt-4 w-full text-sm text-accent underline-offset-4 hover:underline"
+            variant="link"
+            className="mt-4 w-full text-accent"
           >
             {modo === "entrar"
               ? "No tengo cuenta, quiero registrarme"
               : "Ya tengo cuenta, quiero entrar"}
-          </button>
+          </Button>
         </div>
       </div>
     </main>

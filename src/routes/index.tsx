@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { BookLock, Compass, ScrollText, ShieldCheck } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import bosquePalabras from "@/assets/bosque-palabras-stage.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -47,7 +49,10 @@ const PILARES = [
 function Inicio() {
   return (
     <main className="min-h-screen">
-      <div className="mx-auto max-w-5xl px-4 py-16 sm:py-24">
+      <section className="relative isolate flex min-h-[86vh] items-end overflow-hidden border-b border-border">
+        <img src={bosquePalabras} alt="Bosque nocturno de libros y misterios" width={1536} height={1024} className="absolute inset-0 h-full w-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/55 to-background/10" />
+        <div className="relative mx-auto w-full max-w-6xl px-4 pb-14 pt-28 sm:pb-20">
         <div className="flex items-center gap-2">
           <BookLock className="h-5 w-5 text-primary" aria-hidden />
           <span className="font-display text-xs uppercase tracking-[0.3em] text-primary">
@@ -55,31 +60,22 @@ function Inicio() {
           </span>
         </div>
 
-        <h1 className="mt-8 max-w-3xl font-display text-4xl leading-tight text-foreground sm:text-6xl">
-          El archivo está sellado. Solo entra quien sabe leer entre líneas.
+        <h1 className="mt-8 max-w-3xl font-display text-5xl font-bold leading-[0.95] text-foreground sm:text-7xl">
+          Lector Legendario
         </h1>
-        <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
-          Una plataforma de aventuras lectoras para el aula: el estudiante crea su héroe
-          investigador, descifra enigmas a partir de textos originales y demuestra su comprensión
-          reto tras reto. El docente ve el avance sin adivinar.
+        <p className="mt-5 max-w-2xl text-lg text-foreground/85">
+          El archivo está sellado. Crea tu héroe, sigue las pistas y conquista cada reino leyendo entre líneas.
         </p>
 
         <div className="mt-10 flex flex-wrap gap-3">
-          <Link
-            to="/auth"
-            className="rounded-md bg-primary px-6 py-3 font-semibold text-primary-foreground transition-opacity hover:opacity-90"
-          >
-            Comenzar aventura
-          </Link>
-          <Link
-            to="/auth"
-            className="rounded-md border border-border px-6 py-3 font-semibold text-foreground transition-colors hover:bg-secondary"
-          >
-            Soy docente
-          </Link>
+          <Button asChild size="lg"><Link to="/auth">Comenzar aventura</Link></Button>
+          <Button asChild size="lg" variant="outline"><Link to="/auth">Soy docente</Link></Button>
         </div>
+        </div>
+      </section>
 
-        <section className="mt-20 grid gap-4 sm:grid-cols-3">
+      <div className="mx-auto max-w-6xl px-4 py-16">
+        <section className="grid gap-4 sm:grid-cols-3">
           {PILARES.map(({ icono: Icono, titulo, texto }) => (
             <article key={titulo} className="panel p-6">
               <Icono className="h-6 w-6 text-accent" aria-hidden />

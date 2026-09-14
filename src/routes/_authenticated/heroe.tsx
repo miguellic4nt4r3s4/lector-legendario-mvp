@@ -3,8 +3,10 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { heroeQuery, perfilQuery } from "@/lib/consultas";
-import { AVATARES, AVATAR_EMOJI, CLASES_HEROE } from "@/lib/juego";
+import { AVATARES, CLASES_HEROE } from "@/lib/juego";
 import { Encabezado } from "@/components/juego/Encabezado";
+import { Button } from "@/components/ui/button";
+import { Feather, KeyRound, Lamp, Search, Timer, Bird } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/heroe")({
   head: () => ({
@@ -16,6 +18,8 @@ export const Route = createFileRoute("/_authenticated/heroe")({
       },
       { property: "og:title", content: "Crea tu héroe — Lector Legendario" },
       { property: "og:description", content: "Diseña tu investigador y comienza la aventura." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: CrearHeroe,
@@ -57,12 +61,12 @@ function CrearHeroe() {
             <p className="mt-2 text-muted-foreground">
               {heroe.nombre} — {heroe.clase}
             </p>
-            <button
+            <Button
               onClick={() => navigate({ to: "/aventura" })}
-              className="mt-6 rounded-md bg-primary px-5 py-2.5 font-semibold text-primary-foreground"
+              className="mt-6"
             >
               Ir a la aventura
-            </button>
+            </Button>
           </div>
         </main>
       </div>
@@ -73,8 +77,8 @@ function CrearHeroe() {
     <div className="min-h-screen">
       <Encabezado rol={perfil?.rol} />
       <main className="mx-auto max-w-2xl px-4 py-10">
-        <p className="font-display text-xs uppercase tracking-[0.3em] text-accent">Paso 1 de 2</p>
-        <h1 className="mt-2 font-display text-3xl">Crea tu héroe investigador</h1>
+        <p className="text-xs font-bold uppercase tracking-[0.3em] text-accent">Paso 1 de 2</p>
+        <h1 className="mt-2 font-display text-4xl font-bold text-primary">Crea tu héroe investigador</h1>
         <p className="mt-2 text-muted-foreground">
           Tu nombre, tu especialidad y tu emblema aparecerán en cada misión que resuelvas.
         </p>
@@ -106,22 +110,19 @@ function CrearHeroe() {
             <legend className="px-1 text-sm text-muted-foreground">Clase</legend>
             <div className="mt-2 grid gap-3 sm:grid-cols-2">
               {CLASES_HEROE.map((c) => (
-                <button
+                <Button
                   key={c.id}
                   type="button"
                   onClick={() => setClase(c.id)}
-                  className={`rounded-lg border p-4 text-left transition-colors ${
-                    clase === c.id
-                      ? "border-primary bg-primary/10"
-                      : "border-border hover:bg-secondary"
-                  }`}
+                  variant="outline"
+                  className={`h-auto min-h-28 w-full whitespace-normal p-4 text-left ${clase === c.id ? "border-primary bg-primary/10" : ""}`}
                 >
                   <p className="font-semibold text-foreground">{c.id}</p>
                   <p className="mt-1 text-sm text-muted-foreground">{c.descripcion}</p>
                   <p className="mt-2 text-xs uppercase tracking-wider text-accent">
                     Afinidad: {c.fuerte}
                   </p>
-                </button>
+                </Button>
               ))}
             </div>
           </fieldset>
@@ -130,17 +131,17 @@ function CrearHeroe() {
             <legend className="px-1 text-sm text-muted-foreground">Emblema</legend>
             <div className="mt-2 flex flex-wrap gap-3">
               {AVATARES.map((a) => (
-                <button
+                <Button
                   key={a}
                   type="button"
                   onClick={() => setAvatar(a)}
                   aria-label={a}
-                  className={`flex h-14 w-14 items-center justify-center rounded-full border text-2xl transition-colors ${
-                    avatar === a ? "border-primary bg-primary/15" : "border-border hover:bg-secondary"
-                  }`}
+                  variant={avatar === a ? "default" : "outline"}
+                  size="icon"
+                  className="h-14 w-14 rounded-full"
                 >
-                  <span aria-hidden>{AVATAR_EMOJI[a]}</span>
-                </button>
+                  <span aria-hidden>{a === "lupa" ? <Search /> : a === "pluma" ? <Feather /> : a === "farol" ? <Lamp /> : a === "llave" ? <KeyRound /> : a === "reloj" ? <Timer /> : <Bird />}</span>
+                </Button>
               ))}
             </div>
           </fieldset>
@@ -151,13 +152,14 @@ function CrearHeroe() {
             </p>
           )}
 
-          <button
+          <Button
             type="submit"
             disabled={crear.isPending}
-            className="w-full rounded-md bg-primary px-5 py-3 font-semibold text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-60 sm:w-auto"
+            size="lg"
+            className="w-full sm:w-auto"
           >
             {crear.isPending ? "Forjando héroe…" : "Entrar al archivo"}
-          </button>
+          </Button>
         </form>
       </main>
     </div>
