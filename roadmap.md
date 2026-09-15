@@ -6,3 +6,10 @@
 - [x] Aplicar respuestas visuales breves a XP, nivel, insignia y objeto sin cambiar reglas.
 - [x] Afinar pantallas de misión, creación, acceso y docente dentro del mismo sistema visual.
 - [x] Verificar escritorio, tableta y teléfono, flujo completo y persistencia.
+
+# Mejora del personaje principal
+
+- [x] Redibujar las ocho capas del avatar con silueta y acabado RPG de aventura.
+- [x] Integrar físicamente la Mochila del Explorador y mejorar las miniaturas bloqueadas.
+- [x] Actualizar la presentación oficial del Mundo 1 sin cambiar su progresión.
+- [ ] Verificar visualmente y probar equipamiento y persistencia tras volver a iniciar sesión.

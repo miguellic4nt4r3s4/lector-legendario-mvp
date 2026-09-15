@@ -142,9 +142,9 @@ function Aventura() {
 
               return (
                 <article key={aventura.id} className="game-surface ornate-frame rounded-lg p-5 sm:p-7">
-                  <p className="text-xs font-bold uppercase tracking-[0.35em] text-accent">
-                    Mundo 1 · Bosque de las Palabras
-                  </p>
+                  <p className="text-xs font-bold uppercase tracking-[0.35em] text-accent">Mundo 1</p>
+                  <h2 className="mt-1 font-display text-2xl font-bold uppercase text-primary">Bosque de las Palabras</h2>
+                  <p className="mt-1 text-xs font-bold uppercase tracking-[0.25em] text-accent">Localización de información</p>
                   <p className="mt-3 font-display text-sm uppercase tracking-[0.3em] text-muted-foreground">
                     Aventura {aventura.orden}
                   </p>

@@ -22,7 +22,7 @@ export function AvatarStage({ configuracion, nombre, mundo = "bosque", className
         <MapPin className="h-3.5 w-3.5 text-primary" aria-hidden /> {mundos[mundo]}
       </div>
       <div className="absolute right-5 top-5 h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_16px_5px_var(--color-primary)]" aria-hidden />
-      <div className="absolute bottom-0 left-1/2 z-10 w-[72%] max-w-[390px] -translate-x-1/2">
+      <div className="absolute -bottom-[1%] left-1/2 z-10 w-[82%] max-w-[430px] -translate-x-1/2 sm:w-[78%]">
         <AvatarModular configuracion={configuracion} nombre={`Avatar modular de ${nombre}`} className="border-0 bg-transparent" />
       </div>
       <div className="absolute bottom-4 left-4 z-20 flex items-center gap-2 text-xs text-muted-foreground">

@@ -81,8 +81,8 @@ export const MUNDOS: Mundo[] = [
   {
     numero: 1,
     nombre: "Bosque de las Palabras",
-    competencia: "Comprensión literal y vocabulario",
-    descripcion: "Donde cada palabra es una huella y cada frase, un sendero.",
+    competencia: "Localización de información",
+    descripcion: "Un bosque de pistas donde cada detalle relevante abre un nuevo sendero.",
     nivelRequerido: 1,
     aventuraOrden: 1,
   },
