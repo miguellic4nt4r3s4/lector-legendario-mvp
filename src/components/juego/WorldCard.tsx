@@ -22,8 +22,9 @@ export function WorldCard({ mundo, xp, nivel, completado, posicion }: Props) {
           {disponible ? <Icono className="h-5 w-5" aria-hidden /> : <Lock className="h-4 w-4" aria-hidden />}
         </div>
         <div className="min-w-0 flex-1">
-          <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-accent">Mundo {mundo.numero} · {mundo.competencia}</p>
+          <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-accent">Mundo {mundo.numero}</p>
           <h3 className={cn("mt-1 font-display text-xl font-bold", disponible ? "text-primary" : "text-foreground")}>{mundo.nombre}</h3>
+          <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.2em] text-accent">{mundo.competencia}</p>
           <p className="mt-1 text-sm text-muted-foreground">{mundo.descripcion}</p>
           <div className="mt-3 flex flex-wrap items-center gap-2 text-xs">
             <span className={cn("rounded-sm border px-2 py-1 font-semibold uppercase", disponible ? "border-success/50 bg-success/10 text-success" : "border-border text-muted-foreground")}>{disponible ? (completado ? "Misión completada" : "Disponible") : nivelAlcanzado ? "En preparación" : `Nivel ${mundo.nivelRequerido}`}</span>

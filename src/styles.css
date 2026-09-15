@@ -54,6 +54,15 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-avatar-outline: var(--avatar-outline);
+  --color-avatar-skin: var(--avatar-skin);
+  --color-avatar-skin-shadow: var(--avatar-skin-shadow);
+  --color-avatar-hair: var(--avatar-hair);
+  --color-avatar-hair-light: var(--avatar-hair-light);
+  --color-avatar-cloth: var(--avatar-cloth);
+  --color-avatar-cloth-light: var(--avatar-cloth-light);
+  --color-avatar-leather: var(--avatar-leather);
+  --color-avatar-leather-light: var(--avatar-leather-light);
 }
 
 :root {
@@ -99,6 +108,15 @@
   --rarity-mythic: oklch(0.66 0.2 25);
   --shadow-panel: 0 24px 70px -38px oklch(0.03 0.02 250 / 0.95);
   --shadow-reward: 0 0 42px -16px color-mix(in oklab, var(--primary) 68%, transparent);
+  --avatar-outline: oklch(0.16 0.035 250);
+  --avatar-skin: oklch(0.78 0.095 68);
+  --avatar-skin-shadow: oklch(0.63 0.1 55);
+  --avatar-hair: oklch(0.24 0.04 45);
+  --avatar-hair-light: oklch(0.38 0.07 55);
+  --avatar-cloth: oklch(0.42 0.09 180);
+  --avatar-cloth-light: oklch(0.58 0.1 174);
+  --avatar-leather: oklch(0.36 0.07 60);
+  --avatar-leather-light: oklch(0.55 0.1 69);
 }
 
 .dark {
@@ -109,6 +127,13 @@
 @layer base {
   * {
     border-color: var(--color-border);
+  }
+
+  html,
+  body,
+  #root {
+    max-width: 100%;
+    overflow-x: hidden;
   }
 
   body {
