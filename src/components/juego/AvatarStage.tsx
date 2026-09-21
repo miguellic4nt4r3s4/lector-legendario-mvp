@@ -1,5 +1,6 @@
 import type { ConfiguracionAvatar } from "./AvatarModular";
 import { AvatarModular } from "./AvatarModular";
+import { MapPin, ScrollText } from "lucide-react";
 import bosquePalabras from "@/assets/bosque-palabras-stage.jpg";
 import { cn } from "@/lib/utils";
 
