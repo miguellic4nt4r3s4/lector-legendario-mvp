@@ -58,14 +58,14 @@ function Personalizar() {
           <Button asChild variant="outline"><Link to="/aventura">Volver a mi aventura</Link></Button>
         </div>
 
-        <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(380px,0.9fr)_minmax(0,1.1fr)]">
+        <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(420px,0.82fr)_minmax(0,1.18fr)]">
           <aside className="space-y-4 lg:sticky lg:top-24 lg:self-start">
             <AvatarStage configuracion={configuracion} nombre={heroe?.nombre ?? "tu héroe"} />
             {heroe && <CharacterCard nombre={heroe.nombre} clase={heroe.clase} xp={heroe.xp} compacto />}
           </aside>
 
-          <section className="game-surface rounded-lg border border-border p-4 sm:p-6">
-            <div className="mb-5"><p className="text-xs font-bold uppercase tracking-[0.25em] text-accent">Colección de aventura</p><h2 className="mt-1 font-display text-2xl font-bold text-foreground">Elige una pieza</h2></div>
+          <section className="game-surface ornate-frame rounded-lg p-4 sm:p-6">
+            <div className="mb-5 border-b border-border/70 pb-4"><p className="text-xs font-bold uppercase tracking-[0.25em] text-accent">Colección de aventura</p><h2 className="mt-1 font-display text-2xl font-bold text-foreground">Armería del héroe</h2></div>
             <CategoryTabs activa={categoria} onChange={setCategoria} />
             <div className="mt-5"><InventoryGrid items={piezas} inventario={inventarioPorItem} cargando={equipar.isPending} onEquipar={(item) => equipar.mutate(item)} /></div>
           </section>

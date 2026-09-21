@@ -1,3 +1,4 @@
+import { useId } from "react";
 import { cn } from "@/lib/utils";
 
 export const CATEGORIAS_AVATAR = [
@@ -20,6 +21,15 @@ type Props = {
   nombre?: string;
 };
 
+type Gradientes = {
+  piel: string;
+  cabello: string;
+  tela: string;
+  telaRara: string;
+  cuero: string;
+  metal: string;
+};
+
 const PREDETERMINADO: ConfiguracionAvatar = {
   face: "face_01",
   hair: "hair_01",
@@ -31,85 +41,165 @@ const PREDETERMINADO: ConfiguracionAvatar = {
   effect: "effect_00",
 };
 
-const contorno = "stroke-avatar-outline [stroke-linecap:round] [stroke-linejoin:round]";
+const trazo = "stroke-avatar-outline [stroke-linecap:round] [stroke-linejoin:round]";
+const detalle = "fill-none stroke-avatar-detail [stroke-linecap:round] [stroke-linejoin:round]";
 
-function Capa({ codigo }: { codigo: string }) {
+function Capa({ codigo, gradientes }: { codigo: string; gradientes: Gradientes }) {
   switch (codigo) {
     case "effect_01":
       return (
-        <g className="fill-accent/45 stroke-primary" strokeWidth="1.8">
-          <path d="M45 280C20 234 28 154 61 105M274 278c27-45 20-119-15-169" fill="none" strokeDasharray="4 12" opacity=".7" />
-          <path d="M48 126l5 9 10 3-9 5-2 10-7-8-10 1 6-8-3-10zM270 157l4 7 8 2-7 4-1 8-6-6-8 1 5-7-3-7z" />
-          <circle cx="57" cy="203" r="4" /><circle cx="258" cy="223" r="3" />
+        <g className="fill-avatar-glow stroke-primary" strokeWidth="1.4">
+          <path d="M55 310C25 260 31 177 69 123M267 308c27-48 22-124-13-174" fill="none" strokeDasharray="3 11" opacity=".56" />
+          <path d="M55 133l4 8 9 2-8 5-1 9-7-6-9 2 4-9-5-7zM269 178l4 7 8 2-7 4-1 8-6-6-8 1 5-7-3-7z" />
+          <path d="M62 240q12-9 21 3-12-2-17 9zM251 258q-12-10-21 2 12-1 17 10z" opacity=".8" />
+          <circle cx="62" cy="199" r="3.5" /><circle cx="255" cy="221" r="3" />
         </g>
       );
     case "accessory_backpack_01":
       return (
-        <g className={contorno} strokeWidth="4">
-          <path d="M74 151c-19 5-29 21-30 46l-2 75c0 13 9 23 22 25l40 3 3-139z" className="fill-avatar-leather" />
-          <path d="M57 171c3-21 14-34 35-38 13 5 18 15 19 31" fill="none" className="stroke-avatar-leather-light" strokeWidth="8" />
-          <path d="M47 216h58v64H58c-8 0-12-6-12-15z" className="fill-avatar-leather-light" />
-          <path d="M48 230h56M70 217v62M58 249h13" fill="none" className="stroke-primary" strokeWidth="3" />
-          <path d="M45 194l17 6M46 267l15-5" fill="none" className="stroke-primary/70" strokeWidth="3" />
+        <g className={trazo} strokeWidth="3.2">
+          <path d="M79 155c-24 7-37 28-38 62l-1 76c0 17 12 28 29 29l47-1 6-153c-13-13-27-17-43-13z" fill={`url(#${gradientes.cuero})`} />
+          <path d="M60 191c1-25 13-43 35-50 16 3 26 13 30 31" fill="none" className="stroke-avatar-leather-light" strokeWidth="9" />
+          <path d="M44 222l68-5-1 80-52 3c-10 0-16-7-16-17z" className="fill-avatar-leather" />
+          <path d="M44 222q33 18 68-5v25q-33 17-68 4z" className="fill-avatar-leather-light" />
+          <path d="M64 249v47M91 246v50M70 263h15v14H70z" className="stroke-avatar-detail fill-avatar-leather-shadow" strokeWidth="2.2" />
+          <path d="M45 207l20 6M44 286l17-7" fill="none" className="stroke-primary/75" strokeWidth="2.4" />
+          <circle cx="77" cy="226" r="3.8" fill={`url(#${gradientes.metal})`} />
+        </g>
+      );
+    case "accessory_01":
+      return (
+        <g className={trazo} strokeWidth="2.6">
+          <path d="M198 168c20 14 31 35 34 62" fill="none" className="stroke-primary" strokeWidth="5" />
+          <circle cx="233" cy="242" r="14" fill={`url(#${gradientes.metal})`} />
+          <path d="M233 233v18M224 242h18" className={detalle} strokeWidth="2" />
+        </g>
+      );
+    case "bottom_02":
+      return (
+        <g className={trazo} strokeWidth="3.2">
+          <path d="M111 280l50-2 4 44-13 84-53-1 10-87z" fill={`url(#${gradientes.telaRara})`} />
+          <path d="M160 278l47 7 18 36 1 82-54 3-11-87z" fill={`url(#${gradientes.telaRara})`} />
+          <path d="M106 309q27 9 54 4M166 315q25 1 47-9M104 354h50M170 356h53" className={detalle} strokeWidth="2.2" />
+          <path d="M112 329l15 1-2 22-17-1zM197 331l17-1 4 21-18 2z" className="fill-avatar-leather stroke-avatar-detail" strokeWidth="2" />
         </g>
       );
     case "bottom_01":
       return (
-        <g className={contorno} strokeWidth="4">
-          <path d="M104 259l50-2 3 70-8 66H98l8-68z" className="fill-secondary" />
-          <path d="M154 257l51 6 14 63-1 67h-50l-13-69z" className="fill-secondary" />
-          <path d="M110 278c13 6 28 8 43 5M169 284c13 0 25-3 36-9" fill="none" className="stroke-accent/70" strokeWidth="3" />
-          <path d="M150 267l5 58M104 325l45 1M164 326l51-1" fill="none" className="stroke-avatar-outline/60" strokeWidth="3" />
-          <path d="M101 365l50 1M168 365l50 1" fill="none" className="stroke-primary/50" strokeWidth="3" />
+        <g className={trazo} strokeWidth="3.2">
+          <path d="M109 278l51-1 5 45-13 84-54-1 11-87z" className="fill-avatar-trouser" />
+          <path d="M160 277l48 7 17 37 1 82-54 3-11-87z" className="fill-avatar-trouser" />
+          <path d="M108 303q26 10 52 4M166 309q24 2 44-7M103 356l50 1M170 358l52-1" className={detalle} strokeWidth="2.1" />
+          <path d="M156 287l5 34M112 325l15 2M199 327l15-2" className="stroke-accent/75" fill="none" strokeWidth="2.4" />
+          <path d="M104 381l49 2M172 383l50-2" fill="none" className="stroke-avatar-trouser-light" strokeWidth="4" />
+        </g>
+      );
+    case "shoes_02":
+      return (
+        <g className={trazo} strokeWidth="3.2">
+          <path d="M96 380l57 2 2 25-17 17H67c-1-18 10-32 29-44z" fill={`url(#${gradientes.telaRara})`} />
+          <path d="M173 382l51-3c22 11 31 25 28 43l-72 2-12-16z" fill={`url(#${gradientes.telaRara})`} />
+          <path d="M76 411h75M179 411h66M102 391l42 4M179 395l37-6" className={detalle} strokeWidth="3" />
+          <path d="M94 385l8 30M220 384l-5 30" fill="none" className="stroke-primary" strokeWidth="3" />
         </g>
       );
     case "shoes_01":
       return (
-        <g className={contorno} strokeWidth="4">
-          <path d="M98 374h52l3 24-12 11H72c-4-16 4-27 26-35z" className="fill-avatar-leather" />
-          <path d="M169 374h49c22 7 31 18 28 35h-70l-10-11z" className="fill-avatar-leather" />
-          <path d="M82 396h66M173 396h65M105 382l38 2M176 384l37-2" fill="none" className="stroke-avatar-leather-light" strokeWidth="4" />
-          <path d="M76 408h73M175 408h68" fill="none" className="stroke-primary" strokeWidth="3" />
-        </g>
-      );
-    case "top_01":
-      return (
-        <g className={contorno} strokeWidth="4">
-          <path d="M111 144l25-14h42l30 14 18 46-21 15-11-28 9 86c-27 18-72 17-103-3l11-82-16 45-22-10z" className="fill-avatar-cloth" />
-          <path d="M112 145c-20 5-29 22-35 43l-13 51c-3 11 3 21 14 24 10 3 20-2 24-12l18-48" className="fill-avatar-cloth" />
-          <path d="M205 145c19 5 27 19 34 39l17 49c4 11-1 21-11 25-10 4-21-1-25-11l-22-48" className="fill-avatar-cloth" />
-          <path d="M71 238c-8 5-11 14-7 22 4 9 15 12 24 7l9-8-19-17zM251 232c9 4 13 13 10 22-4 10-15 14-24 9l-9-7 17-20z" className="fill-avatar-skin" />
-          <path d="M132 132l24 29 23-30 12 9-12 39-23-17-24 17-13-38z" className="fill-card" />
-          <path d="M156 163v96M119 202h31v28h-31z" fill="none" className="stroke-primary" strokeWidth="3" />
-          <path d="M106 254c31 14 66 15 96 2l4 21c-33 16-71 15-104-2z" className="fill-avatar-leather" />
-          <path d="M151 259h18v20h-18z" className="fill-primary" />
-          <path d="M218 190l-13 9M89 197l17 8" fill="none" className="stroke-avatar-cloth-light" strokeWidth="5" />
-          <path d="M190 150c9 8 14 19 16 32M122 151c-8 7-12 18-14 29" fill="none" className="stroke-avatar-cloth-light" strokeWidth="3" />
+        <g className={trazo} strokeWidth="3.2">
+          <path d="M98 379l55 3 2 25-17 17H68c-2-18 9-32 30-45z" fill={`url(#${gradientes.cuero})`} />
+          <path d="M173 382l51-3c22 10 31 25 28 43l-72 2-12-16z" fill={`url(#${gradientes.cuero})`} />
+          <path d="M77 410h74M180 410h65" fill="none" className="stroke-avatar-sole" strokeWidth="7" />
+          <path d="M99 390l43 5M181 395l36-7M103 383l-8 31M219 383l5 30" className={detalle} strokeWidth="2.5" />
+          <path d="M105 391l8 8m1-6 8 8m72-9-8 9m18-11-8 9" fill="none" className="stroke-primary/75" strokeWidth="2" />
         </g>
       );
     case "top_02":
       return (
-        <g className={contorno} strokeWidth="4">
-          <path d="M111 143l27-13h39l31 14 19 47-22 14-12-29 10 87c-30 17-70 16-103-3l11-82-16 45-22-10z" className="fill-card" />
-          <path d="M111 146c-19 5-29 22-35 43l-12 49c-4 12 2 22 13 26 10 3 21-3 25-13l18-49M205 145c18 5 27 19 34 39l17 49c4 11-1 21-11 25-10 4-21-1-25-11l-22-48" className="fill-card" />
-          <path d="M71 238c-8 5-11 14-7 22 4 9 15 12 24 7l9-8-19-17zM251 232c9 4 13 13 10 22-4 10-15 14-24 9l-9-7 17-20z" className="fill-avatar-skin" />
-          <path d="M132 132l24 31 23-32 17 13-20 41-20-19-21 19-21-42z" className="fill-secondary" />
-          <path d="M156 164v96M112 221h88M106 254c31 14 66 15 96 2" fill="none" className="stroke-primary" strokeWidth="3" />
-          <path d="M121 194l13 8-13 8M191 194l-13 8 13 8" fill="none" className="stroke-accent" strokeWidth="3" />
+        <g className={trazo} strokeWidth="3.2">
+          <path d="M120 162l28-17 39 2 31 21 9 105c-35 19-79 16-112-5z" fill={`url(#${gradientes.telaRara})`} />
+          <path d="M122 166c-22 8-34 28-41 55l-9 42c-3 14 5 27 18 29 12 1 21-7 24-20l11-50" fill={`url(#${gradientes.telaRara})`} />
+          <path d="M215 168c21 9 31 27 36 50l12 43c4 13-3 26-16 29-12 2-23-6-26-19l-13-49" fill={`url(#${gradientes.telaRara})`} />
+          <path d="M73 262c-8 5-10 16-5 24 6 9 18 11 27 4l13-15-22-17zM261 259c9 4 13 14 9 23-5 10-17 14-27 7l-12-13 21-20z" fill={`url(#${gradientes.piel})`} />
+          <path d="M145 145l20 30 23-28 18 14-17 41-25-19-23 17-17-39z" className="fill-card" />
+          <path d="M165 178v98M120 232h35v30h-35zM176 218h37v36h-37z" className={detalle} strokeWidth="2.5" />
+          <path d="M111 267q55 24 116 5l3 20q-60 25-122-3z" fill={`url(#${gradientes.cuero})`} />
+          <path d="M158 275h19v20h-19z" fill={`url(#${gradientes.metal})`} />
+          <path d="M130 173l34 33 38-34M128 196l-14 68M205 194l18 67" fill="none" className="stroke-primary/75" strokeWidth="2.4" />
+        </g>
+      );
+    case "top_01":
+      return (
+        <g className={trazo} strokeWidth="3.2">
+          <path d="M119 160l29-16 39 2 31 21 8 105c-35 18-78 16-112-5z" fill={`url(#${gradientes.tela})`} />
+          <path d="M121 165c-22 8-34 29-41 56l-9 42c-3 14 5 27 18 29 12 1 22-7 25-20l11-50" fill={`url(#${gradientes.tela})`} />
+          <path d="M215 168c21 9 31 27 37 50l11 43c4 14-3 26-16 29-12 2-23-6-26-19l-13-49" fill={`url(#${gradientes.tela})`} />
+          <path d="M72 262c-8 5-10 16-5 24 6 9 18 11 27 4l13-15-22-17zM262 259c9 4 13 14 9 23-5 10-17 14-27 7l-12-13 21-20z" fill={`url(#${gradientes.piel})`} />
+          <path d="M144 144l21 31 23-29 17 15-16 38-25-18-23 17-17-37z" className="fill-avatar-shirt" />
+          <path d="M165 178v96M119 226h35v31h-35z" className={detalle} strokeWidth="2.5" />
+          <path d="M111 267q55 24 115 5l4 20q-60 25-122-3z" fill={`url(#${gradientes.cuero})`} />
+          <path d="M158 275h19v20h-19z" fill={`url(#${gradientes.metal})`} />
+          <path d="M190 230h21v27h-21z" className="fill-avatar-cloth-light stroke-avatar-detail" strokeWidth="2" />
+          <path d="M194 235l7 6 7-6" fill="none" className="stroke-primary" strokeWidth="2.2" />
+          <path d="M126 173l38 33 38-34M121 203l-9 61M210 201l13 60" fill="none" className="stroke-avatar-cloth-light" strokeWidth="2.5" />
+          <path d="M88 215l29 12M249 214l-34 13" fill="none" className="stroke-avatar-seam" strokeWidth="2" strokeDasharray="4 4" />
         </g>
       );
     case "face_02":
-      return <g className={contorno} strokeWidth="4"><path d="M137 58c13-9 37-8 50 1 14 10 20 29 17 51l-4 24c-3 21-20 39-43 42-24-3-41-20-45-42l-4-24c-3-23 8-42 29-52z" className="fill-avatar-skin" /><path d="M145 174h24l3 19c-9 8-21 8-31 0z" className="fill-avatar-skin-shadow" /><path d="M120 115c-8-4-13 1-10 12 2 9 7 15 14 15M198 115c8-4 13 1 10 12-2 9-7 15-14 15" className="fill-avatar-skin" /></g>;
+      return (
+        <g className={trazo} strokeWidth="3.2">
+          <path d="M132 56c16-13 42-14 59-3 17 11 25 33 21 59l-5 28c-4 24-21 43-46 47-24-4-42-22-47-46l-6-29c-5-25 4-44 24-56z" fill={`url(#${gradientes.piel})`} />
+          <path d="M145 181h31l1 20q-15 13-33 0z" className="fill-avatar-skin-shadow" />
+          <path d="M116 117c-9-4-14 2-11 14 2 10 8 17 16 17M207 116c9-4 14 2 11 14-2 10-8 17-16 17" fill={`url(#${gradientes.piel})`} />
+          <path d="M126 151q35 26 69-1c-7 22-20 35-35 37-16-3-28-15-34-36z" className="fill-avatar-skin-shadow/20 stroke-none" />
+          <path d="M145 164q15 8 31-1" className={detalle} strokeWidth="2.4" />
+        </g>
+      );
     case "face_01":
-      return <g className={contorno} strokeWidth="4"><path d="M132 58c15-11 40-10 55 0 15 10 21 29 18 52l-4 24c-4 22-20 39-44 43-25-4-42-21-45-43l-4-24c-4-23 5-41 24-52z" className="fill-avatar-skin" /><path d="M144 174h25l3 20c-9 8-22 8-31 0z" className="fill-avatar-skin-shadow" /><path d="M119 114c-8-3-13 2-10 13 2 9 8 15 15 15M199 114c8-3 13 2 10 13-2 9-8 15-15 15" className="fill-avatar-skin" /><path d="M120 91c5-18 19-29 38-31 19 0 34 10 42 28" fill="none" className="stroke-avatar-skin-shadow/60" strokeWidth="3" /></g>;
+      return (
+        <g className={trazo} strokeWidth="3.2">
+          <path d="M130 55c17-13 44-14 62-2 17 12 24 34 20 59l-5 28c-5 25-22 43-47 47-25-4-43-22-47-47l-5-28c-5-25 4-45 22-57z" fill={`url(#${gradientes.piel})`} />
+          <path d="M144 181h32l1 20q-16 13-34 0z" className="fill-avatar-skin-shadow" />
+          <path d="M116 117c-9-4-14 2-11 14 2 10 8 17 16 17M207 116c9-4 14 2 11 14-2 10-8 17-16 17" fill={`url(#${gradientes.piel})`} />
+          <path d="M124 148q36 29 73-2c-7 23-21 38-37 41-17-3-30-17-36-39z" className="fill-avatar-skin-shadow/20 stroke-none" />
+          <path d="M144 164q16 10 33 0" className={detalle} strokeWidth="2.4" />
+        </g>
+      );
     case "eyes_02":
-      return <g className={contorno} strokeWidth="3"><path d="M126 111q12-11 25 0-12 12-25 0zM166 111q12-11 25 0-12 12-25 0z" className="fill-accent" /><circle cx="140" cy="111" r="4" className="fill-background stroke-none" /><circle cx="180" cy="111" r="4" className="fill-background stroke-none" /><path d="M128 98q12-7 24 0M166 98q12-7 24 0M145 149q14 7 29-1" fill="none" /></g>;
+      return (
+        <g className={trazo} strokeWidth="2.3">
+          <path d="M124 117q15-14 31 0-15 14-31 0zM166 117q15-14 31 0-15 14-31 0z" className="fill-avatar-eye" />
+          <ellipse cx="141" cy="117" rx="7" ry="8.5" className="fill-primary stroke-none" /><ellipse cx="181" cy="117" rx="7" ry="8.5" className="fill-primary stroke-none" />
+          <ellipse cx="141" cy="118" rx="3" ry="5" className="fill-avatar-pupil stroke-none" /><ellipse cx="181" cy="118" rx="3" ry="5" className="fill-avatar-pupil stroke-none" />
+          <circle cx="143" cy="114" r="2" className="fill-foreground stroke-none" /><circle cx="183" cy="114" r="2" className="fill-foreground stroke-none" />
+          <path d="M125 101q14-9 29-1M168 100q14-8 28 2M156 133l-4 10 8 3" className={detalle} strokeWidth="2.7" />
+        </g>
+      );
     case "eyes_01":
-      return <g className={contorno} strokeWidth="3"><path d="M125 111q13-12 27 0-13 12-27 0zM165 111q13-12 27 0-13 12-27 0z" className="fill-foreground" /><ellipse cx="140" cy="111" rx="5" ry="7" className="fill-accent stroke-none" /><ellipse cx="178" cy="111" rx="5" ry="7" className="fill-accent stroke-none" /><circle cx="142" cy="109" r="1.8" className="fill-foreground stroke-none" /><circle cx="180" cy="109" r="1.8" className="fill-foreground stroke-none" /><path d="M127 98q12-7 24 0M166 98q12-7 24 0M152 127l-3 9 7 2M145 151q14 8 29 0" fill="none" /></g>;
+      return (
+        <g className={trazo} strokeWidth="2.3">
+          <path d="M123 116q16-14 32 0-16 14-32 0zM166 116q16-14 32 0-16 14-32 0z" className="fill-avatar-eye" />
+          <ellipse cx="141" cy="116" rx="7" ry="8.5" className="fill-accent stroke-none" /><ellipse cx="181" cy="116" rx="7" ry="8.5" className="fill-accent stroke-none" />
+          <ellipse cx="141" cy="117" rx="3" ry="5" className="fill-avatar-pupil stroke-none" /><ellipse cx="181" cy="117" rx="3" ry="5" className="fill-avatar-pupil stroke-none" />
+          <circle cx="143" cy="113" r="2" className="fill-foreground stroke-none" /><circle cx="183" cy="113" r="2" className="fill-foreground stroke-none" />
+          <path d="M124 100q15-9 30 0M168 100q14-8 28 1M156 132l-4 11 8 3" className={detalle} strokeWidth="2.7" />
+        </g>
+      );
     case "hair_02":
-      return <g className={contorno} strokeWidth="4"><path d="M108 105c-4-35 8-62 35-71 29-10 60 5 67 38 3 14 0 29-7 42l-7-29-12 10-8-24-16 19-12-18-19 24-10-16z" className="fill-secondary" /><path d="M121 79c14-31 47-43 75-18M131 61c17 5 29 14 36 28" fill="none" className="stroke-accent" strokeWidth="4" /></g>;
+      return (
+        <g className={trazo} strokeWidth="3.2">
+          <path d="M108 115c-8-37 2-69 31-84 29-16 67-7 82 22 10 20 7 47-5 67l-7-35-15 14-9-29-19 23-14-20-21 29-11-20z" className="fill-secondary" />
+          <path d="M125 78c19-31 56-43 86-20M133 56c24-8 48-1 64 18M207 85l-14 14M121 87l11 15" fill="none" className="stroke-accent" strokeWidth="5" />
+          <path d="M187 38q27 7 31 30-18-12-38-8z" className="fill-secondary" />
+        </g>
+      );
     case "hair_01":
-      return <g className={contorno} strokeWidth="4"><path d="M107 110c-6-34 4-62 31-74 25-12 57-5 70 21 9 18 7 39-2 57l-8-29-13 11-7-25-17 19-12-18-19 25-10-17z" className="fill-avatar-hair" /><path d="M119 76c17-25 47-37 76-20M126 60c20-7 44-2 57 15M198 84l-12 12M120 84l10 13" fill="none" className="stroke-avatar-hair-light" strokeWidth="5" /></g>;
+      return (
+        <g className={trazo} strokeWidth="3.2">
+          <path d="M107 116c-8-38 3-70 32-85 27-14 64-9 80 19 12 21 9 48-4 70l-7-36-15 15-9-29-20 24-13-21-22 29-10-20z" fill={`url(#${gradientes.cabello})`} />
+          <path d="M120 80c19-31 57-45 88-22M130 59c23-12 50-5 66 16M205 86l-13 14M120 88l11 15" fill="none" className="stroke-avatar-hair-light" strokeWidth="5" />
+          <path d="M139 39q23-13 43 2-22 2-35 18z" className="fill-avatar-hair-light" />
+        </g>
+      );
     default:
       return null;
   }
@@ -117,14 +207,27 @@ function Capa({ codigo }: { codigo: string }) {
 
 export function AvatarModular({ configuracion, className, nombre = "Avatar del héroe" }: Props) {
   const piezas = { ...PREDETERMINADO, ...configuracion };
+  const uid = useId().replace(/:/g, "");
+  const gradientes: Gradientes = {
+    piel: `${uid}-piel`, cabello: `${uid}-cabello`, tela: `${uid}-tela`, telaRara: `${uid}-tela-rara`, cuero: `${uid}-cuero`, metal: `${uid}-metal",
+  };
   const orden: CategoriaAvatar[] = ["effect", "accessory", "bottom", "shoes", "top", "face", "eyes", "hair"];
+
   return (
-    <div className={cn("relative aspect-[4/5] overflow-hidden rounded-md border border-primary/50 bg-secondary/35", className)} role="img" aria-label={nombre}>
-      <div className="absolute inset-x-[12%] bottom-[1%] h-[11%] rounded-full bg-background/70 blur-md" />
-      <div className="absolute left-1/2 top-[16%] h-[58%] w-[56%] -translate-x-1/2 rounded-full bg-accent/15 blur-2xl" />
-      <svg viewBox="0 0 320 420" className="relative h-full w-full overflow-visible drop-shadow-[0_12px_14px_var(--color-background)]" aria-hidden="true">
-        <path d="M48 404Q160 431 274 402" fill="none" className="stroke-primary/45" strokeWidth="3" />
-        {orden.map((categoria) => <Capa key={categoria} codigo={piezas[categoria] ?? ""} />)}
+    <div className={cn("relative aspect-[4/5] overflow-hidden rounded-md border border-primary/50 bg-secondary/20", className)} role="img" aria-label={nombre}>
+      <div className="absolute inset-x-[14%] bottom-[1%] h-[10%] rounded-full bg-background/75 blur-md" />
+      <div className="absolute left-1/2 top-[14%] h-[60%] w-[54%] -translate-x-1/2 rounded-full bg-accent/10 blur-2xl" />
+      <svg viewBox="0 0 320 440" className="relative h-full w-full overflow-visible drop-shadow-[0_16px_16px_var(--color-avatar-shadow)]" aria-hidden="true">
+        <defs>
+          <linearGradient id={gradientes.piel} x1="0" y1="0" x2="1" y2="1"><stop stopColor="var(--avatar-skin-light)" /><stop offset=".56" stopColor="var(--avatar-skin)" /><stop offset="1" stopColor="var(--avatar-skin-shadow)" /></linearGradient>
+          <linearGradient id={gradientes.cabello} x1="0" y1="0" x2=".8" y2="1"><stop stopColor="var(--avatar-hair-light)" /><stop offset=".42" stopColor="var(--avatar-hair)" /><stop offset="1" stopColor="var(--avatar-hair-shadow)" /></linearGradient>
+          <linearGradient id={gradientes.tela} x1="0" y1="0" x2="1" y2="1"><stop stopColor="var(--avatar-cloth-light)" /><stop offset=".48" stopColor="var(--avatar-cloth)" /><stop offset="1" stopColor="var(--avatar-cloth-shadow)" /></linearGradient>
+          <linearGradient id={gradientes.telaRara} x1="0" y1="0" x2="1" y2="1"><stop stopColor="var(--avatar-rare-light)" /><stop offset=".52" stopColor="var(--avatar-rare)" /><stop offset="1" stopColor="var(--avatar-rare-shadow)" /></linearGradient>
+          <linearGradient id={gradientes.cuero} x1="0" y1="0" x2="1" y2="1"><stop stopColor="var(--avatar-leather-light)" /><stop offset=".5" stopColor="var(--avatar-leather)" /><stop offset="1" stopColor="var(--avatar-leather-shadow)" /></linearGradient>
+          <linearGradient id={gradientes.metal} x1="0" y1="0" x2="1" y2="1"><stop stopColor="var(--avatar-gold-light)" /><stop offset=".52" stopColor="var(--primary)" /><stop offset="1" stopColor="var(--avatar-gold-shadow)" /></linearGradient>
+        </defs>
+        <path d="M52 423Q160 446 270 420" fill="none" className="stroke-primary/40" strokeWidth="3" />
+        {orden.map((categoria) => <Capa key={categoria} codigo={piezas[categoria] ?? ""} gradientes={gradientes} />)}
       </svg>
     </div>
   );
