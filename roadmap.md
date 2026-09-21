@@ -27,3 +27,10 @@
 - [x] Reorganizar misión, progreso, equipo, insignias y mapa como HUD de aventura.
 - [x] Adaptar la experiencia a escritorio, portátil, tableta y móvil.
 - [x] Verificar navegación, misión, progreso, equipamiento e insignias sin cambios funcionales.
+
+# Nueva dirección artística — Mi aventura
+
+- [ ] Sustituir la composición de paneles por una escena cinematográfica de juego.
+- [ ] Integrar HUD compacto, misión principal, slots, trofeos y navegación sobre el escenario.
+- [ ] Transformar el mapa vertical de tarjetas en un recorrido visual por seis mundos.
+- [ ] Verificar escritorio, portátil, tableta y móvil sin alterar lógica ni persistencia.
