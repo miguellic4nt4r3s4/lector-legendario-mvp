@@ -418,6 +418,16 @@
   }
 }
 
+@media (max-width: 520px) {
+  .game-nav-link {
+    flex: 1 0 3.25rem;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.4rem 0.3rem;
+    font-size: 0.55rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     scroll-behavior: auto !important;
