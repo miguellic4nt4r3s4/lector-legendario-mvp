@@ -37,7 +37,7 @@
 
 # Design System visual v1.0 — Mi aventura
 
-- [ ] Aplicar la paleta oficial y las superficies WORLD, HUD, destacado y recompensa.
-- [ ] Reutilizar AvatarStage para integrar escenario y héroe como foco principal.
-- [ ] Afinar Player HUD, Quest HUD, navegación y mapa con jerarquía de videojuego.
-- [ ] Verificar escritorio, tableta y móvil sin alterar datos ni lógica.
+- [x] Aplicar la paleta oficial y las superficies WORLD, HUD, destacado y recompensa.
+- [x] Reutilizar AvatarStage para integrar escenario y héroe como foco principal.
+- [x] Afinar Player HUD, Quest HUD, navegación y mapa con jerarquía de videojuego.
+- [x] Verificar escritorio, tableta y móvil sin alterar datos ni lógica.
