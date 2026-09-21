@@ -23,7 +23,7 @@
 
 # Rediseño mayor — Mi aventura
 
-- [ ] Convertir Mi aventura en un escenario cinematográfico con el héroe integrado.
-- [ ] Reorganizar misión, progreso, equipo, insignias y mapa como HUD de aventura.
-- [ ] Adaptar la experiencia a escritorio, portátil, tableta y móvil.
-- [ ] Verificar navegación, misión, progreso, equipamiento e insignias sin cambios funcionales.
+- [x] Convertir Mi aventura en un escenario cinematográfico con el héroe integrado.
+- [x] Reorganizar misión, progreso, equipo, insignias y mapa como HUD de aventura.
+- [x] Adaptar la experiencia a escritorio, portátil, tableta y móvil.
+- [x] Verificar navegación, misión, progreso, equipamiento e insignias sin cambios funcionales.
