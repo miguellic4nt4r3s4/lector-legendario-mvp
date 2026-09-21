@@ -1,6 +1,5 @@
 import type { ConfiguracionAvatar } from "./AvatarModular";
 import { AvatarModular } from "./AvatarModular";
-import { MapPin, ScrollText } from "lucide-react";
 import bosquePalabras from "@/assets/bosque-palabras-stage.jpg";
 import { cn } from "@/lib/utils";
 
@@ -11,9 +10,25 @@ const mundos: Record<MundoEscenario, string> = {
   ciudad: "Ciudad de las Perspectivas", archivo: "Archivo Secreto del Autor", reino: "Reino del Pensamiento Crítico",
 };
 
-type Props = { configuracion?: ConfiguracionAvatar | undefined; nombre: string; mundo?: MundoEscenario | undefined; className?: string | undefined; compacto?: boolean | undefined };
+type Props = { configuracion?: ConfiguracionAvatar | undefined; nombre: string; mundo?: MundoEscenario | undefined; className?: string | undefined; compacto?: boolean | undefined; integrado?: boolean | undefined };
 
-export function AvatarStage({ configuracion, nombre, mundo = "bosque", className, compacto = false }: Props) {
+export function AvatarStage({ configuracion, nombre, mundo = "bosque", className, compacto = false, integrado = false }: Props) {
+  if (integrado) {
+    return (
+      <div className={cn("absolute inset-0", className)} aria-label={`Escenario de ${nombre} en ${mundos[mundo]}`}>
+        {mundo === "bosque" ? <img src={bosquePalabras} alt="Bosque nocturno con libros y un archivo oculto" width={1536} height={1024} className="absolute inset-0 h-full w-full object-cover object-[55%_center] lg:object-center" /> : <div className="absolute inset-0 bg-secondary" />}
+        <div className="adventure-cinematic absolute inset-0" aria-hidden />
+        <div className="adventure-vignette absolute inset-0" aria-hidden />
+        <div className="adventure-mist absolute inset-x-0 bottom-0 h-1/2" aria-hidden />
+        <div className="adventure-particles absolute inset-0" aria-hidden />
+        <div className="absolute inset-x-0 top-[112px] h-[500px] sm:top-[120px] sm:h-[590px] lg:inset-y-0 lg:left-[24%] lg:right-[29%] lg:h-auto">
+          <div className="avatar-contact-shadow absolute bottom-[6%] left-1/2 h-12 w-52 -translate-x-1/2 sm:w-72" aria-hidden />
+          <AvatarModular configuracion={configuracion} nombre={`Avatar modular de ${nombre}`} className="absolute bottom-[2%] left-1/2 h-auto w-[340px] max-w-none -translate-x-1/2 border-0 bg-transparent drop-shadow-2xl sm:w-[430px] lg:w-[520px]" />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <section className={cn("group relative isolate min-h-[420px] overflow-hidden rounded-lg border border-primary/40 bg-secondary ornate-frame", compacto ? "min-h-[360px]" : "sm:min-h-[560px]", className)} aria-label={`Escenario de ${nombre} en ${mundos[mundo]}`}>
       {mundo === "bosque" ? <img src={bosquePalabras} alt="Bosque nocturno con libros y un archivo oculto" width={1536} height={1024} className="absolute inset-0 h-full w-full object-cover" /> : <div className="absolute inset-0 bg-gradient-to-b from-accent/30 via-secondary to-background" />}

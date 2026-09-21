@@ -75,31 +75,61 @@
   --color-avatar-sole: var(--avatar-sole);
   --color-avatar-seam: var(--avatar-seam);
   --color-avatar-glow: var(--avatar-glow);
+  --color-ll-night: var(--ll-night);
+  --color-ll-night-2: var(--ll-night-2);
+  --color-ll-deep: var(--ll-deep);
+  --color-ll-teal-dark: var(--ll-teal-dark);
+  --color-ll-teal: var(--ll-teal);
+  --color-ll-teal-light: var(--ll-teal-light);
+  --color-ll-gold: var(--ll-gold);
+  --color-ll-gold-light: var(--ll-gold-light);
+  --color-ll-gold-dark: var(--ll-gold-dark);
+  --color-ll-cream: var(--ll-cream);
+  --color-ll-white: var(--ll-white);
+  --color-ll-locked: var(--ll-locked);
 }
 
 :root {
   --radius: 0.5rem;
-  --background: oklch(0.16 0.035 241);
-  --foreground: oklch(0.94 0.01 240);
-  --card: oklch(0.28 0.045 215);
-  --card-foreground: oklch(0.94 0.01 240);
-  --popover: oklch(0.23 0.034 250);
-  --popover-foreground: oklch(0.94 0.01 240);
-  --primary: oklch(0.7 0.115 79);
-  --primary-foreground: oklch(0.18 0.03 256);
-  --secondary: oklch(0.32 0.05 211);
-  --secondary-foreground: oklch(0.94 0.01 240);
-  --muted: oklch(0.3 0.028 244);
-  --muted-foreground: oklch(0.77 0.025 237);
-  --accent: oklch(0.52 0.084 180);
-  --accent-foreground: oklch(0.96 0.01 180);
-  --destructive: oklch(0.6 0.19 22);
-  --destructive-foreground: oklch(0.97 0.01 85);
-  --success: oklch(0.67 0.12 157);
-  --success-foreground: oklch(0.18 0.03 256);
-  --border: oklch(0.4 0.04 243);
-  --input: oklch(0.35 0.04 243);
-  --ring: oklch(0.7 0.115 79);
+  --ll-night: oklch(0.1819 0.0271 232.69);
+  --ll-night-2: oklch(0.2147 0.0313 229.87);
+  --ll-deep: oklch(0.2625 0.0352 227.59);
+  --ll-teal-dark: oklch(0.3959 0.0343 207.19);
+  --ll-teal: oklch(0.5439 0.0399 202.73);
+  --ll-teal-light: oklch(0.6879 0.0397 189.96);
+  --ll-gold: oklch(0.7607 0.0924 74.89);
+  --ll-gold-light: oklch(0.848 0.0879 84.45);
+  --ll-gold-dark: oklch(0.5773 0.0836 68.55);
+  --ll-cream: oklch(0.8611 0.037 117.36);
+  --ll-white: oklch(0.9513 0.0225 104.08);
+  --ll-muted: oklch(0.7024 0.0235 196.63);
+  --ll-success: oklch(0.7181 0.1052 157.46);
+  --ll-info: oklch(0.6547 0.0838 218.46);
+  --ll-epic: oklch(0.5885 0.1097 304.96);
+  --ll-special: oklch(0.6969 0.1161 59.78);
+  --ll-danger: oklch(0.6007 0.135 21.96);
+  --ll-locked: oklch(0.2548 0.0202 223.75);
+  --background: var(--ll-night);
+  --foreground: var(--ll-white);
+  --card: var(--ll-deep);
+  --card-foreground: var(--ll-white);
+  --popover: var(--ll-night-2);
+  --popover-foreground: var(--ll-white);
+  --primary: var(--ll-gold);
+  --primary-foreground: var(--ll-night);
+  --secondary: var(--ll-deep);
+  --secondary-foreground: var(--ll-white);
+  --muted: var(--ll-locked);
+  --muted-foreground: var(--ll-muted);
+  --accent: var(--ll-teal);
+  --accent-foreground: var(--ll-white);
+  --destructive: var(--ll-danger);
+  --destructive-foreground: var(--ll-white);
+  --success: var(--ll-success);
+  --success-foreground: var(--ll-night);
+  --border: var(--ll-teal-dark);
+  --input: var(--ll-deep);
+  --ring: var(--ll-gold);
   --chart-1: oklch(0.78 0.13 84);
   --chart-2: oklch(0.52 0.084 180);
   --chart-3: oklch(0.66 0.13 155);
@@ -115,11 +145,13 @@
   --sidebar-ring: oklch(0.78 0.13 84);
   --rarity-common: oklch(0.72 0.025 240);
   --rarity-rare: oklch(0.67 0.13 230);
-  --rarity-epic: oklch(0.68 0.15 305);
-  --rarity-legendary: oklch(0.76 0.14 78);
-  --rarity-mythic: oklch(0.66 0.2 25);
-  --shadow-panel: 0 24px 70px -38px oklch(0.03 0.02 250 / 0.95);
-  --shadow-reward: 0 0 42px -16px color-mix(in oklab, var(--primary) 68%, transparent);
+  --rarity-epic: var(--ll-epic);
+  --rarity-legendary: var(--ll-gold);
+  --rarity-mythic: var(--ll-special);
+  --surface-hud: oklch(0.1819 0.0271 232.69 / 0.78);
+  --surface-focus: oklch(0.2625 0.0352 227.59 / 0.9);
+  --shadow-panel: 0 22px 60px -34px oklch(0.08 0.025 230 / 0.72);
+  --shadow-reward: 0 0 38px -18px color-mix(in oklab, var(--ll-gold) 62%, transparent);
   --avatar-outline: oklch(0.2 0.045 247);
   --avatar-detail: oklch(0.27 0.04 240);
   --avatar-shadow: oklch(0.04 0.025 250 / 0.9);
@@ -169,9 +201,7 @@
 
   body {
     background-color: var(--color-background);
-    background-image:
-      linear-gradient(180deg, color-mix(in oklab, var(--accent) 10%, transparent), transparent 32%),
-      radial-gradient(circle at 82% 4%, color-mix(in oklab, var(--primary) 11%, transparent), transparent 32%);
+    background-image: linear-gradient(180deg, var(--ll-night-2), var(--ll-night));
     background-attachment: fixed;
     color: var(--color-foreground);
     font-family: var(--font-sans);
@@ -247,8 +277,8 @@
 }
 
 @utility adventure-stage {
-  background-color: var(--background);
-  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--primary) 8%, transparent), 0 30px 90px -38px var(--background);
+  background-color: var(--ll-night);
+  box-shadow: 0 30px 90px -44px var(--ll-night);
   font-family: var(--font-adventure-body);
 }
 
@@ -258,8 +288,8 @@
 
 @utility adventure-cinematic {
   background:
-    linear-gradient(to right, color-mix(in oklab, var(--background) 88%, transparent), transparent 36%, transparent 62%, color-mix(in oklab, var(--background) 82%, transparent)),
-    linear-gradient(to bottom, color-mix(in oklab, var(--background) 52%, transparent), transparent 28%, transparent 68%, color-mix(in oklab, var(--background) 78%, transparent));
+    linear-gradient(to right, oklch(0.1819 0.0271 232.69 / 0.88), transparent 34%, transparent 63%, oklch(0.1819 0.0271 232.69 / 0.84)),
+    linear-gradient(to bottom, oklch(0.1819 0.0271 232.69 / 0.48), transparent 30%, transparent 67%, oklch(0.1819 0.0271 232.69 / 0.86));
 }
 
 @utility adventure-vignette {
@@ -267,19 +297,24 @@
 }
 
 @utility adventure-particles {
-  opacity: 0.55;
+  opacity: 0.34;
   background-image:
     radial-gradient(circle at 13% 28%, color-mix(in oklab, var(--primary) 75%, transparent) 0 1px, transparent 2px),
     radial-gradient(circle at 74% 41%, color-mix(in oklab, var(--accent) 72%, transparent) 0 1px, transparent 2px),
     radial-gradient(circle at 88% 67%, color-mix(in oklab, var(--primary) 66%, transparent) 0 1px, transparent 2px),
     radial-gradient(circle at 38% 18%, color-mix(in oklab, var(--accent) 64%, transparent) 0 1px, transparent 2px);
   background-size: 210px 190px, 260px 230px, 310px 270px, 180px 250px;
-  animation: particle-drift 14s ease-in-out infinite alternate;
+}
+
+@utility avatar-contact-shadow {
+  border-radius: 999px;
+  background: oklch(0.08 0.025 230 / 0.62);
+  filter: blur(18px);
 }
 
 @utility player-hud {
-  border-left: 2px solid var(--primary);
-  background: linear-gradient(90deg, color-mix(in oklab, var(--background) 92%, transparent), color-mix(in oklab, var(--background) 42%, transparent));
+  border-left: 1px solid color-mix(in oklab, var(--ll-teal) 55%, transparent);
+  background: linear-gradient(90deg, var(--surface-hud), oklch(0.1819 0.0271 232.69 / 0.28));
   padding: 1rem 1.1rem;
   box-shadow: -18px 0 46px -28px var(--primary);
   backdrop-filter: blur(8px);
@@ -302,8 +337,8 @@
 }
 
 @utility quest-focus {
-  border-right: 2px solid var(--primary);
-  background: linear-gradient(270deg, color-mix(in oklab, var(--background) 94%, transparent), color-mix(in oklab, var(--background) 60%, transparent));
+  border-right: 1px solid color-mix(in oklab, var(--ll-gold) 65%, transparent);
+  background: linear-gradient(270deg, var(--surface-focus), oklch(0.2625 0.0352 227.59 / 0.58));
   padding: 1.25rem;
   box-shadow: 22px 0 54px -32px var(--primary);
   backdrop-filter: blur(10px);
@@ -327,7 +362,7 @@
   width: 3.75rem;
   overflow: hidden;
   border: 1px solid color-mix(in oklab, var(--accent) 60%, var(--border));
-  border-radius: var(--radius-md);
+  border-radius: 0.25rem;
   background: color-mix(in oklab, var(--background) 76%, transparent);
   box-shadow: inset 0 0 18px color-mix(in oklab, var(--accent) 11%, transparent);
   backdrop-filter: blur(8px);
@@ -360,15 +395,32 @@
   font-size: 0.7rem;
   font-weight: 700;
   text-transform: uppercase;
-  transition: color 160ms ease, border-color 160ms ease;
+  transition: color 180ms ease, border-color 180ms ease, background-color 180ms ease;
   &:hover { color: var(--foreground); }
   &.is-active { border-color: var(--primary); color: var(--primary); }
 }
 
 @utility world-map {
-  border-top: 1px solid color-mix(in oklab, var(--accent) 44%, var(--border));
-  border-bottom: 1px solid color-mix(in oklab, var(--accent) 28%, var(--border));
-  background: var(--background);
+  border-top: 1px solid color-mix(in oklab, var(--ll-teal) 48%, transparent);
+  background: var(--ll-night-2);
+}
+
+@utility game-top-hud {
+  border-bottom: 1px solid color-mix(in oklab, var(--ll-teal) 55%, transparent);
+  background: var(--surface-hud);
+  box-shadow: 0 12px 30px -24px var(--ll-night);
+  backdrop-filter: blur(12px);
+}
+
+@utility game-brand-mark {
+  display: flex;
+  height: 2rem;
+  width: 2rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid color-mix(in oklab, var(--ll-gold) 65%, transparent);
+  border-radius: 999px;
+  color: var(--ll-gold);
 }
 
 @utility world-map-atmosphere {
@@ -399,11 +451,6 @@
 @keyframes reveal-up {
   from { opacity: 0; transform: translateY(10px) scale(0.98); }
   to { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-@keyframes particle-drift {
-  from { transform: translate3d(0, 0, 0); }
-  to { transform: translate3d(8px, -12px, 0); }
 }
 
 @media (max-width: 1023px) {
