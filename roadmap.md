@@ -34,3 +34,10 @@
 - [x] Integrar HUD compacto, misión principal, slots, trofeos y navegación sobre el escenario.
 - [x] Transformar el mapa vertical de tarjetas en un recorrido visual por seis mundos.
 - [x] Verificar escritorio, portátil, tableta y móvil sin alterar lógica ni persistencia.
+
+# Design System visual v1.0 — Mi aventura
+
+- [x] Aplicar la paleta oficial y las superficies WORLD, HUD, destacado y recompensa.
+- [x] Reutilizar AvatarStage para integrar escenario y héroe como foco principal.
+- [x] Afinar Player HUD, Quest HUD, navegación y mapa con jerarquía de videojuego.
+- [x] Verificar escritorio, tableta y móvil sin alterar datos ni lógica.
