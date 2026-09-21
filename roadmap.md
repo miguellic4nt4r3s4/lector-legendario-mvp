@@ -33,4 +33,4 @@
 - [x] Sustituir la composición de paneles por una escena cinematográfica de juego.
 - [x] Integrar HUD compacto, misión principal, slots, trofeos y navegación sobre el escenario.
 - [x] Transformar el mapa vertical de tarjetas en un recorrido visual por seis mundos.
-- [ ] Verificar escritorio, portátil, tableta y móvil sin alterar lógica ni persistencia.
+- [x] Verificar escritorio, portátil, tableta y móvil sin alterar lógica ni persistencia.
