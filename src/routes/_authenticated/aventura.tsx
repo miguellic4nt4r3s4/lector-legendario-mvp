@@ -3,8 +3,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { Lock, MapPin } from "lucide-react";
 import { Encabezado } from "@/components/juego/Encabezado";
-import { TarjetaHeroe } from "@/components/juego/TarjetaHeroe";
-import { Insignia } from "@/components/juego/Insignia";
+import { AdventureStage } from "@/components/juego/AdventureStage";
 import { MapaReino } from "@/components/juego/MapaReino";
 import {
   aventurasQuery,
@@ -15,7 +14,6 @@ import {
   perfilQuery,
   progresoQuery,
 } from "@/lib/consultas";
-import { CONDICION_POR_CODIGO, MUNDO_POR_CODIGO, rarezaDe } from "@/lib/juego";
 import type { ConfiguracionAvatar } from "@/components/juego/AvatarModular";
 import { Button } from "@/components/ui/button";
 
@@ -67,12 +65,7 @@ function Aventura() {
   }
 
   const progresoPorMision = new Map((progreso ?? []).map((p) => [p.mision_id, p]));
-  const obtenidaPorId = new Map(
-    (insignias ?? []).map((i) => {
-      const ins = i.insignias as unknown as { id: string };
-      return [ins.id, i.obtenida_at as string];
-    }),
-  );
+  const insigniasObtenidas = new Set((insignias ?? []).map((i) => (i.insignias as unknown as { id: string }).id));
   const aventurasCompletadas = (aventuras ?? [])
     .filter((a) => {
       const ms = (a.misiones as unknown as { id: string }[]) ?? [];
@@ -82,54 +75,32 @@ function Aventura() {
   const configuracionAvatar = Object.fromEntries(
     (inventarioAvatar ?? []).filter((fila) => fila.equipped).map((fila) => [fila.category, fila.avatar_items.asset]),
   ) as ConfiguracionAvatar;
+  const equipados = (inventarioAvatar ?? []).filter((fila) => fila.equipped).map((fila) => fila.avatar_items);
+  const primeraAventura = aventuras?.[0];
+  const misionesPrimeraAventura = ((primeraAventura?.misiones as unknown as {
+    id: string; titulo: string; sinopsis: string; xp_base: number; orden: number; disponible: boolean;
+  }[]) ?? []).sort((a, b) => a.orden - b.orden);
+  const misionActual = misionesPrimeraAventura.find((mision) => mision.disponible && !progresoPorMision.get(mision.id)?.completada)
+    ?? misionesPrimeraAventura.find((mision) => mision.disponible);
+  const progresoMisionActual = misionActual ? progresoPorMision.get(misionActual.id) : undefined;
 
   return (
     <div className="min-h-screen">
       <Encabezado rol={perfil?.rol} />
-      <main className="mx-auto max-w-6xl px-4 py-6 sm:py-8">
-        <div className="grid gap-7 lg:grid-cols-[minmax(380px,0.92fr)_minmax(0,1.08fr)]">
-          <aside id="mi-heroe" className="space-y-6 lg:sticky lg:top-24 lg:self-start">
-            <TarjetaHeroe
-              nombre={heroe.nombre}
-              clase={heroe.clase}
-              configuracion={configuracionAvatar}
-              xp={heroe.xp}
-              insignias={insignias?.length ?? 0}
-            />
-            <section id="insignias" className="space-y-4 border-t border-border pt-6" aria-labelledby="titulo-insignias">
-              <p className="text-xs font-bold uppercase tracking-[0.35em] text-accent">
-                Recompensas
-              </p>
-              <h2 id="titulo-insignias" className="mt-1 text-lg">
-                Insignias
-              </h2>
-              <p className="mt-1 text-xs text-muted-foreground">
-                {insignias?.length ?? 0} de {catalogo?.length ?? 0} desbloqueadas
-              </p>
-              <div className="mt-4 space-y-3">
-                {(catalogo ?? []).map((ins) => {
-                  const fecha = obtenidaPorId.get(ins.id) ?? null;
-                  return (
-                    <Insignia
-                      key={ins.id}
-                      nombre={ins.nombre}
-                      descripcion={ins.descripcion}
-                      icono={ins.icono}
-                      rareza={rarezaDe(ins.codigo)}
-                      desbloqueada={!!fecha}
-                      fecha={fecha}
-                      mundo={MUNDO_POR_CODIGO[ins.codigo]}
-                      condicion={CONDICION_POR_CODIGO[ins.codigo]}
-                      destacada={!!fecha}
-                    />
-                  );
-                })}
-              </div>
-            </section>
-          </aside>
+      <main className="pb-10 lg:mx-auto lg:max-w-[1440px] lg:px-4 lg:py-5">
+        <AdventureStage
+          nombre={heroe.nombre}
+          clase={heroe.clase}
+          xp={heroe.xp}
+          configuracion={configuracionAvatar}
+          equipados={equipados}
+          insignias={(catalogo ?? []).map((insignia) => ({ nombre: insignia.nombre, icono: insignia.icono, desbloqueada: insigniasObtenidas.has(insignia.id) }))}
+          mision={misionActual ? { ...misionActual, completada: progresoMisionActual?.completada ?? false, iniciada: !!progresoMisionActual } : undefined}
+        />
 
+        <div className="mx-auto mt-8 grid max-w-6xl gap-7 px-4 lg:grid-cols-[minmax(0,1.15fr)_minmax(340px,0.85fr)] lg:px-0">
+          <div id="mapa"><MapaReino xp={heroe.xp} aventurasCompletadas={aventurasCompletadas} /></div>
           <section className="space-y-6">
-            <div id="mapa"><MapaReino xp={heroe.xp} aventurasCompletadas={aventurasCompletadas} /></div>
             {(aventuras ?? []).map((aventura) => {
               const misiones = ((aventura.misiones as unknown as {
                 id: string;
@@ -141,7 +112,7 @@ function Aventura() {
               }[]) ?? []).sort((a, b) => a.orden - b.orden);
 
               return (
-                <article key={aventura.id} className="game-surface ornate-frame rounded-lg p-5 sm:p-7">
+                <article key={aventura.id} className="quest-journal rounded-lg p-5 sm:p-7">
                   <p className="text-xs font-bold uppercase tracking-[0.35em] text-accent">Mundo 1</p>
                   <h2 className="mt-1 font-display text-2xl font-bold uppercase text-primary">Bosque de las Palabras</h2>
                   <p className="mt-1 text-xs font-bold uppercase tracking-[0.25em] text-accent">Localización de información</p>
