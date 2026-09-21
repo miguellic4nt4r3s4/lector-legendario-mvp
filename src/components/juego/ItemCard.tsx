@@ -16,7 +16,7 @@ export function ItemCard({ item, desbloqueada, equipada, cargando, onEquipar }: 
     </div>
     <div className="mt-3 flex items-start justify-between gap-2"><h3 className="font-display text-lg font-bold leading-tight text-foreground">{item.name}</h3><RarityBadge rareza={item.rarity} /></div>
     <p className="mt-2 line-clamp-2 min-h-10 text-sm text-muted-foreground">{item.description}</p>
-    <p className={cn("mt-3 min-h-8 text-xs font-semibold uppercase", equipada ? "text-primary" : desbloqueada ? "text-success" : "text-foreground")}>{equipada ? "Equipado" : desbloqueada ? "Desbloqueado" : `🔒 Bloqueado · ${item.unlock_condition}`}</p>
+    <p className={cn("mt-3 flex min-h-8 items-start gap-1.5 text-xs font-semibold uppercase", equipada ? "text-primary" : desbloqueada ? "text-success" : "text-foreground")}>{!desbloqueada && <Lock className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden />}{equipada ? "Equipado" : desbloqueada ? "Desbloqueado" : `Bloqueado · ${item.unlock_condition}`}</p>
     <Button className="mt-3 w-full" variant={equipada ? "secondary" : "default"} disabled={!desbloqueada || equipada || cargando} onClick={onEquipar}>{equipada ? "Equipado" : desbloqueada ? "Equipar" : "Bloqueado"}</Button>
   </article>;
 }
