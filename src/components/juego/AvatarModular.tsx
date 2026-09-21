@@ -209,7 +209,7 @@ export function AvatarModular({ configuracion, className, nombre = "Avatar del h
   const piezas = { ...PREDETERMINADO, ...configuracion };
   const uid = useId().replace(/:/g, "");
   const gradientes: Gradientes = {
-    piel: `${uid}-piel`, cabello: `${uid}-cabello`, tela: `${uid}-tela`, telaRara: `${uid}-tela-rara`, cuero: `${uid}-cuero`, metal: `${uid}-metal",
+    piel: `${uid}-piel`, cabello: `${uid}-cabello`, tela: `${uid}-tela`, telaRara: `${uid}-tela-rara`, cuero: `${uid}-cuero`, metal: `${uid}-metal`,
   };
   const orden: CategoriaAvatar[] = ["effect", "accessory", "bottom", "shoes", "top", "face", "eyes", "hair"];
 
