@@ -15,24 +15,17 @@ export function WorldCard({ mundo, xp, nivel, completado, posicion }: Props) {
   const faltan = Math.max(0, metaXp - xp);
   const avance = nivelAlcanzado ? 100 : Math.min(100, Math.round((xp / metaXp) * 100));
   const Icono = iconos[mundo.numero - 1] ?? Map;
-  return <li className={cn("relative z-10 w-[84%] max-w-md", posicion % 2 === 0 ? "self-end" : "self-start")}>
-    <article className={cn("game-surface relative overflow-hidden rounded-lg border p-4 sm:p-5", disponible ? "ornate-frame border-primary/60" : "border-border/70", !nivelAlcanzado && "bg-background/80")} aria-label={`${mundo.nombre}, ${disponible ? "disponible" : "bloqueado"}`}>
-      <div className="flex gap-4">
-        <div className={cn("flex h-12 w-12 shrink-0 items-center justify-center rounded-full border", disponible ? "border-primary bg-primary/15 text-primary reward-glow" : "border-border bg-secondary text-muted-foreground")}>
-          {disponible ? <Icono className="h-5 w-5" aria-hidden /> : <Lock className="h-4 w-4" aria-hidden />}
-        </div>
-        <div className="min-w-0 flex-1">
-          <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-accent">Mundo {mundo.numero}</p>
-          <h3 className={cn("mt-1 font-display text-xl font-bold", disponible ? "text-primary" : "text-foreground")}>{mundo.nombre}</h3>
-          <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.2em] text-accent">{mundo.competencia}</p>
-          <p className="mt-1 text-sm text-muted-foreground">{mundo.descripcion}</p>
-          <div className="mt-3 flex flex-wrap items-center gap-2 text-xs">
-            <span className={cn("rounded-sm border px-2 py-1 font-semibold uppercase", disponible ? "border-success/50 bg-success/10 text-success" : "border-border text-muted-foreground")}>{disponible ? (completado ? "Misión completada" : "Disponible") : nivelAlcanzado ? "En preparación" : `Nivel ${mundo.nivelRequerido}`}</span>
-            {!nivelAlcanzado && <span className="text-muted-foreground">Faltan {faltan} XP</span>}
-          </div>
-          {!nivelAlcanzado && <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-secondary" role="progressbar" aria-valuenow={avance} aria-valuemin={0} aria-valuemax={100}><div className="h-full bg-gradient-to-r from-accent to-primary" style={{ width: `${avance}%` }} /></div>}
-        </div>
+  return <li className={cn("world-node relative z-10 text-center", posicion % 2 === 1 && "lg:translate-y-16")}>
+    <article className="group flex flex-col items-center" aria-label={`${mundo.nombre}, ${disponible ? "disponible" : "bloqueado"}`}>
+      <div className={cn("world-landmark relative flex h-24 w-24 items-center justify-center rounded-full border sm:h-28 sm:w-28", disponible ? "is-open border-primary text-primary" : "border-border text-muted-foreground")}>
+        <Icono className="h-9 w-9 transition-transform duration-300 group-hover:scale-110" aria-hidden />
+        {!disponible && <span className="absolute -bottom-1 right-1 flex h-8 w-8 items-center justify-center rounded-full border border-border bg-background"><Lock className="h-4 w-4" aria-hidden /></span>}
+        <span className="absolute left-1/2 top-1 -translate-x-1/2 text-[9px] font-bold uppercase">{String(mundo.numero).padStart(2, "0")}</span>
       </div>
+      <h3 className={cn("mt-3 max-w-[170px] font-adventure text-lg leading-tight", disponible ? "text-primary" : "text-foreground")}>{mundo.nombre}</h3>
+      <p className="mt-1 max-w-[170px] text-[10px] font-bold uppercase text-accent">{mundo.competencia}</p>
+      <p className={cn("mt-2 text-[10px] font-bold uppercase", disponible ? "text-success" : "text-muted-foreground")}>{disponible ? (completado ? "Misión completada" : "Disponible") : nivelAlcanzado ? "En preparación" : `Nivel ${mundo.nivelRequerido} · faltan ${faltan} XP`}</p>
+      {!nivelAlcanzado && <div className="mt-2 h-1 w-20 overflow-hidden rounded-full bg-secondary" role="progressbar" aria-valuenow={avance} aria-valuemin={0} aria-valuemax={100}><div className="h-full bg-accent" style={{ width: `${avance}%` }} /></div>}
     </article>
   </li>;
 }

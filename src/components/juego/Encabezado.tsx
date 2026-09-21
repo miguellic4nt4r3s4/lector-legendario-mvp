@@ -4,7 +4,7 @@ import { Backpack, BookLock, Compass, LogOut, Map, Medal, ScrollText, Shield, Sp
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 
-export function Encabezado({ rol }: { rol?: string | undefined }) {
+export function Encabezado({ rol, modoAventura = false }: { rol?: string | undefined; modoAventura?: boolean | undefined }) {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
@@ -16,8 +16,8 @@ export function Encabezado({ rol }: { rol?: string | undefined }) {
   }
 
   return (
-    <header className="sticky top-0 z-40 w-full max-w-[100vw] overflow-x-hidden border-b border-border/70 bg-background/88 backdrop-blur-xl">
-      <div className="mx-auto flex w-full min-w-0 max-w-6xl flex-wrap items-center gap-3 px-4 py-3">
+    <header className={modoAventura ? "sticky top-0 z-40 w-full border-b border-primary/20 bg-background/92 backdrop-blur-xl" : "sticky top-0 z-40 w-full max-w-[100vw] overflow-x-hidden border-b border-border/70 bg-background/88 backdrop-blur-xl"}>
+      <div className="mx-auto flex w-full min-w-0 max-w-7xl flex-wrap items-center gap-3 px-4 py-3">
         <Link to="/aventura" className="flex items-center gap-2">
           <span className="flex h-8 w-8 items-center justify-center rounded-full border border-primary/50 bg-primary/10"><BookLock className="h-4 w-4 text-primary" aria-hidden /></span>
           <span className="font-display text-lg font-bold text-primary">
@@ -34,7 +34,7 @@ export function Encabezado({ rol }: { rol?: string | undefined }) {
               <ScrollText className="h-4 w-4" /> Progreso
             </Link>
           ) : (
-            <><Link to="/aventura" className="inline-flex shrink-0 items-center gap-1.5 rounded-md px-3 py-2 text-muted-foreground hover:bg-secondary hover:text-foreground" activeProps={{ className: "bg-secondary text-primary" }}><Compass className="h-4 w-4" /> Mi aventura</Link><Link to="/aventura" hash="mi-heroe" className="inline-flex shrink-0 items-center gap-1.5 rounded-md px-3 py-2 text-muted-foreground hover:bg-secondary hover:text-foreground"><Shield className="h-4 w-4" /> Mi héroe</Link><Link to="/aventura" hash="mapa" className="inline-flex shrink-0 items-center gap-1.5 rounded-md px-3 py-2 text-muted-foreground hover:bg-secondary hover:text-foreground"><Map className="h-4 w-4" /> Mapa</Link><Link to="/aventura" hash="insignias" className="inline-flex shrink-0 items-center gap-1.5 rounded-md px-3 py-2 text-muted-foreground hover:bg-secondary hover:text-foreground"><Medal className="h-4 w-4" /> Insignias</Link><Link to="/personalizar" search={{ categoria: "top" }} className="inline-flex shrink-0 items-center gap-1.5 rounded-md px-3 py-2 text-muted-foreground hover:bg-secondary hover:text-foreground"><Backpack className="h-4 w-4" /> Vestuario</Link><span className="inline-flex shrink-0 items-center gap-1.5 px-3 py-2 text-muted-foreground/50" title="Próximamente"><Sparkles className="h-4 w-4" /> Poderes</span></>
+            <><Link to="/aventura" className="game-nav-link" activeProps={{ className: "game-nav-link is-active" }}><Compass className="h-5 w-5" /><span>{modoAventura ? "Aventura" : "Mi aventura"}</span></Link><Link to="/aventura" hash="mi-heroe" className="game-nav-link"><Shield className="h-5 w-5" /><span>{modoAventura ? "Héroe" : "Mi héroe"}</span></Link><Link to="/personalizar" search={{ categoria: "top" }} className="game-nav-link"><Backpack className="h-5 w-5" /><span>{modoAventura ? "Mochila" : "Vestuario"}</span></Link><Link to="/aventura" hash="insignias" className="game-nav-link"><Medal className="h-5 w-5" /><span>Insignias</span></Link><Link to="/aventura" hash="mapa" className="game-nav-link"><Map className="h-5 w-5" /><span>Mapa</span></Link>{!modoAventura && <span className="inline-flex shrink-0 items-center gap-1.5 px-3 py-2 text-muted-foreground/50" title="Próximamente"><Sparkles className="h-4 w-4" /> Poderes</span>}</>
           )}
           <Button
             onClick={salir}
