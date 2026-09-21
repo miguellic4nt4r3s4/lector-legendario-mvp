@@ -1,7 +1,6 @@
 import { useEffect } from "react";
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { Lock, MapPin } from "lucide-react";
 import { Encabezado } from "@/components/juego/Encabezado";
 import { AdventureStage } from "@/components/juego/AdventureStage";
 import { MapaReino } from "@/components/juego/MapaReino";
@@ -15,7 +14,6 @@ import {
   progresoQuery,
 } from "@/lib/consultas";
 import type { ConfiguracionAvatar } from "@/components/juego/AvatarModular";
-import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/_authenticated/aventura")({
   head: () => ({
