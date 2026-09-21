@@ -43,7 +43,7 @@ export function Encabezado({ rol, modoAventura = false }: { rol?: string | undef
             className="ml-auto shrink-0 text-muted-foreground"
           >
             <LogOut className="h-4 w-4" aria-hidden />
-            Salir
+            <span className={modoAventura ? "sr-only" : undefined}>Salir</span>
           </Button>
         </nav>
       </div>
