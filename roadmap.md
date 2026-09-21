@@ -20,3 +20,10 @@
 - [x] Redibujar la Mochila del Explorador y preparar variantes visuales compatibles con los códigos actuales.
 - [x] Reequilibrar la Armería del Héroe y mantener miniaturas bloqueadas deseables.
 - [x] Verificar escritorio, tableta, teléfono, equipamiento y persistencia completa.
+
+# Rediseño mayor — Mi aventura
+
+- [ ] Convertir Mi aventura en un escenario cinematográfico con el héroe integrado.
+- [ ] Reorganizar misión, progreso, equipo, insignias y mapa como HUD de aventura.
+- [ ] Adaptar la experiencia a escritorio, portátil, tableta y móvil.
+- [ ] Verificar navegación, misión, progreso, equipamiento e insignias sin cambios funcionales.
