@@ -52,4 +52,4 @@
 
 - [x] Sustituir la composición de paneles por una escena única con HUD mínimo.
 - [x] Reubicar el héroe, la misión y el progreso según la nueva jerarquía.
-- [ ] Verificar encuadre, adaptación móvil y acceso a la misión.
+- [x] Verificar encuadre, adaptación móvil y acceso a la misión.

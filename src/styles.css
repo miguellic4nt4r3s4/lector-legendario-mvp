@@ -554,7 +554,9 @@
     height: auto;
     background-image: linear-gradient(180deg, var(--primary), var(--accent) 18%, var(--border) 32%, var(--border));
   }
+}
 
+@media (max-width: 700px) {
   .adventure-hero-plane {
     bottom: 18.5rem;
     left: 42%;
