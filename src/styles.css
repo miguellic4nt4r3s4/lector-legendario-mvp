@@ -286,6 +286,15 @@
   filter: drop-shadow(0 4px 12px color-mix(in oklab, var(--ll-night) 85%, transparent));
 }
 
+@utility adventure-zone-label {
+  border-left: 1px solid color-mix(in oklab, var(--ll-teal) 68%, transparent);
+  padding-left: 0.7rem;
+  text-shadow: 0 2px 10px var(--ll-night);
+  & span { color: var(--ll-gold); font-size: 0.58rem; font-weight: 700; text-transform: uppercase; }
+  & h1 { color: var(--ll-white); font-family: var(--font-adventure-body); font-size: 0.78rem; font-weight: 700; text-transform: uppercase; }
+  & p { color: var(--ll-muted); font-size: 0.55rem; text-transform: uppercase; }
+}
+
 @utility adventure-mist {
   background: linear-gradient(to top, color-mix(in oklab, var(--background) 78%, transparent), color-mix(in oklab, var(--background) 18%, transparent), transparent);
 }
@@ -313,6 +322,68 @@
 @utility adventure-avatar {
   filter: drop-shadow(0 18px 15px oklch(0.08 0.025 230 / 0.62)) drop-shadow(0 -2px 8px color-mix(in oklab, var(--ll-teal-light) 14%, transparent));
   animation: hero-arrival 380ms ease-out both;
+}
+
+@utility adventure-hero-plane {
+  bottom: 5rem;
+  left: 39%;
+  height: 23rem;
+  width: 18rem;
+  transform: translateX(-50%);
+}
+
+@utility quest-marker {
+  bottom: 7rem;
+  right: 5%;
+  width: min(22vw, 19rem);
+}
+
+@utility quest-marker-line {
+  position: absolute;
+  right: 100%;
+  top: 2rem;
+  width: clamp(2rem, 8vw, 7rem);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--ll-gold) 62%, transparent));
+}
+
+@utility quest-ribbon {
+  border-block: 1px solid color-mix(in oklab, var(--ll-teal) 48%, transparent);
+  border-right: 1px solid color-mix(in oklab, var(--ll-gold) 55%, transparent);
+  background: linear-gradient(270deg, oklch(0.1819 0.0271 232.69 / 0.86), oklch(0.1819 0.0271 232.69 / 0.46));
+  padding: 1rem 0.9rem;
+  box-shadow: 12px 14px 38px -30px var(--ll-night);
+  backdrop-filter: blur(7px);
+  transition: transform 180ms ease, border-right-color 180ms ease;
+  &:hover { border-right-color: var(--ll-gold); transform: translateY(-2px); }
+}
+
+@utility player-strip {
+  bottom: 1.1rem;
+  left: 2rem;
+  display: flex;
+  width: min(28rem, calc(100% - 4rem));
+  align-items: center;
+  gap: 1rem;
+  border-top: 1px solid color-mix(in oklab, var(--ll-teal) 46%, transparent);
+  background: linear-gradient(90deg, oklch(0.1819 0.0271 232.69 / 0.76), transparent);
+  padding: 0.75rem 0.5rem 0 0;
+  backdrop-filter: blur(5px);
+}
+
+@utility hud-action {
+  height: 2rem;
+  width: 2rem;
+  color: var(--ll-teal-light);
+  &:hover { color: var(--ll-white); }
+}
+
+@utility hud-trophy {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--ll-gold);
+  font-size: 0.7rem;
 }
 
 @utility player-hud {
@@ -485,11 +556,58 @@
   }
 }
 
+@media (max-width: 700px) {
+  .adventure-hero-plane {
+    bottom: 18.5rem;
+    left: 42%;
+    height: 22rem;
+    width: 17rem;
+  }
+
+  .quest-marker {
+    bottom: 6.5rem;
+    left: 2rem;
+    right: 2rem;
+    width: auto;
+  }
+
+  .quest-marker-line { display: none; }
+
+  .player-strip {
+    bottom: 0.8rem;
+    left: 2rem;
+    width: calc(100% - 4rem);
+  }
+}
+
 @media (max-width: 520px) {
   .hud-level { height: 3.4rem; width: 3.4rem; }
   .hud-level strong { font-size: 1.25rem; }
   .player-hud { padding: 0.7rem 0.85rem; }
   .quest-focus { padding: 1rem; }
+
+  .adventure-hero-plane {
+    bottom: 21.5rem;
+    left: 43%;
+    height: 19rem;
+    width: 15rem;
+  }
+
+  .quest-marker {
+    bottom: 6.8rem;
+    left: 1rem;
+    right: 1rem;
+  }
+
+  .quest-ribbon { padding: 0.8rem; }
+  .quest-ribbon h2 { font-size: 1.25rem; }
+
+  .player-strip {
+    bottom: 0.7rem;
+    left: 1rem;
+    width: calc(100% - 2rem);
+    padding-top: 0.6rem;
+  }
 
   .game-nav-link {
     flex: 1 0 3.25rem;

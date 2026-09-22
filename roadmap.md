@@ -47,3 +47,9 @@
 - [x] Reequilibrar escenario, protagonista y misión como una sola composición RPG.
 - [x] Compactar HUD del jugador, navegación, equipo y trofeos sin crear tarjetas nuevas.
 - [x] Verificar escritorio, tableta y móvil, y confirmar la acción de misión.
+
+# Recomposición estructural — Mi aventura
+
+- [x] Sustituir la composición de paneles por una escena única con HUD mínimo.
+- [x] Reubicar el héroe, la misión y el progreso según la nueva jerarquía.
+- [x] Verificar encuadre, adaptación móvil y acceso a la misión.
