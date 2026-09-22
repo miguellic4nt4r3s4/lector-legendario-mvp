@@ -17,10 +17,10 @@ export function Encabezado({ rol, modoAventura = false }: { rol?: string | undef
 
   return (
     <header className={modoAventura ? "game-top-hud sticky top-0 z-40 w-full" : "sticky top-0 z-40 w-full max-w-[100vw] overflow-x-hidden border-b border-border/70 bg-background/88 backdrop-blur-xl"}>
-      <div className="mx-auto flex w-full min-w-0 max-w-7xl flex-wrap items-center gap-3 px-4 py-3">
+      <div className="mx-auto flex w-full min-w-0 max-w-7xl flex-wrap items-center gap-3 px-4 py-2.5">
         <Link to="/aventura" className="flex items-center gap-2">
           <span className="game-brand-mark"><BookLock className="h-4 w-4" aria-hidden /></span>
-          <span className="font-adventure text-lg text-primary">
+          <span className="font-adventure text-base text-primary sm:text-lg">
             Lector Legendario
           </span>
         </Link>
