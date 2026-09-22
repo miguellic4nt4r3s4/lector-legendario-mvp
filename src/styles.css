@@ -338,6 +338,7 @@
 }
 
 @utility adventure-avatar {
+  width: min(100%, 25rem);
   filter: drop-shadow(0 18px 15px oklch(0.08 0.025 230 / 0.62)) drop-shadow(0 -2px 8px color-mix(in oklab, var(--ll-teal-light) 14%, transparent));
   animation: hero-arrival 380ms ease-out both;
 }
