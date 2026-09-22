@@ -16,15 +16,13 @@ export function Encabezado({ rol, modoAventura = false }: { rol?: string | undef
   }
 
   return (
-    <header className={modoAventura ? "game-top-hud sticky top-0 z-40 w-full" : "sticky top-0 z-40 w-full max-w-[100vw] overflow-x-hidden border-b border-border/70 bg-background/88 backdrop-blur-xl"}>
-      <div className="mx-auto flex w-full min-w-0 max-w-7xl flex-wrap items-center gap-3 px-4 py-2.5">
-        <Link to="/aventura" className="flex items-center gap-2">
+    <header className={modoAventura ? "game-top-hud z-40 w-full" : "sticky top-0 z-40 w-full max-w-[100vw] overflow-x-hidden border-b border-border/70 bg-background/88 backdrop-blur-xl"}>
+      <div className={modoAventura ? "game-top-hud-inner" : "mx-auto flex w-full min-w-0 max-w-7xl flex-wrap items-center gap-3 px-4 py-2.5"}>
+        <Link to="/aventura" className={modoAventura ? "game-logo" : "flex items-center gap-2"}>
           <span className="game-brand-mark"><BookLock className="h-4 w-4" aria-hidden /></span>
-          <span className="font-adventure text-base text-primary sm:text-lg">
-            Lector Legendario
-          </span>
+          <span className="font-adventure text-base text-primary sm:text-lg">Lector Legendario</span>
         </Link>
-        <nav className="order-3 flex w-full min-w-0 max-w-full items-center gap-1 overflow-x-auto overscroll-x-contain border-t border-border/50 pt-2 text-xs [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:order-none md:ml-auto md:w-auto md:border-0 md:pt-0" aria-label="Navegación principal">
+        <nav className={modoAventura ? "game-nav" : "order-3 flex w-full min-w-0 max-w-full items-center gap-1 overflow-x-auto overscroll-x-contain border-t border-border/50 pt-2 text-xs [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:order-none md:ml-auto md:w-auto md:border-0 md:pt-0"} aria-label="Navegación principal">
           {rol === "docente" ? (
             <Link
               to="/docente"

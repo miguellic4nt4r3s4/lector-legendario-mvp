@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Backpack, ChevronRight, Compass, Medal, ScrollText } from "lucide-react";
+import { Backpack, ChevronRight, Compass, Crown, Gem, LockKeyhole, Medal, ScrollText, Shield } from "lucide-react";
 import type { AvatarItem } from "@/lib/consultas";
 import { nivelDesdeXp, rangoDeNivel } from "@/lib/juego";
 import type { ConfiguracionAvatar } from "./AvatarModular";
@@ -33,48 +33,60 @@ type Props = {
   aventuraTitulo?: string | undefined;
 };
 
-export function AdventureStage({ nombre, clase, xp, configuracion, insignias, mision, aventuraTitulo }: Props) {
+export function AdventureStage({ nombre, clase, xp, configuracion, equipados, insignias, mision, aventuraTitulo }: Props) {
   const nivel = nivelDesdeXp(xp);
   const obtenidas = insignias.filter((insignia) => insignia.desbloqueada);
+  const ranuras = equipados.slice(0, 6);
 
   return (
-    <section className="adventure-stage relative isolate h-[860px] overflow-hidden sm:h-[900px] lg:h-[calc(100svh-61px)] lg:min-h-[690px] lg:max-h-[860px]" aria-labelledby="aventura-mundo-actual">
-      <AvatarStage nombre={nombre} configuracion={configuracion} integrado />
+    <section className="adventure-stage" aria-labelledby="aventura-mundo-actual">
+      <div className="adventure-artboard">
+        <AvatarStage nombre={nombre} configuracion={configuracion} integrado />
 
-      <div className="adventure-zone-label absolute left-4 top-5 z-20 sm:left-7 sm:top-7 lg:left-9">
-        <span>Mundo 01</span>
-        <h1 id="aventura-mundo-actual">Bosque de las Palabras</h1>
-        <p>Localización de información</p>
-      </div>
-
-      <aside className="quest-marker absolute z-30" aria-labelledby="mision-actual">
-        <div className="quest-marker-line" aria-hidden />
-        <section className="quest-ribbon reveal-up">
-          <div className="flex items-center gap-2 text-accent"><ScrollText className="h-4 w-4" aria-hidden /><p className="text-[10px] font-bold uppercase">Misión activa</p></div>
-          <p className="mt-2 text-[9px] font-bold uppercase text-primary">{aventuraTitulo ?? "El Enigma de la Biblioteca Perdida"}</p>
-          <h2 id="mision-actual" className="mt-1 font-adventure text-2xl leading-tight text-foreground">{mision?.titulo ?? "Próxima expedición"}</h2>
-          <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-muted-foreground">{mision?.sinopsis ?? "El archivo prepara una nueva pista para tu héroe."}</p>
-          {mision && <div className="mt-2 flex items-center justify-between text-[11px]"><span className="text-muted-foreground">Recompensa</span><strong className="text-primary">{mision.xp_base} XP</strong></div>}
-          {mision && <Button asChild size="sm" className="game-cta mt-3 w-full"><Link to="/mision/$misionId" params={{ misionId: mision.id }}>{mision.completada ? "Repetir aventura" : "Continuar aventura"}<ChevronRight aria-hidden /></Link></Button>}
-        </section>
-      </aside>
-
-      <div id="mi-heroe" className="player-strip absolute z-30" aria-label={`Datos de ${nombre}`}>
-        <div className="min-w-0 flex-1">
-          <div className="flex items-baseline gap-2">
-            <h2 className="truncate font-adventure text-xl text-foreground">{nombre}</h2>
-            <span className="shrink-0 text-[10px] font-bold uppercase text-primary">Nv. {String(nivel).padStart(2, "0")}</span>
-          </div>
-          <p className="text-[11px] text-muted-foreground">{clase} · {rangoDeNivel(nivel)}</p>
-          <div className="mt-2 max-w-[300px]"><XPBar xp={xp} /></div>
+        <div className="adventure-zone-label">
+          <span>Mundo 01</span>
+          <h1 id="aventura-mundo-actual">Bosque de las Palabras</h1>
+          <p><Compass aria-hidden /> Localización de información</p>
         </div>
-        <div id="insignias" className="flex shrink-0 items-center gap-2" aria-label={`${obtenidas.length} trofeos obtenidos`}>
-          <Button asChild variant="ghost" size="icon" className="hud-action" title="Abrir mochila"><Link to="/personalizar" search={{ categoria: "top" }} aria-label="Abrir mochila"><Backpack aria-hidden /></Link></Button>
-          <span className="hud-trophy"><Medal className="h-4 w-4" aria-hidden /><strong>{obtenidas.length}</strong></span>
+
+        <div id="mi-heroe" className="hero-identity" aria-label={`Datos de ${nombre}`}>
+          <span className="hero-identity-kicker">Héroe lector</span>
+          <h2>{nombre}</h2>
+          <p>{clase}</p>
+          <div className="hero-level"><strong>{String(nivel).padStart(2, "0")}</strong><span>Nivel<br />{rangoDeNivel(nivel)}</span></div>
+        </div>
+
+        <aside className="quest-console reveal-up" aria-labelledby="mision-actual">
+          <div className="quest-console-heading"><ScrollText aria-hidden /><span>Misión activa</span></div>
+          <p className="quest-adventure-name">{aventuraTitulo ?? "El Enigma de la Biblioteca Perdida"}</p>
+          <h2 id="mision-actual">{mision?.titulo ?? "Próxima expedición"}</h2>
+          <p className="quest-copy">{mision?.sinopsis ?? "El archivo prepara una nueva pista para tu héroe."}</p>
+          {mision && <div className="quest-reward"><Gem aria-hidden /><span>Recompensa</span><strong>+{mision.xp_base} XP</strong></div>}
+          {mision && <Button asChild className="game-cta"><Link to="/mision/$misionId" params={{ misionId: mision.id }}>{mision.completada ? "Repetir aventura" : "Continuar aventura"}<ChevronRight aria-hidden /></Link></Button>}
+        </aside>
+
+        <div className="adventure-bottom-hud">
+          <section className="xp-console" aria-label={`Progreso de ${nombre}`}>
+            <div className="xp-console-top"><span>Progreso del héroe</span><strong>NV. {String(nivel).padStart(2, "0")}</strong></div>
+            <XPBar xp={xp} compacta />
+            <p>{xp} XP acumulados</p>
+          </section>
+
+          <section className="loadout-console" aria-label="Equipo actual">
+            <div className="console-title"><Backpack aria-hidden /><span>Equipo</span></div>
+            <div className="loadout-slots">
+              {ranuras.map((item) => <span key={item.id} className="loadout-slot" title={item.name}><Shield aria-hidden /><small>{item.name}</small></span>)}
+              {Array.from({ length: Math.max(0, 4 - ranuras.length) }).map((_, index) => <span key={`vacia-${index}`} className="loadout-slot is-locked"><LockKeyhole aria-hidden /></span>)}
+            </div>
+            <Button asChild variant="ghost" size="sm" className="console-link"><Link to="/personalizar" search={{ categoria: "top" }}>Ver mochila<ChevronRight aria-hidden /></Link></Button>
+          </section>
+
+          <section id="insignias" className="trophy-console" aria-label={`${obtenidas.length} trofeos obtenidos`}>
+            <div className="console-title"><Medal aria-hidden /><span>Trofeos</span></div>
+            <div className="trophy-summary"><Crown aria-hidden /><strong>{obtenidas.length}</strong><span>obtenidos</span></div>
+          </section>
         </div>
       </div>
-
-      <div className="adventure-path-marker absolute bottom-5 left-1/2 z-20 hidden -translate-x-1/2 items-center gap-2 text-[10px] font-semibold uppercase text-primary lg:flex"><Compass className="h-3.5 w-3.5" aria-hidden /> Sendero activo</div>
     </section>
   );
 }

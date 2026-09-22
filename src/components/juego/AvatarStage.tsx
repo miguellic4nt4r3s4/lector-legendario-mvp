@@ -24,7 +24,7 @@ export function AvatarStage({ configuracion, nombre, mundo = "bosque", className
         <div className="adventure-light-shaft absolute inset-0" aria-hidden />
         <div className="adventure-hero-plane absolute">
           <div className="avatar-contact-shadow absolute bottom-0 left-1/2 h-8 w-44 -translate-x-1/2" aria-hidden />
-          <AvatarModular configuracion={configuracion} nombre={`Avatar modular de ${nombre}`} className="adventure-avatar absolute bottom-0 left-1/2 h-auto w-[230px] max-w-none -translate-x-1/2 border-0 bg-transparent sm:w-[250px] lg:w-[260px]" />
+          <AvatarModular configuracion={configuracion} nombre={`Avatar modular de ${nombre}`} className="adventure-avatar absolute bottom-0 left-1/2 h-auto max-w-none -translate-x-1/2 border-0 bg-transparent" />
         </div>
       </div>
     );
