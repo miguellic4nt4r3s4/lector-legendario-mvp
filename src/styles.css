@@ -277,9 +277,20 @@
 }
 
 @utility adventure-stage {
+  min-height: calc(100svh - 4rem);
+  padding: clamp(0.6rem, 1.4vw, 1.2rem);
   background-color: var(--ll-night);
-  box-shadow: 0 34px 90px -48px var(--ll-night);
   font-family: var(--font-adventure-body);
+}
+
+@utility adventure-artboard {
+  position: relative;
+  isolation: isolate;
+  min-height: min(860px, calc(100svh - 5.2rem));
+  overflow: hidden;
+  border: 1px solid color-mix(in oklab, var(--ll-teal) 42%, transparent);
+  border-radius: 0.35rem;
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--ll-white) 5%, transparent), 0 28px 70px -38px var(--ll-night);
 }
 
 @utility adventure-world-title {
@@ -287,12 +298,19 @@
 }
 
 @utility adventure-zone-label {
-  border-left: 1px solid color-mix(in oklab, var(--ll-teal) 68%, transparent);
-  padding-left: 0.7rem;
+  position: absolute;
+  left: clamp(1rem, 2.4vw, 2.2rem);
+  top: clamp(1rem, 2.4vw, 2rem);
+  z-index: 20;
+  max-width: 18rem;
+  border-left: 2px solid var(--ll-gold);
+  padding: 0.55rem 0.8rem;
+  background: linear-gradient(90deg, oklch(0.1819 0.0271 232.69 / 0.74), transparent);
   text-shadow: 0 2px 10px var(--ll-night);
-  & span { color: var(--ll-gold); font-size: 0.58rem; font-weight: 700; text-transform: uppercase; }
-  & h1 { color: var(--ll-white); font-family: var(--font-adventure-body); font-size: 0.78rem; font-weight: 700; text-transform: uppercase; }
-  & p { color: var(--ll-muted); font-size: 0.55rem; text-transform: uppercase; }
+  & span { color: var(--ll-gold); font-size: 0.62rem; font-weight: 800; text-transform: uppercase; }
+  & h1 { color: var(--ll-white); font-family: var(--font-adventure); font-size: clamp(1.15rem, 2vw, 1.7rem); line-height: 1.05; }
+  & p { display: flex; align-items: center; gap: 0.35rem; margin-top: 0.3rem; color: var(--ll-cream); font-size: 0.62rem; text-transform: uppercase; }
+  & p svg { height: 0.75rem; width: 0.75rem; color: var(--ll-teal-light); }
 }
 
 @utility adventure-mist {
@@ -301,8 +319,8 @@
 
 @utility adventure-cinematic {
   background:
-    linear-gradient(to right, oklch(0.1819 0.0271 232.69 / 0.7), transparent 30%, transparent 68%, oklch(0.1819 0.0271 232.69 / 0.68)),
-    linear-gradient(to bottom, oklch(0.1819 0.0271 232.69 / 0.42), transparent 26%, transparent 72%, oklch(0.1819 0.0271 232.69 / 0.72));
+    linear-gradient(to right, oklch(0.1819 0.0271 232.69 / 0.64), transparent 26%, transparent 66%, oklch(0.1819 0.0271 232.69 / 0.7)),
+    linear-gradient(to bottom, oklch(0.1819 0.0271 232.69 / 0.3), transparent 24%, transparent 66%, oklch(0.1819 0.0271 232.69 / 0.9));
 }
 
 @utility adventure-vignette {
@@ -320,16 +338,204 @@
 }
 
 @utility adventure-avatar {
+  width: min(100%, 25rem);
   filter: drop-shadow(0 18px 15px oklch(0.08 0.025 230 / 0.62)) drop-shadow(0 -2px 8px color-mix(in oklab, var(--ll-teal-light) 14%, transparent));
   animation: hero-arrival 380ms ease-out both;
 }
 
 @utility adventure-hero-plane {
-  bottom: 5rem;
-  left: 39%;
-  height: 23rem;
-  width: 18rem;
+  bottom: 7.6rem;
+  left: 31%;
+  height: min(68vh, 35rem);
+  width: min(34vw, 26rem);
   transform: translateX(-50%);
+}
+
+@utility hero-identity {
+  position: absolute;
+  left: clamp(1rem, 2.4vw, 2.2rem);
+  bottom: 9.4rem;
+  z-index: 24;
+  width: min(17rem, 25vw);
+  border-left: 1px solid color-mix(in oklab, var(--ll-teal-light) 58%, transparent);
+  padding: 0.7rem 0.8rem;
+  background: linear-gradient(90deg, oklch(0.1819 0.0271 232.69 / 0.78), transparent);
+  text-shadow: 0 2px 8px var(--ll-night);
+  & .hero-identity-kicker { color: var(--ll-teal-light); font-size: 0.58rem; font-weight: 800; text-transform: uppercase; }
+  & h2 { color: var(--ll-white); font-family: var(--font-adventure); font-size: clamp(1.4rem, 2.4vw, 2.1rem); line-height: 1; }
+  & > p { margin-top: 0.25rem; color: var(--ll-cream); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; }
+}
+
+@utility hero-level {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 0.65rem;
+  & strong { color: var(--ll-gold); font-family: var(--font-adventure); font-size: 1.75rem; line-height: 1; }
+  & span { color: var(--ll-muted); font-size: 0.54rem; font-weight: 700; line-height: 1.2; text-transform: uppercase; }
+}
+
+@utility quest-console {
+  position: absolute;
+  right: clamp(1rem, 2.7vw, 2.6rem);
+  top: 19%;
+  z-index: 26;
+  width: min(25rem, 32vw);
+  border: 1px solid color-mix(in oklab, var(--ll-teal) 58%, transparent);
+  border-right-color: color-mix(in oklab, var(--ll-gold) 58%, transparent);
+  border-radius: 0.25rem;
+  background: oklch(0.1819 0.0271 232.69 / 0.82);
+  padding: clamp(1rem, 2vw, 1.5rem);
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--ll-white) 5%, transparent), 0 22px 48px -32px var(--ll-night);
+  backdrop-filter: blur(8px);
+  &::before { position: absolute; left: -0.45rem; top: 1rem; height: 2.8rem; width: 0.18rem; background: var(--ll-gold); content: ""; }
+  & h2 { margin-top: 0.35rem; color: var(--ll-white); font-family: var(--font-adventure); font-size: clamp(1.65rem, 2.8vw, 2.55rem); line-height: 1.02; }
+}
+
+@utility quest-console-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--ll-teal-light);
+  font-size: 0.62rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  & svg { height: 0.9rem; width: 0.9rem; }
+}
+
+@utility quest-adventure-name {
+  margin-top: 0.85rem;
+  color: var(--ll-gold);
+  font-size: 0.62rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+@utility quest-copy {
+  margin-top: 0.8rem;
+  color: var(--ll-cream);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+@utility quest-reward {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1rem;
+  border-top: 1px solid color-mix(in oklab, var(--ll-teal) 34%, transparent);
+  padding-top: 0.75rem;
+  color: var(--ll-muted);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  & svg { height: 0.9rem; width: 0.9rem; color: var(--ll-gold); }
+  & strong { color: var(--ll-gold-light); }
+}
+
+@utility adventure-bottom-hud {
+  position: absolute;
+  inset-inline: clamp(0.7rem, 1.5vw, 1.4rem);
+  bottom: clamp(0.7rem, 1.5vw, 1.2rem);
+  z-index: 28;
+  display: grid;
+  grid-template-columns: minmax(13rem, 1.15fr) minmax(18rem, 1.6fr) minmax(8rem, 0.65fr);
+  gap: 0.55rem;
+}
+
+@utility xp-console {
+  border-top: 1px solid color-mix(in oklab, var(--ll-teal-light) 48%, transparent);
+  background: oklch(0.1819 0.0271 232.69 / 0.82);
+  padding: 0.7rem 0.85rem;
+  backdrop-filter: blur(8px);
+  & > p { margin-top: 0.3rem; color: var(--ll-muted); font-size: 0.58rem; text-transform: uppercase; }
+}
+
+@utility xp-console-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.45rem;
+  color: var(--ll-cream);
+  font-size: 0.6rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  & strong { color: var(--ll-gold); }
+}
+
+@utility loadout-console {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.75rem;
+  border-top: 1px solid color-mix(in oklab, var(--ll-teal) 42%, transparent);
+  background: oklch(0.1819 0.0271 232.69 / 0.82);
+  padding: 0.55rem 0.75rem;
+  backdrop-filter: blur(8px);
+}
+
+@utility console-title {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--ll-cream);
+  font-size: 0.58rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  & svg { height: 0.9rem; width: 0.9rem; color: var(--ll-teal-light); }
+}
+
+@utility loadout-slots {
+  display: flex;
+  gap: 0.35rem;
+}
+
+@utility loadout-slot {
+  position: relative;
+  display: flex;
+  height: 2.8rem;
+  width: 2.8rem;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid color-mix(in oklab, var(--ll-teal) 58%, transparent);
+  border-radius: 0.2rem;
+  background: color-mix(in oklab, var(--ll-deep) 84%, transparent);
+  color: var(--ll-teal-light);
+  transition: border-color 180ms ease, transform 180ms ease;
+  &:hover { border-color: var(--ll-gold); transform: translateY(-2px); }
+  &.is-locked { color: var(--ll-muted); opacity: 0.48; }
+  & svg { height: 1.15rem; width: 1.15rem; }
+  & small { position: absolute; inset-inline: 0.15rem; bottom: 0.1rem; overflow: hidden; color: var(--ll-cream); font-size: 0.38rem; text-align: center; text-overflow: ellipsis; white-space: nowrap; }
+}
+
+@utility console-link {
+  color: var(--ll-gold);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+}
+
+@utility trophy-console {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 0.7rem;
+  border-top: 1px solid color-mix(in oklab, var(--ll-gold) 42%, transparent);
+  background: oklch(0.1819 0.0271 232.69 / 0.82);
+  padding: 0.65rem 0.8rem;
+  backdrop-filter: blur(8px);
+}
+
+@utility trophy-summary {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  justify-content: end;
+  gap: 0.3rem;
+  color: var(--ll-gold);
+  & svg { grid-row: span 2; height: 1.7rem; width: 1.7rem; }
+  & strong { font-family: var(--font-adventure); font-size: 1.25rem; line-height: 1; }
+  & span { color: var(--ll-muted); font-size: 0.5rem; text-transform: uppercase; }
 }
 
 @utility quest-marker {
@@ -477,6 +683,35 @@
   &.is-active { border-color: var(--primary); color: var(--primary); }
 }
 
+@utility game-top-hud-inner {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: stretch;
+  min-height: 4rem;
+}
+
+@utility game-logo {
+  display: flex;
+  min-width: 15rem;
+  align-items: center;
+  gap: 0.65rem;
+  border-right: 1px solid color-mix(in oklab, var(--ll-gold) 38%, transparent);
+  padding-inline: clamp(1rem, 2.5vw, 2rem);
+  background: color-mix(in oklab, var(--ll-night-2) 92%, transparent);
+}
+
+@utility game-nav {
+  display: flex;
+  min-width: 0;
+  align-items: stretch;
+  justify-content: flex-end;
+  overflow-x: auto;
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+  & .game-nav-link { min-width: 6.7rem; justify-content: center; border-left: 1px solid color-mix(in oklab, var(--ll-teal-dark) 48%, transparent); border-bottom-width: 3px; }
+  & button { align-self: center; margin-inline: 0.5rem; }
+}
+
 @utility world-map {
   border-top: 1px solid color-mix(in oklab, var(--ll-teal) 48%, transparent);
   background: var(--ll-night-2);
@@ -554,30 +789,35 @@
     height: auto;
     background-image: linear-gradient(180deg, var(--primary), var(--accent) 18%, var(--border) 32%, var(--border));
   }
+
+  .adventure-artboard { min-height: 900px; }
+  .adventure-hero-plane { bottom: 16.4rem; left: 36%; height: 30rem; width: 23rem; }
+  .hero-identity { bottom: 17rem; width: 15rem; }
+  .quest-console { top: 17%; width: min(22rem, 42vw); }
+  .adventure-bottom-hud { grid-template-columns: 1fr 1.4fr; }
+  .trophy-console { display: none; }
+  .game-logo { min-width: 12.5rem; }
 }
 
 @media (max-width: 700px) {
-  .adventure-hero-plane {
-    bottom: 18.5rem;
-    left: 42%;
-    height: 22rem;
-    width: 17rem;
-  }
-
-  .quest-marker {
-    bottom: 6.5rem;
-    left: 2rem;
-    right: 2rem;
-    width: auto;
-  }
-
-  .quest-marker-line { display: none; }
-
-  .player-strip {
-    bottom: 0.8rem;
-    left: 2rem;
-    width: calc(100% - 4rem);
-  }
+  .adventure-stage { padding: 0; }
+  .adventure-artboard { min-height: 940px; border-inline: 0; border-radius: 0; }
+  .adventure-zone-label { left: 0.9rem; top: 1rem; }
+  .adventure-hero-plane { bottom: 27.5rem; left: 48%; height: 27rem; width: 21rem; }
+  .hero-identity { left: 0.9rem; bottom: 32rem; width: 11.5rem; padding-left: 0.55rem; }
+  .hero-identity h2 { font-size: 1.35rem; }
+  .quest-console { inset-inline: 0.8rem; top: auto; bottom: 12.3rem; width: auto; padding: 0.9rem; }
+  .quest-console h2 { font-size: 1.55rem; }
+  .quest-copy { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+  .adventure-bottom-hud { inset-inline: 0.8rem; bottom: 0.7rem; grid-template-columns: 1fr; }
+  .loadout-console { grid-template-columns: auto 1fr; }
+  .console-link { display: none; }
+  .loadout-slots { justify-content: flex-end; overflow: hidden; }
+  .loadout-slot { height: 2.35rem; width: 2.35rem; }
+  .game-top-hud-inner { grid-template-columns: 1fr; }
+  .game-logo { min-width: 0; justify-content: center; border-right: 0; border-bottom: 1px solid color-mix(in oklab, var(--ll-gold) 28%, transparent); padding-block: 0.55rem; }
+  .game-nav { justify-content: flex-start; }
+  .game-nav .game-nav-link { min-width: 4.5rem; }
 }
 
 @media (max-width: 520px) {
@@ -585,29 +825,6 @@
   .hud-level strong { font-size: 1.25rem; }
   .player-hud { padding: 0.7rem 0.85rem; }
   .quest-focus { padding: 1rem; }
-
-  .adventure-hero-plane {
-    bottom: 21.5rem;
-    left: 43%;
-    height: 19rem;
-    width: 15rem;
-  }
-
-  .quest-marker {
-    bottom: 6.8rem;
-    left: 1rem;
-    right: 1rem;
-  }
-
-  .quest-ribbon { padding: 0.8rem; }
-  .quest-ribbon h2 { font-size: 1.25rem; }
-
-  .player-strip {
-    bottom: 0.7rem;
-    left: 1rem;
-    width: calc(100% - 2rem);
-    padding-top: 0.6rem;
-  }
 
   .game-nav-link {
     flex: 1 0 3.25rem;

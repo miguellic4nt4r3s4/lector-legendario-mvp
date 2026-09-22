@@ -53,3 +53,9 @@
 - [x] Sustituir la composición de paneles por una escena única con HUD mínimo.
 - [x] Reubicar el héroe, la misión y el progreso según la nueva jerarquía.
 - [x] Verificar encuadre, adaptación móvil y acceso a la misión.
+
+# Dirección visual de referencia — Mi aventura
+
+- [x] Reorganizar la pantalla como interfaz RPG ilustrada con protagonista dominante.
+- [x] Integrar misión, progreso, equipo y trofeos en una consola compacta de juego.
+- [ ] Verificar escritorio, tableta, móvil y acceso a la misión.
