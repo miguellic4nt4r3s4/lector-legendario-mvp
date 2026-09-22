@@ -278,45 +278,48 @@
 
 @utility adventure-stage {
   background-color: var(--ll-night);
-  box-shadow: 0 30px 90px -44px var(--ll-night);
+  box-shadow: 0 34px 90px -48px var(--ll-night);
   font-family: var(--font-adventure-body);
 }
 
+@utility adventure-world-title {
+  filter: drop-shadow(0 4px 12px color-mix(in oklab, var(--ll-night) 85%, transparent));
+}
+
 @utility adventure-mist {
-  background: linear-gradient(to top, var(--background), color-mix(in oklab, var(--background) 50%, transparent), transparent);
+  background: linear-gradient(to top, color-mix(in oklab, var(--background) 78%, transparent), color-mix(in oklab, var(--background) 18%, transparent), transparent);
 }
 
 @utility adventure-cinematic {
   background:
-    linear-gradient(to right, oklch(0.1819 0.0271 232.69 / 0.88), transparent 34%, transparent 63%, oklch(0.1819 0.0271 232.69 / 0.84)),
-    linear-gradient(to bottom, oklch(0.1819 0.0271 232.69 / 0.48), transparent 30%, transparent 67%, oklch(0.1819 0.0271 232.69 / 0.86));
+    linear-gradient(to right, oklch(0.1819 0.0271 232.69 / 0.7), transparent 30%, transparent 68%, oklch(0.1819 0.0271 232.69 / 0.68)),
+    linear-gradient(to bottom, oklch(0.1819 0.0271 232.69 / 0.42), transparent 26%, transparent 72%, oklch(0.1819 0.0271 232.69 / 0.72));
 }
 
 @utility adventure-vignette {
-  box-shadow: inset 0 0 180px 28px color-mix(in oklab, var(--background) 84%, transparent);
+  box-shadow: inset 0 0 150px 16px color-mix(in oklab, var(--background) 68%, transparent);
 }
 
-@utility adventure-particles {
-  opacity: 0.34;
-  background-image:
-    radial-gradient(circle at 13% 28%, color-mix(in oklab, var(--primary) 75%, transparent) 0 1px, transparent 2px),
-    radial-gradient(circle at 74% 41%, color-mix(in oklab, var(--accent) 72%, transparent) 0 1px, transparent 2px),
-    radial-gradient(circle at 88% 67%, color-mix(in oklab, var(--primary) 66%, transparent) 0 1px, transparent 2px),
-    radial-gradient(circle at 38% 18%, color-mix(in oklab, var(--accent) 64%, transparent) 0 1px, transparent 2px);
-  background-size: 210px 190px, 260px 230px, 310px 270px, 180px 250px;
+@utility adventure-light-shaft {
+  background: radial-gradient(ellipse at 51% 38%, color-mix(in oklab, var(--ll-teal-light) 9%, transparent), transparent 38%);
 }
 
 @utility avatar-contact-shadow {
   border-radius: 999px;
-  background: oklch(0.08 0.025 230 / 0.62);
-  filter: blur(18px);
+  background: oklch(0.08 0.025 230 / 0.7);
+  filter: blur(15px);
+}
+
+@utility adventure-avatar {
+  filter: drop-shadow(0 18px 15px oklch(0.08 0.025 230 / 0.62)) drop-shadow(0 -2px 8px color-mix(in oklab, var(--ll-teal-light) 14%, transparent));
+  animation: hero-arrival 380ms ease-out both;
 }
 
 @utility player-hud {
   border-left: 1px solid color-mix(in oklab, var(--ll-teal) 55%, transparent);
-  background: linear-gradient(90deg, var(--surface-hud), oklch(0.1819 0.0271 232.69 / 0.28));
-  padding: 1rem 1.1rem;
-  box-shadow: -18px 0 46px -28px var(--primary);
+  background: linear-gradient(90deg, var(--surface-hud), oklch(0.1819 0.0271 232.69 / 0.06));
+  padding: 0.8rem 1rem;
+  box-shadow: -14px 0 38px -30px var(--accent);
   backdrop-filter: blur(8px);
 }
 
@@ -338,10 +341,13 @@
 
 @utility quest-focus {
   border-right: 1px solid color-mix(in oklab, var(--ll-gold) 65%, transparent);
-  background: linear-gradient(270deg, var(--surface-focus), oklch(0.2625 0.0352 227.59 / 0.58));
-  padding: 1.25rem;
-  box-shadow: 22px 0 54px -32px var(--primary);
+  border-bottom: 1px solid color-mix(in oklab, var(--ll-teal) 32%, transparent);
+  background: linear-gradient(270deg, var(--surface-focus), oklch(0.2625 0.0352 227.59 / 0.32));
+  padding: 1.1rem 1.2rem;
+  box-shadow: 18px 8px 48px -34px var(--primary);
   backdrop-filter: blur(10px);
+  transition: border-color 180ms ease, transform 180ms ease;
+  &:hover { border-right-color: var(--primary); transform: translateY(-2px); }
 }
 
 @utility game-cta {
@@ -390,7 +396,7 @@
   align-items: center;
   gap: 0.4rem;
   border-bottom: 2px solid transparent;
-  padding: 0.5rem 0.7rem;
+  padding: 0.45rem 0.7rem;
   color: var(--muted-foreground);
   font-size: 0.7rem;
   font-weight: 700;
@@ -410,6 +416,10 @@
   background: var(--surface-hud);
   box-shadow: 0 12px 30px -24px var(--ll-night);
   backdrop-filter: blur(12px);
+}
+
+@utility adventure-path-marker {
+  text-shadow: 0 2px 8px var(--ll-night);
 }
 
 @utility game-brand-mark {
@@ -453,7 +463,17 @@
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
+@keyframes hero-arrival {
+  from { opacity: 0; filter: drop-shadow(0 12px 10px oklch(0.08 0.025 230 / 0.36)); }
+  to { opacity: 1; filter: drop-shadow(0 18px 15px oklch(0.08 0.025 230 / 0.62)) drop-shadow(0 -2px 8px color-mix(in oklab, var(--ll-teal-light) 14%, transparent)); }
+}
+
 @media (max-width: 1023px) {
+  .adventure-cinematic {
+    background:
+      linear-gradient(to bottom, oklch(0.1819 0.0271 232.69 / 0.42), transparent 23%, transparent 48%, oklch(0.1819 0.0271 232.69 / 0.88) 68%, var(--ll-night));
+  }
+
   .world-route-line {
     left: 50%;
     right: auto;
@@ -466,6 +486,11 @@
 }
 
 @media (max-width: 520px) {
+  .hud-level { height: 3.4rem; width: 3.4rem; }
+  .hud-level strong { font-size: 1.25rem; }
+  .player-hud { padding: 0.7rem 0.85rem; }
+  .quest-focus { padding: 1rem; }
+
   .game-nav-link {
     flex: 1 0 3.25rem;
     flex-direction: column;

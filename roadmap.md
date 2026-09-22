@@ -41,3 +41,9 @@
 - [x] Reutilizar AvatarStage para integrar escenario y héroe como foco principal.
 - [x] Afinar Player HUD, Quest HUD, navegación y mapa con jerarquía de videojuego.
 - [x] Verificar escritorio, tableta y móvil sin alterar datos ni lógica.
+
+# Intervención visual controlada — Mi aventura
+
+- [x] Reequilibrar escenario, protagonista y misión como una sola composición RPG.
+- [x] Compactar HUD del jugador, navegación, equipo y trofeos sin crear tarjetas nuevas.
+- [x] Verificar escritorio, tableta y móvil, y confirmar la acción de misión.
