@@ -58,4 +58,4 @@
 
 - [x] Reorganizar la pantalla como interfaz RPG ilustrada con protagonista dominante.
 - [x] Integrar misión, progreso, equipo y trofeos en una consola compacta de juego.
-- [ ] Verificar escritorio, tableta, móvil y acceso a la misión.
+- [x] Verificar escritorio, tableta, móvil y acceso a la misión.
