@@ -46,4 +46,4 @@
 
 - [x] Reequilibrar escenario, protagonista y misión como una sola composición RPG.
 - [x] Compactar HUD del jugador, navegación, equipo y trofeos sin crear tarjetas nuevas.
-- [ ] Verificar escritorio, tableta y móvil, y confirmar la acción de misión.
+- [x] Verificar escritorio, tableta y móvil, y confirmar la acción de misión.

@@ -40,7 +40,7 @@ export function AdventureStage({ nombre, clase, xp, configuracion, equipados, in
   const obtenidas = insignias.filter((insignia) => insignia.desbloqueada);
 
   return (
-    <section className="adventure-stage relative isolate min-h-[960px] overflow-hidden sm:min-h-[920px] lg:min-h-[calc(100svh-65px)] lg:max-h-[900px]" aria-labelledby="aventura-mundo-actual">
+    <section className="adventure-stage relative isolate min-h-[960px] overflow-hidden sm:min-h-[920px] lg:h-[calc(100svh-65px)] lg:min-h-[720px] lg:max-h-[900px]" aria-labelledby="aventura-mundo-actual">
       <AvatarStage nombre={nombre} configuracion={configuracion} integrado />
 
       <div className="absolute inset-x-0 top-0 z-20 flex items-start justify-between gap-3 px-4 pt-5 sm:px-7 sm:pt-7 lg:px-10 lg:pt-8">
