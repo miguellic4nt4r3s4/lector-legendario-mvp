@@ -684,7 +684,7 @@
   .adventure-world { height: auto; min-height: 640px; max-height: none; }
   .hero-hud { width: 11rem; }
   .world-location { top: auto; bottom: 1rem; left: 1rem; transform: none; text-align: left; }
-  .hero-character { left: 50%; bottom: 13.5rem; height: 24rem; width: 18rem; }
+  .hero-character { left: 50%; bottom: 14.5rem; height: 20rem; width: 15rem; }
   .quest-marker { inset-inline: 0.9rem; top: auto; bottom: 4.2rem; width: auto; min-width: 0; background: oklch(0.1819 0.0271 232.69 / 0.72); }
   .game-top-hud-inner { grid-template-columns: auto minmax(0,1fr); }
   .game-logo { min-width: 0; padding-inline: 0.7rem; }
@@ -698,6 +698,7 @@
   .hud-level strong { font-size: 1.25rem; }
   .player-hud { padding: 0.7rem 0.85rem; }
   .quest-focus { padding: 1rem; }
+  .hero-character { bottom: 14.75rem; height: 18.5rem; width: 14rem; }
 
   .game-nav-link {
     flex: 1 0 3.25rem;
