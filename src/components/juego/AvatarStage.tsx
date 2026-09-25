@@ -29,7 +29,7 @@ export function AvatarStage({ configuracion, nombre, mundo = "bosque", className
           ))}
         </div>
         <div className="hero-character">
-          <div className="avatar-contact-shadow absolute -bottom-1 left-1/2 h-7 w-[82%] -translate-x-1/2" aria-hidden />
+          <div className="avatar-contact-shadow absolute -bottom-1 left-1/2 h-7 w-[44%] -translate-x-1/2" aria-hidden />
           {(() => {
             const r = retratoHeroe(configuracion);
             return (
