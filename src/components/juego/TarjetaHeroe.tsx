@@ -31,7 +31,7 @@ export function TarjetaHeroe({ nombre, clase, configuracion, xp, insignias = 0 }
         <span className="text-xs text-muted-foreground">Expediente del Bosque</span>
       </header>
       <AvatarStage configuracion={configuracion} nombre={nombre} compacto />
-      <CharacterCard nombre={nombre} clase={clase} xp={xp} insignias={insignias} />
+      <CharacterCard nombre={nombre} clase={clase} xp={xp} insignias={insignias} configuracion={configuracion} />
       <div className="grid grid-cols-2 gap-3">
           <Button asChild>
             <Link to="/personalizar" search={{ categoria: "face" }}><SlidersHorizontal aria-hidden /> Personalizar</Link>
