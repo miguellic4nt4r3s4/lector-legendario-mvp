@@ -152,23 +152,23 @@
   --surface-focus: oklch(0.2625 0.0352 227.59 / 0.9);
   --shadow-panel: 0 22px 60px -34px oklch(0.08 0.025 230 / 0.72);
   --shadow-reward: 0 0 38px -18px color-mix(in oklab, var(--ll-gold) 62%, transparent);
-  --avatar-outline: oklch(0.2 0.045 247);
-  --avatar-detail: oklch(0.27 0.04 240);
+  --avatar-outline: oklch(0.16 0.04 236);
+  --avatar-detail: oklch(0.24 0.045 224);
   --avatar-shadow: oklch(0.04 0.025 250 / 0.9);
-  --avatar-skin-light: oklch(0.88 0.07 72);
-  --avatar-skin: oklch(0.78 0.095 68);
-  --avatar-skin-shadow: oklch(0.61 0.1 52);
-  --avatar-hair: oklch(0.25 0.045 48);
-  --avatar-hair-light: oklch(0.4 0.075 57);
-  --avatar-hair-shadow: oklch(0.15 0.035 42);
+  --avatar-skin-light: oklch(0.9 0.065 72);
+  --avatar-skin: oklch(0.8 0.09 65);
+  --avatar-skin-shadow: oklch(0.63 0.09 50);
+  --avatar-hair: oklch(0.27 0.055 48);
+  --avatar-hair-light: oklch(0.47 0.085 58);
+  --avatar-hair-shadow: oklch(0.13 0.035 40);
   --avatar-eye: oklch(0.96 0.015 90);
   --avatar-pupil: oklch(0.15 0.035 244);
-  --avatar-cloth: oklch(0.42 0.09 180);
-  --avatar-cloth-light: oklch(0.59 0.105 174);
-  --avatar-cloth-shadow: oklch(0.28 0.07 188);
+  --avatar-cloth: oklch(0.43 0.095 184);
+  --avatar-cloth-light: oklch(0.65 0.105 177);
+  --avatar-cloth-shadow: oklch(0.25 0.07 193);
   --avatar-shirt: oklch(0.86 0.025 94);
-  --avatar-trouser: oklch(0.31 0.055 247);
-  --avatar-trouser-light: oklch(0.48 0.07 235);
+  --avatar-trouser: oklch(0.27 0.045 246);
+  --avatar-trouser-light: oklch(0.43 0.055 233);
   --avatar-leather: oklch(0.36 0.07 60);
   --avatar-leather-light: oklch(0.57 0.105 69);
   --avatar-leather-shadow: oklch(0.24 0.055 50);
@@ -401,7 +401,7 @@
     drop-shadow(0 14px 12px oklch(0.08 0.025 230 / 0.55))
     drop-shadow(-1px -1px 0 color-mix(in oklab, var(--ll-teal-light) 35%, transparent))
     drop-shadow(0 0 14px color-mix(in oklab, var(--ll-teal) 22%, transparent))
-    saturate(0.9) brightness(0.94);
+    saturate(1.04) brightness(0.98) contrast(1.03);
   animation: hero-arrival 380ms ease-out both;
 }
 
@@ -684,7 +684,7 @@
   .adventure-world { height: auto; min-height: 640px; max-height: none; }
   .hero-hud { width: 11rem; }
   .world-location { top: auto; bottom: 1rem; left: 1rem; transform: none; text-align: left; }
-  .hero-character { left: 50%; bottom: 13.5rem; height: 24rem; width: 18rem; }
+  .hero-character { left: 50%; bottom: 14.5rem; height: 20rem; width: 15rem; }
   .quest-marker { inset-inline: 0.9rem; top: auto; bottom: 4.2rem; width: auto; min-width: 0; background: oklch(0.1819 0.0271 232.69 / 0.72); }
   .game-top-hud-inner { grid-template-columns: auto minmax(0,1fr); }
   .game-logo { min-width: 0; padding-inline: 0.7rem; }
@@ -698,6 +698,7 @@
   .hud-level strong { font-size: 1.25rem; }
   .player-hud { padding: 0.7rem 0.85rem; }
   .quest-focus { padding: 1rem; }
+  .hero-character { bottom: 14.75rem; height: 18.5rem; width: 14rem; }
 
   .game-nav-link {
     flex: 1 0 3.25rem;
