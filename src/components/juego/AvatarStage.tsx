@@ -1,5 +1,6 @@
 import type { ConfiguracionAvatar } from "./AvatarModular";
 import { AvatarModular } from "./AvatarModular";
+import { retratoHeroe } from "./retratoHeroe";
 import { MapPin, ScrollText } from "lucide-react";
 import bosquePalabras from "@/assets/bosque-palabras-stage.jpg";
 import { cn } from "@/lib/utils";
@@ -29,7 +30,7 @@ export function AvatarStage({ configuracion, nombre, mundo = "bosque", className
         </div>
         <div className="hero-character">
           <div className="avatar-contact-shadow absolute -bottom-1 left-1/2 h-7 w-3/4 -translate-x-1/2" aria-hidden />
-          <AvatarModular configuracion={configuracion} nombre={`Avatar modular de ${nombre}`} className="adventure-avatar absolute bottom-0 left-1/2 h-auto max-w-none -translate-x-1/2 border-0 bg-transparent" />
+          {(() => { const r = retratoHeroe(configuracion); return <img src={r.src} width={r.width} height={r.height} alt={`${nombre}${r.conMochila ? " con su mochila" : ""}`} className="adventure-avatar absolute bottom-0 left-1/2 h-full w-auto max-w-none -translate-x-1/2 object-contain" />; })()}
         </div>
       </div>
     );
