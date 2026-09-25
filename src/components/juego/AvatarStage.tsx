@@ -29,8 +29,19 @@ export function AvatarStage({ configuracion, nombre, mundo = "bosque", className
           ))}
         </div>
         <div className="hero-character">
-          <div className="avatar-contact-shadow absolute -bottom-1 left-1/2 h-7 w-3/4 -translate-x-1/2" aria-hidden />
-          {(() => { const r = retratoHeroe(configuracion); return <img src={r.src} width={r.width} height={r.height} alt={`${nombre}${r.conMochila ? " con su mochila" : ""}`} className="adventure-avatar absolute bottom-0 left-1/2 h-full w-auto max-w-none -translate-x-1/2 object-contain" />; })()}
+          <div className="avatar-contact-shadow absolute -bottom-1 left-1/2 h-7 w-[44%] -translate-x-1/2" aria-hidden />
+          {(() => {
+            const r = retratoHeroe(configuracion);
+            return (
+              <img
+                src={r.src}
+                width={r.width}
+                height={r.height}
+                alt={`${nombre}${r.conMochila ? " con su mochila" : ""}`}
+                className="adventure-avatar absolute bottom-0 left-1/2 h-full w-auto max-w-none -translate-x-1/2 object-contain object-bottom"
+              />
+            );
+          })()}
         </div>
       </div>
     );
