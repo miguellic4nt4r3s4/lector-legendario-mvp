@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Backpack, ChevronRight, Medal, Sparkles as _S, ScrollText as Sparkles } from "lucide-react";
-void _S;
+import { Backpack, ChevronRight, Medal, ScrollText } from "lucide-react";
 import type { AvatarItem } from "@/lib/consultas";
 import { nivelDesdeXp, rangoDeNivel } from "@/lib/juego";
 import type { ConfiguracionAvatar } from "./AvatarModular";
@@ -56,7 +55,7 @@ export function AdventureStage({ nombre, xp, configuracion, insignias, mision }:
 
         {mision && (
           <aside className="quest-marker reveal-up" aria-labelledby="mision-actual">
-            <p className="quest-marker-kicker hud-text"><Sparkles aria-hidden />Misión activa</p>
+            <p className="quest-marker-kicker hud-text"><ScrollText aria-hidden />Misión activa</p>
             <h2 id="mision-actual" className="hud-text">{mision.titulo}</h2>
             <p className="quest-marker-xp">+{mision.xp_base} XP</p>
             <Button asChild className="game-cta">
