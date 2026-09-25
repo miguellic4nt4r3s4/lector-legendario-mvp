@@ -651,8 +651,6 @@
   .game-logo > span:last-child { display: none; }
   .game-nav { justify-content: flex-start; }
   .game-nav .game-nav-link { min-width: 3.25rem; }
-  .game-nav { justify-content: flex-start; }
-  .game-nav .game-nav-link { min-width: 4.5rem; }
 }
 
 @media (max-width: 520px) {
