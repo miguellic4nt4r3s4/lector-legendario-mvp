@@ -57,14 +57,14 @@ function Capa({ codigo, gradientes }: { codigo: string; gradientes: Gradientes }
       );
     case "accessory_backpack_01":
       return (
-        <g className={trazo} strokeWidth="3.2">
-          <path d="M79 155c-24 7-37 28-38 62l-1 76c0 17 12 28 29 29l47-1 6-153c-13-13-27-17-43-13z" fill={`url(#${gradientes.cuero})`} />
-          <path d="M60 191c1-25 13-43 35-50 16 3 26 13 30 31" fill="none" className="stroke-avatar-leather-light" strokeWidth="9" />
-          <path d="M44 222l68-5-1 80-52 3c-10 0-16-7-16-17z" className="fill-avatar-leather" />
-          <path d="M44 222q33 18 68-5v25q-33 17-68 4z" className="fill-avatar-leather-light" />
-          <path d="M64 249v47M91 246v50M70 263h15v14H70z" className="stroke-avatar-detail fill-avatar-leather-shadow" strokeWidth="2.2" />
-          <path d="M45 207l20 6M44 286l17-7" fill="none" className="stroke-primary/75" strokeWidth="2.4" />
-          <circle cx="77" cy="226" r="3.8" fill={`url(#${gradientes.metal})`} />
+        <g className={trazo} strokeWidth="3">
+          <path d="M101 145c-34 4-52 30-55 69l-4 76c-1 18 11 30 29 32l47-3 9-151c-5-14-13-21-26-23z" fill={`url(#${gradientes.cuero})`} />
+          <path d="M66 188c4-29 18-46 42-51 15 4 25 14 30 31" fill="none" className="stroke-avatar-leather-light" strokeWidth="10" />
+          <path d="M44 216l75-4-5 87-55 3c-12 0-18-8-17-20z" className="fill-avatar-leather" />
+          <path d="M45 217q35 19 73-5l-2 27q-36 18-72 4z" className="fill-avatar-leather-light" />
+          <path d="M61 247l-1 51M94 244l-2 55M69 262h17v16H69z" className="stroke-avatar-detail fill-avatar-leather-shadow" strokeWidth="2.2" />
+          <path d="M48 203l21 7M45 286l18-8" fill="none" className="stroke-primary/75" strokeWidth="2.4" />
+          <circle cx="80" cy="226" r="4" fill={`url(#${gradientes.metal})`} />
         </g>
       );
     case "accessory_01":
@@ -87,11 +87,11 @@ function Capa({ codigo, gradientes }: { codigo: string; gradientes: Gradientes }
     case "bottom_01":
       return (
         <g className={trazo} strokeWidth="3.2">
-          <path d="M109 278l51-1 5 45-13 84-54-1 11-87z" className="fill-avatar-trouser" />
-          <path d="M160 277l48 7 17 37 1 82-54 3-11-87z" className="fill-avatar-trouser" />
-          <path d="M108 303q26 10 52 4M166 309q24 2 44-7M103 356l50 1M170 358l52-1" className={detalle} strokeWidth="2.1" />
-          <path d="M156 287l5 34M112 325l15 2M199 327l15-2" className="stroke-accent/75" fill="none" strokeWidth="2.4" />
-          <path d="M104 381l49 2M172 383l50-2" fill="none" className="stroke-avatar-trouser-light" strokeWidth="4" />
+          <path d="M107 276l54-2 4 45-13 88-58-2 13-89z" className="fill-avatar-trouser" />
+          <path d="M160 274l51 7 16 39 2 84-59 3-10-89z" className="fill-avatar-trouser" />
+          <path d="M105 304q27 10 55 3M167 309q25 3 45-7M100 356l54 2M170 359l55-2" className={detalle} strokeWidth="2.1" />
+          <path d="M156 286l5 35M110 324l18 3M198 328l17-3" className="stroke-accent/75" fill="none" strokeWidth="2.4" />
+          <path d="M100 381l53 3M172 384l54-3" fill="none" className="stroke-avatar-trouser-light" strokeWidth="4" />
         </g>
       );
     case "shoes_02":
@@ -106,11 +106,12 @@ function Capa({ codigo, gradientes }: { codigo: string; gradientes: Gradientes }
     case "shoes_01":
       return (
         <g className={trazo} strokeWidth="3.2">
-          <path d="M98 379l55 3 2 25-17 17H68c-2-18 9-32 30-45z" fill={`url(#${gradientes.cuero})`} />
-          <path d="M173 382l51-3c22 10 31 25 28 43l-72 2-12-16z" fill={`url(#${gradientes.cuero})`} />
-          <path d="M77 410h74M180 410h65" fill="none" className="stroke-avatar-sole" strokeWidth="7" />
-          <path d="M99 390l43 5M181 395l36-7M103 383l-8 31M219 383l5 30" className={detalle} strokeWidth="2.5" />
-          <path d="M105 391l8 8m1-6 8 8m72-9-8 9m18-11-8 9" fill="none" className="stroke-primary/75" strokeWidth="2" />
+          <path d="M96 376l58 4 2 26-18 18H63c-1-19 10-34 33-48z" fill={`url(#${gradientes.cuero})`} />
+          <path d="M171 381l55-5c23 11 34 27 31 46l-79 2-12-17z" fill={`url(#${gradientes.cuero})`} />
+          <path d="M71 411h80M180 411h69" fill="none" className="stroke-avatar-sole" strokeWidth="8" />
+          <path d="M98 389l45 6M181 395l38-8M101 380l-8 35M222 380l6 34" className={detalle} strokeWidth="2.5" />
+          <path d="M106 389l9 9m0-6 9 9m72-11-9 10m19-12-9 10" fill="none" className="stroke-primary/75" strokeWidth="2.2" />
+          <path d="M72 416q38 7 79 0M181 416q35 5 69-1" fill="none" className="stroke-avatar-leather-light" strokeWidth="2" />
         </g>
       );
     case "top_02":
@@ -130,18 +131,19 @@ function Capa({ codigo, gradientes }: { codigo: string; gradientes: Gradientes }
     case "top_01":
       return (
         <g className={trazo} strokeWidth="3.2">
-          <path d="M119 160l29-16 39 2 31 21 8 105c-35 18-78 16-112-5z" fill={`url(#${gradientes.tela})`} />
-          <path d="M121 165c-22 8-34 29-41 56l-9 42c-3 14 5 27 18 29 12 1 22-7 25-20l11-50" fill={`url(#${gradientes.tela})`} />
-          <path d="M215 168c21 9 31 27 37 50l11 43c4 14-3 26-16 29-12 2-23-6-26-19l-13-49" fill={`url(#${gradientes.tela})`} />
-          <path d="M72 262c-8 5-10 16-5 24 6 9 18 11 27 4l13-15-22-17zM262 259c9 4 13 14 9 23-5 10-17 14-27 7l-12-13 21-20z" fill={`url(#${gradientes.piel})`} />
-          <path d="M144 144l21 31 23-29 17 15-16 38-25-18-23 17-17-37z" className="fill-avatar-shirt" />
-          <path d="M165 178v96M119 226h35v31h-35z" className={detalle} strokeWidth="2.5" />
-          <path d="M111 267q55 24 115 5l4 20q-60 25-122-3z" fill={`url(#${gradientes.cuero})`} />
-          <path d="M158 275h19v20h-19z" fill={`url(#${gradientes.metal})`} />
-          <path d="M190 230h21v27h-21z" className="fill-avatar-cloth-light stroke-avatar-detail" strokeWidth="2" />
-          <path d="M194 235l7 6 7-6" fill="none" className="stroke-primary" strokeWidth="2.2" />
-          <path d="M126 173l38 33 38-34M121 203l-9 61M210 201l13 60" fill="none" className="stroke-avatar-cloth-light" strokeWidth="2.5" />
-          <path d="M88 215l29 12M249 214l-34 13" fill="none" className="stroke-avatar-seam" strokeWidth="2" strokeDasharray="4 4" />
+          <path d="M125 158q7-27 39-30 34 2 45 33l-21 24h-50z" fill={`url(#${gradientes.tela})`} />
+          <path d="M117 158l31-16 39 2 34 20 9 109c-36 20-82 18-119-5z" fill={`url(#${gradientes.tela})`} />
+          <path d="M120 164c-23 8-36 30-43 58l-10 43c-3 14 5 28 19 30 13 1 23-8 26-21l14-52" fill={`url(#${gradientes.tela})`} />
+          <path d="M218 165c22 9 34 29 40 53l12 44c4 14-4 27-17 30-13 2-24-7-27-20l-15-51" fill={`url(#${gradientes.tela})`} />
+          <path d="M68 264c-9 5-11 17-6 26 6 10 19 12 28 4l15-16-23-18zM269 260c10 4 14 15 10 24-5 11-18 15-28 8l-13-14 22-21z" fill={`url(#${gradientes.piel})`} />
+          <path d="M143 143l22 33 23-31 18 15-17 41-25-18-24 19-17-41z" className="fill-avatar-shirt" />
+          <path d="M165 178v97M118 224h37v34h-37z" className={detalle} strokeWidth="2.5" />
+          <path d="M108 267q58 25 123 5l3 21q-64 26-129-3z" fill={`url(#${gradientes.cuero})`} />
+          <path d="M157 275h21v21h-21z" fill={`url(#${gradientes.metal})`} />
+          <path d="M192 226h22v29h-22z" className="fill-avatar-cloth-light stroke-avatar-detail" strokeWidth="2" />
+          <path d="M196 232l7 6 8-6" fill="none" className="stroke-primary" strokeWidth="2.2" />
+          <path d="M126 172l38 34 40-35M120 200l-10 65M212 199l15 63" fill="none" className="stroke-avatar-cloth-light" strokeWidth="3" />
+          <path d="M84 216l32 12M254 214l-37 14" fill="none" className="stroke-avatar-seam" strokeWidth="2" strokeDasharray="4 4" />
         </g>
       );
     case "face_02":
@@ -157,11 +159,12 @@ function Capa({ codigo, gradientes }: { codigo: string; gradientes: Gradientes }
     case "face_01":
       return (
         <g className={trazo} strokeWidth="3.2">
-          <path d="M130 55c17-13 44-14 62-2 17 12 24 34 20 59l-5 28c-5 25-22 43-47 47-25-4-43-22-47-47l-5-28c-5-25 4-45 22-57z" fill={`url(#${gradientes.piel})`} />
-          <path d="M144 181h32l1 20q-16 13-34 0z" className="fill-avatar-skin-shadow" />
-          <path d="M116 117c-9-4-14 2-11 14 2 10 8 17 16 17M207 116c9-4 14 2 11 14-2 10-8 17-16 17" fill={`url(#${gradientes.piel})`} />
-          <path d="M124 148q36 29 73-2c-7 23-21 38-37 41-17-3-30-17-36-39z" className="fill-avatar-skin-shadow/20 stroke-none" />
-          <path d="M144 164q16 10 33 0" className={detalle} strokeWidth="2.4" />
+          <path d="M126 52c19-16 49-17 69-3 19 13 27 37 22 65l-6 28c-5 27-24 47-51 51-27-4-47-24-52-50l-6-30c-5-27 4-48 24-61z" fill={`url(#${gradientes.piel})`} />
+          <path d="M142 186h36l1 21q-18 14-38 0z" className="fill-avatar-skin-shadow" />
+          <path d="M110 117c-10-4-16 3-13 16 2 11 9 19 18 18M211 116c10-4 16 3 13 16-2 11-9 19-18 18" fill={`url(#${gradientes.piel})`} />
+          <path d="M119 146q41 35 83-2c-8 27-23 45-42 49-19-4-34-21-41-47z" className="fill-avatar-skin-shadow/20 stroke-none" />
+          <path d="M142 168q18 13 37 0" className={detalle} strokeWidth="2.3" />
+          <path d="M148 175q12 6 24 0" fill="none" className="stroke-avatar-skin-shadow" strokeWidth="1.5" opacity=".7" />
         </g>
       );
     case "eyes_02":
@@ -177,11 +180,11 @@ function Capa({ codigo, gradientes }: { codigo: string; gradientes: Gradientes }
     case "eyes_01":
       return (
         <g className={trazo} strokeWidth="2.3">
-          <path d="M123 116q16-14 32 0-16 14-32 0zM166 116q16-14 32 0-16 14-32 0z" className="fill-avatar-eye" />
-          <ellipse cx="141" cy="116" rx="7" ry="8.5" className="fill-accent stroke-none" /><ellipse cx="181" cy="116" rx="7" ry="8.5" className="fill-accent stroke-none" />
-          <ellipse cx="141" cy="117" rx="3" ry="5" className="fill-avatar-pupil stroke-none" /><ellipse cx="181" cy="117" rx="3" ry="5" className="fill-avatar-pupil stroke-none" />
-          <circle cx="143" cy="113" r="2" className="fill-foreground stroke-none" /><circle cx="183" cy="113" r="2" className="fill-foreground stroke-none" />
-          <path d="M124 100q15-9 30 0M168 100q14-8 28 1M156 132l-4 11 8 3" className={detalle} strokeWidth="2.7" />
+          <path d="M117 116q18-17 38 0-19 16-38 0zM166 116q19-17 39 0-20 16-39 0z" className="fill-avatar-eye" />
+          <ellipse cx="138" cy="116" rx="8.5" ry="10" className="fill-accent stroke-none" /><ellipse cx="184" cy="116" rx="8.5" ry="10" className="fill-accent stroke-none" />
+          <ellipse cx="138" cy="117" rx="4" ry="6" className="fill-avatar-pupil stroke-none" /><ellipse cx="184" cy="117" rx="4" ry="6" className="fill-avatar-pupil stroke-none" />
+          <circle cx="141" cy="112" r="2.5" className="fill-foreground stroke-none" /><circle cx="187" cy="112" r="2.5" className="fill-foreground stroke-none" />
+          <path d="M118 97q18-11 36 0M168 97q18-10 35 1M157 131l-5 13 9 4" className={detalle} strokeWidth="2.8" />
         </g>
       );
     case "hair_02":
@@ -195,9 +198,9 @@ function Capa({ codigo, gradientes }: { codigo: string; gradientes: Gradientes }
     case "hair_01":
       return (
         <g className={trazo} strokeWidth="3.2">
-          <path d="M107 116c-8-38 3-70 32-85 27-14 64-9 80 19 12 21 9 48-4 70l-7-36-15 15-9-29-20 24-13-21-22 29-10-20z" fill={`url(#${gradientes.cabello})`} />
-          <path d="M120 80c19-31 57-45 88-22M130 59c23-12 50-5 66 16M205 86l-13 14M120 88l11 15" fill="none" className="stroke-avatar-hair-light" strokeWidth="5" />
-          <path d="M139 39q23-13 43 2-22 2-35 18z" className="fill-avatar-hair-light" />
+          <path d="M102 119c-10-42 1-77 34-94 31-17 73-10 91 22 13 23 9 53-6 77l-8-40-17 17-10-33-22 27-15-24-25 33-11-24z" fill={`url(#${gradientes.cabello})`} />
+          <path d="M111 72l-10-17 25 5q7-28 37-38l-2 22q25-28 52-12l-13 17q26-8 35 12l-25 9M117 80c22-34 64-49 98-24M130 55c27-12 55-4 72 18M211 87l-15 16M115 89l13 17" fill="none" className="stroke-avatar-hair-light" strokeWidth="5" />
+          <path d="M128 42q27-21 53-4-27 3-43 23zM188 31q25 1 36 22-21-10-40 1z" className="fill-avatar-hair-light" />
         </g>
       );
     default:
@@ -217,7 +220,7 @@ export function AvatarModular({ configuracion, className, nombre = "Avatar del h
     <div className={cn("relative aspect-[4/5] overflow-hidden rounded-md border border-primary/50 bg-secondary/20", className)} role="img" aria-label={nombre}>
       <div className="absolute inset-x-[14%] bottom-[1%] h-[10%] rounded-full bg-background/75 blur-md" />
       <div className="absolute left-1/2 top-[14%] h-[60%] w-[54%] -translate-x-1/2 rounded-full bg-accent/10 blur-2xl" />
-      <svg viewBox="0 0 320 440" className="relative h-full w-full overflow-visible drop-shadow-[0_16px_16px_var(--color-avatar-shadow)]" aria-hidden="true">
+      <svg viewBox="0 0 320 440" className="relative h-full w-full overflow-visible drop-shadow-[0_18px_16px_var(--color-avatar-shadow)]" aria-hidden="true">
         <defs>
           <linearGradient id={gradientes.piel} x1="0" y1="0" x2="1" y2="1"><stop stopColor="var(--avatar-skin-light)" /><stop offset=".56" stopColor="var(--avatar-skin)" /><stop offset="1" stopColor="var(--avatar-skin-shadow)" /></linearGradient>
           <linearGradient id={gradientes.cabello} x1="0" y1="0" x2=".8" y2="1"><stop stopColor="var(--avatar-hair-light)" /><stop offset=".42" stopColor="var(--avatar-hair)" /><stop offset="1" stopColor="var(--avatar-hair-shadow)" /></linearGradient>

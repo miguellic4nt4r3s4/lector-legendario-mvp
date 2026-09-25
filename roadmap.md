@@ -62,6 +62,6 @@
 
 # Nueva estética del personaje principal
 
-- [ ] Redibujar el avatar modular con la estética de explorador de la referencia.
-- [ ] Mantener capas, inventario y recompensas sin cambios funcionales.
+- [x] Redibujar el avatar modular con la estética de explorador de la referencia.
+- [x] Mantener capas, inventario y recompensas sin cambios funcionales.
 - [ ] Verificar el personaje en Mi aventura en escritorio y móvil.
