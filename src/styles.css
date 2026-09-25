@@ -396,7 +396,6 @@
 }
 
 @utility adventure-avatar {
-  width: 100%;
   filter:
     drop-shadow(0 14px 12px oklch(0.08 0.025 230 / 0.55))
     drop-shadow(-1px -1px 0 color-mix(in oklab, var(--ll-teal-light) 35%, transparent))
