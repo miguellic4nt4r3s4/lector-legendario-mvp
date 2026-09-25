@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { Backpack, ChevronRight, Medal, Sparkles } from "lucide-react";
+import { Backpack, ChevronRight, Medal, Sparkles as _S, ScrollText as Sparkles } from "lucide-react";
+void _S;
 import type { AvatarItem } from "@/lib/consultas";
 import { nivelDesdeXp, rangoDeNivel } from "@/lib/juego";
 import type { ConfiguracionAvatar } from "./AvatarModular";

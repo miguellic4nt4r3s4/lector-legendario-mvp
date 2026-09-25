@@ -22,8 +22,13 @@ export function AvatarStage({ configuracion, nombre, mundo = "bosque", className
         <div className="adventure-vignette absolute inset-0" aria-hidden />
         <div className="adventure-mist absolute inset-x-0 bottom-0 h-[38%]" aria-hidden />
         <div className="adventure-light-shaft absolute inset-0" aria-hidden />
+        <div className="forest-fireflies absolute inset-0" aria-hidden>
+          {[["12%","38%",0],["24%","62%",2.5],["63%","30%",1.2],["78%","58%",4],["52%","70%",6],["88%","24%",3.3],["35%","22%",7]].map(([l,t,d],i)=>(
+            <i key={i} style={{ left: l as string, top: t as string, animationDelay: `${d}s` }} />
+          ))}
+        </div>
         <div className="hero-character">
-          <div className="avatar-contact-shadow absolute bottom-0 left-1/2 h-6 w-2/3 -translate-x-1/2" aria-hidden />
+          <div className="avatar-contact-shadow absolute -bottom-1 left-1/2 h-7 w-3/4 -translate-x-1/2" aria-hidden />
           <AvatarModular configuracion={configuracion} nombre={`Avatar modular de ${nombre}`} className="adventure-avatar absolute bottom-0 left-1/2 h-auto max-w-none -translate-x-1/2 border-0 bg-transparent" />
         </div>
       </div>
