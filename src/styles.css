@@ -648,7 +648,7 @@
   .quest-marker { inset-inline: 0.9rem; top: auto; bottom: 4.2rem; width: auto; min-width: 0; background: oklch(0.1819 0.0271 232.69 / 0.72); }
   .game-top-hud-inner { grid-template-columns: auto minmax(0,1fr); }
   .game-logo { min-width: 0; padding-inline: 0.7rem; }
-  .game-logo span, .game-logo strong { display: none; }
+  .game-logo > span:last-child { display: none; }
   .game-nav { justify-content: flex-start; }
   .game-nav .game-nav-link { min-width: 3.25rem; }
   .game-top-hud-inner { grid-template-columns: 1fr; }
