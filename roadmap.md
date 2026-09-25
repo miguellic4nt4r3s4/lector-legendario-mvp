@@ -59,3 +59,9 @@
 - [x] Reorganizar la pantalla como interfaz RPG ilustrada con protagonista dominante.
 - [x] Integrar misión, progreso, equipo y trofeos en una consola compacta de juego.
 - [x] Verificar escritorio, tableta, móvil y acceso a la misión.
+
+# Nueva estética del personaje principal
+
+- [ ] Redibujar el avatar modular con la estética de explorador de la referencia.
+- [ ] Mantener capas, inventario y recompensas sin cambios funcionales.
+- [ ] Verificar el personaje en Mi aventura en escritorio y móvil.
