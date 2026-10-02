@@ -7,6 +7,6 @@ export function retratoHeroe(configuracion?: ConfiguracionAvatar) {
   const accesorio = (configuracion?.accessory ?? "").toLowerCase();
   const conMochila = accesorio.includes("mochila") || accesorio.includes("backpack");
   return conMochila
-    ? { src: heroeConMochila, width: 351, height: 900, conMochila }
-    : { src: heroeBase, width: 327, height: 900, conMochila };
+    ? { src: heroeConMochila, width: 359, height: 900, conMochila }
+    : { src: heroeBase, width: 401, height: 900, conMochila };
 }
